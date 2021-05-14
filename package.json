@@ -1,0 +1,26 @@
+{
+    "name": "wowo-cinema-nodejs",
+    "version": "1.0.0",
+    "description": "online cinema ticket booking website",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/worufu97/wowo-cinema-nodejs.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/worufu97/wowo-cinema-nodejs/issues"
+    },
+    "homepage": "https://github.com/worufu97/wowo-cinema-nodejs#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "express-handlebars": "^5.3.2",
+        "morgan": "^1.10.0"
+    }
+}
