@@ -4583,8 +4583,8 @@ input[type='submit'] {
     mask-position: center center;
     -webkit-mask-position: center center;
     text-align: center;
-    mask-image: url(./img/movie-seat.png);
-    -webkit-mask-image: url(./img/movie-seat.png);
+    mask-image: url(../images/css/movie-seat.png);
+    -webkit-mask-image: url(../images/css/movie-seat.png);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
@@ -5470,7 +5470,7 @@ input[type='submit'] {
     border-radius: 50%;
     top: -15px;
     right: -15px;
-    background: url(./img/check.png) no-repeat center center;
+    background: url(../images/css/check.png) no-repeat center center;
     background-size: cover;
 }
 
@@ -5592,7 +5592,7 @@ input[type='submit'] {
     border-radius: 50%;
     top: 7px;
     left: 0;
-    background: url(./img/check.png) no-repeat center center;
+    background: url(../images/css/check.png) no-repeat center center;
     background-size: cover;
     display: none;
 }
@@ -5886,8 +5886,8 @@ input[type='submit'] {
 }
 
 .speaker-item .speaker-thumb {
-    mask: url(./img/team-shape.png) no-repeat center center;
-    -webkit-mask: url(./img/team-shape.png) no-repeat center center;
+    mask: url(../images/css/team-shape.png) no-repeat center center;
+    -webkit-mask: url(../images/css/team-shape.png) no-repeat center center;
     mask-size: cover;
     -webkit-mask-size: cover;
     margin-bottom: 30px;
@@ -6515,7 +6515,7 @@ input[type='submit'] {
     padding: 30px 15px 50px;
     text-align: center;
     position: relative;
-    background: url(./img/ticket-bg04.png) #ffffff no-repeat center top;
+    background: url(../images/css/ticket-bg04.png) #ffffff no-repeat center top;
     background-size: cover;
     border-radius: 20px;
 }
@@ -6580,12 +6580,12 @@ input[type='submit'] {
 }
 
 .ticket--area .ticket-item.two {
-    background: url(./img/ticket-bg05.png) #ffffff no-repeat center top;
+    background: url(../images/css/ticket-bg05.png) #ffffff no-repeat center top;
     background-size: cover;
 }
 
 .ticket--area .ticket-item.three {
-    background: url(./img/ticket-bg06.png) #ffffff no-repeat center top;
+    background: url(../images/css/ticket-bg06.png) #ffffff no-repeat center top;
     background-size: cover;
 }
 
@@ -6687,7 +6687,7 @@ input[type='submit'] {
     padding: 30px;
     text-align: center;
     position: relative;
-    background: url(./img/ticket-bg04.png) #ffffff no-repeat center top;
+    background: url(../images/css/ticket-bg04.png) #ffffff no-repeat center top;
     background-size: cover;
     border-radius: 20px;
 }
@@ -6754,14 +6754,14 @@ input[type='submit'] {
 .ticket--item .ticket-content ul li::before {
     width: 16px;
     height: 13px;
-    background: url(./img/check02.png) no-repeat center center;
+    background: url(../images/css/check02.png) no-repeat center center;
     background-size: contain;
     top: 33px;
     left: 0;
 }
 
 .ticket--item .ticket-content ul li.del::before {
-    background: url(./img/times.png) no-repeat center center;
+    background: url(../images/css/times.png) no-repeat center center;
     background-size: contain;
     height: 16px;
 }
@@ -6777,12 +6777,12 @@ input[type='submit'] {
 }
 
 .ticket--item.two {
-    background: url(./img/ticket-bg05.png) #ffffff no-repeat center top;
+    background: url(../images/css/ticket-bg05.png) #ffffff no-repeat center top;
     background-size: cover;
 }
 
 .ticket--item.three {
-    background: url(./img/ticket-bg06.png) #ffffff no-repeat center top;
+    background: url(../images/css/ticket-bg06.png) #ffffff no-repeat center top;
     background-size: cover;
 }
 
@@ -6834,8 +6834,8 @@ input[type='submit'] {
 
 .speaker-wrapper .speaker-thumb img {
     width: 100%;
-    mask: url(./img/team-shape02.png) no-repeat center center;
-    -webkit-mask: url(./img/team-shape02.png) no-repeat center center;
+    mask: url(../images/css/team-shape02.png) no-repeat center center;
+    -webkit-mask: url(../images/css/team-shape02.png) no-repeat center center;
     mask-size: cover;
     -webkit-mask-size: cover;
     -webkit-transform: scale(1.02);
@@ -7775,14 +7775,14 @@ input[type='submit'] {
 }
 
 .counter--area .counter-item::after {
-    background: url(./img/wreath-02.png) no-repeat bottom right;
+    background: url(../images/css/wreath-02.png) no-repeat bottom right;
     background-size: contain;
     left: 0;
 }
 
 .counter--area .counter-item::before {
     right: 0;
-    background: url(./img/wreath-01.png) no-repeat bottom left;
+    background: url(../images/css/wreath-01.png) no-repeat bottom left;
     background-size: contain;
 }
 
@@ -8749,7 +8749,7 @@ input[type='submit'] {
     width: 100px;
     height: 90px;
     opacity: 0.2;
-    background: url(./img/quotation.png) no-repeat center right;
+    background: url(../images/css/quotation.png) no-repeat center right;
     background-size: contain;
 }
 
