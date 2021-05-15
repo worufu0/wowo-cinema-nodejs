@@ -351,7 +351,6 @@
             owlTT.trigger('prev.owl.carousel', [300]);
         });
         $('.details-photos').owlCarousel({
-            // loop:true,
             dots: false,
             autoplay: true,
             autoplayTimeout: 5000,
@@ -514,6 +513,72 @@
         // Go to the previous item
         $('.blog-prev').on('click', function () {
             owlB.trigger('prev.owl.carousel', [300]);
+        });
+        // Validate register form
+        $('#register-form').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                    minlength: 3,
+                    maxlength: 320,
+                },
+                pass1: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 32,
+                },
+                pass2: {
+                    required: true,
+                    equalTo: '#pass1',
+                    minlength: 6,
+                    maxlength: 32,
+                },
+            },
+            messages: {
+                email: {
+                    required: 'địa chỉ email không được trống',
+                    email: 'địa chỉ email không hợp lệ',
+                },
+                pass1: {
+                    required: 'mật khẩu không được trống',
+                    minlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+                pass2: {
+                    required: 'xác nhận mật khẩu không được trống',
+                    equalTo: 'xác nhận mật khẩu không chính xác',
+                    minlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+            },
+        });
+        // Validate login form
+        $('#login-form').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                    minlength: 3,
+                    maxlength: 320,
+                },
+                pass: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 32,
+                },
+            },
+            messages: {
+                email: {
+                    required: 'địa chỉ email không được trống',
+                    email: 'địa chỉ email không hợp lệ',
+                },
+                pass: {
+                    required: 'mật khẩu không được trống',
+                    minlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+            },
         });
     });
 })(jQuery);

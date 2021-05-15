@@ -1,4 +1,4 @@
-<section class="account-section bg_img" data-background="./assets/images/account/account-bg.jpg">
+<section class="account-section bg_img" data-background="/images/account/account-bg.jpg">
     <div class="container">
         <div class="padding-top padding-bottom">
             <div class="account-area">
@@ -6,19 +6,19 @@
                     <span class="cate">wowo cinema</span>
                     <h2 class="title">đăng nhập</h2>
                 </div>
-                <form class="account-form">
+                <form id="login-form" class="account-form">
                     <div class="form-group">
-                        <label for="email2">email<span>*</span></label>
-                        <input type="text" placeholder="Nhập email" id="email2" required />
+                        <label for="email">email <span>*</span></label>
+                        <input type="text" placeholder="Nhập email" id="email" name="email" />
                     </div>
                     <div class="form-group">
-                        <label for="pass3">mật khẩu<span>*</span></label>
-                        <input type="password" placeholder="Nhập mật khẩu" id="pass3" required />
+                        <label for="pass">mật khẩu <span>*</span></label>
+                        <input type="password" placeholder="Nhập mật khẩu" id="pass" name="pass" />
                     </div>
                     <div class="form-group checkgroup">
-                        <input type="checkbox" id="bal2" required checked />
-                        <label for="bal2">ghi nhớ mật khẩu</label>
-                        <a href="#" class="forget-pass">quên mật khẩu</a>
+                        <input type="checkbox" id="remember" checked />
+                        <label for="remember">ghi nhớ mật khẩu</label>
+                        <a href="#" class="forget">quên mật khẩu</a>
                     </div>
                     <div class="form-group text-center">
                         <input type="submit" value="đăng nhập" />

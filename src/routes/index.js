@@ -1,6 +1,6 @@
 module.exports = (app) => {
-    app.use('/login', require('./login.r'));
-    app.use('/register', require('./register.r'));
-    app.use('/', require('./home.r'));
-    app.use(require('./404.r'));
+    app.use('/login', require('./login'));
+    app.use('/register', require('./register'));
+    app.use('/', require('./home'));
+    app.use(require('./404'));
 };
