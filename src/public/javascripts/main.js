@@ -537,20 +537,44 @@
             },
             messages: {
                 email: {
-                    required: 'địa chỉ email không được trống',
-                    email: 'địa chỉ email không hợp lệ',
+                    required: 'Địa chỉ email không được trống',
+                    email: 'Địa chỉ email không hợp lệ',
                 },
                 pass1: {
-                    required: 'mật khẩu không được trống',
-                    minlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
-                    maxlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    required: 'Mật khẩu không được trống',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
                 pass2: {
-                    required: 'xác nhận mật khẩu không được trống',
-                    equalTo: 'xác nhận mật khẩu không chính xác',
-                    minlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
-                    maxlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    required: 'Xác nhận mật khẩu không được trống',
+                    equalTo: 'Xác nhận mật khẩu không chính xác',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
+            },
+            submitHandler: (form) => {
+                $.ajax({
+                    url: '/register/validate',
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    success: (ajaxRes) => {
+                        if (ajaxRes === true) {
+                            $.redirect(
+                                '/register',
+                                {
+                                    data: decodeURIComponent(
+                                        $(form).serialize()
+                                    ),
+                                },
+                                'POST'
+                            );
+                        } else {
+                            $('#email-error.error')
+                                .css('display', 'block')
+                                .html(ajaxRes);
+                        }
+                    },
+                });
             },
         });
         // Validate login form
@@ -570,13 +594,13 @@
             },
             messages: {
                 email: {
-                    required: 'địa chỉ email không được trống',
-                    email: 'địa chỉ email không hợp lệ',
+                    required: 'Địa chỉ email không được trống',
+                    email: 'Địa chỉ email không hợp lệ',
                 },
                 pass: {
-                    required: 'mật khẩu không được trống',
-                    minlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
-                    maxlength: 'mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    required: 'Mật khẩu không được trống',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
             },
         });

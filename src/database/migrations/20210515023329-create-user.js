@@ -8,10 +8,7 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            localPart: {
-                type: Sequelize.STRING,
-            },
-            domainPart: {
+            email: {
                 type: Sequelize.STRING,
             },
             password: {
@@ -19,15 +16,26 @@ module.exports = {
             },
             fullName: {
                 type: Sequelize.TEXT,
+                defaultValue: 'chưa đặt tên',
             },
             phone: {
                 type: Sequelize.STRING,
+                defaultValue: 'không có',
             },
             userType: {
                 type: Sequelize.INTEGER,
+                defaultValue: 1,
             },
-            role: {
-                type: Sequelize.INTEGER,
+            admin: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
+            },
+            token: {
+                type: Sequelize.STRING,
+            },
+            verified: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
             },
             createdAt: {
                 allowNull: false,
