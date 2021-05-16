@@ -1361,6 +1361,10 @@ input[type='submit'] {
     flex-wrap: wrap-reverse;
 }
 
+.footer-bottom-area p {
+    text-transform: capitalize;
+}
+
 .footer-top {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 10px;
@@ -1585,7 +1589,7 @@ input[type='submit'] {
     }
 }
 
-.header-wrapper .menu li.header-button a {
+.header-wrapper .menu li.header-button > a {
     background-image: -webkit-linear-gradient(
         169deg,
         #5560ff 17%,
@@ -1596,6 +1600,14 @@ input[type='submit'] {
     font-weight: 600;
     border-radius: 25px;
     display: inline-block;
+    max-width: 200px;
+}
+
+.header-wrapper .menu li.header-button > a.truncated {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .header-wrapper .menu li.header-button a:hover {
@@ -4069,6 +4081,10 @@ input[type='submit'] {
 
 .pagination-area a:hover {
     color: #ffffff;
+}
+
+.pagination-area a span {
+    text-transform: capitalize;
 }
 
 @media (max-width: 575px) {
@@ -8133,6 +8149,8 @@ input[type='submit'] {
     text-transform: lowercase !important;
     color: #f1481f !important;
     cursor: default;
+    float: right;
+    display: block;
 }
 
 /*Four-Not-Four-Section Starts Here*/

@@ -1,80 +1,81 @@
 const nodemailer = require('nodemailer');
 const TokenGenerator = require('uuid-token-generator');
 const { User } = require('../models');
-const appConfig = require('../config/app');
-const mailConfig = require('../config/email');
+const appConfig = require('../configs/app');
+const mailConfig = require('../configs/email');
 
 class RegisterController {
     // [GET] /register
     index(req, res) {
         res.render('pages/register', {
             layout: 'other',
-            title: 'Đăng Ký | Wowo Cinema',
+            title: `${appConfig.pageTitle.register} | ${appConfig.appName}`,
+            appName: appConfig.appName,
         });
     }
 
     // [POST] /register
     async register(req, res) {
         const transporter = nodemailer.createTransport(mailConfig);
+        const uuid = new TokenGenerator().generate();
         const token = new TokenGenerator(256, TokenGenerator.BASE62).generate();
-        const data = new URLSearchParams(req.body.data);
-        const email = data.get('email');
-        const pass = data.get('pass1');
-
-        await User.findOrCreate({
-            where: {
-                email: email,
-                password: pass,
-                userType: 0,
-            },
-        });
-
-        await User.update(
-            { token: token },
-            {
-                where: {
-                    email: email,
-                },
-            }
-        );
-
-        await transporter.sendMail({
-            from: mailConfig.auth.user,
-            to: email,
-            subject: 'Xác minh tài khoản Wowo Cinama',
-            text: 'Chào mừng bạn đến với Wowo Cinama',
-            html: `
-            <h1>Chào mừng bạn đến với Wowo Cinema</h1>
-            </br>
-            <h3>Vui lòng xác minh địa chỉ email bạn dùng để đăng ký tài khoản Wowo Cinema.</h3>
-            </br>
-            <p>Vui lòng click vào link bên dưới để xác nhận email của bạn.</p>
-            <a href="${appConfig.urlRoot}/register/verify/${token}" style="margin-bottom: 16px">${appConfig.urlRoot}/register/verify/${token}</a>
-            </br>
-            <h4>Wowo Admin</h4>
-            `,
-        });
-
-        res.render('pages/notification', {
-            layout: 'other',
-            title: 'Đăng Ký | Wowo Cinema',
-            notification:
-                'Chúc mừng bạn đã đăng ký thành công. Để hoàn tất đăng ký, vui lòng kiểm tra hộp thư để xác minh tài khoản !',
-        });
-    }
-
-    // [POST] /register/validate
-    async validate(req, res) {
+        const { email, pass1, pass2 } = req.body;
         const user = await User.findOne({
             where: {
-                email: req.body.email,
+                email: email,
             },
         });
 
         if (user) {
-            res.send('Địa chỉ email đã được sử dụng');
+            res.render('pages/register', {
+                layout: 'other',
+                title: `${appConfig.pageTitle.register} | ${appConfig.appName}`,
+                appName: appConfig.appName,
+                regErr: 'Địa chỉ email đã được sử dụng',
+            });
         } else {
-            res.send(true);
+            await User.findOrCreate({
+                where: {
+                    uuid: uuid,
+                    email: email,
+                    password: pass1,
+                    userType: 0,
+                },
+            });
+
+            await User.update(
+                { token: token },
+                {
+                    where: {
+                        email: email,
+                    },
+                }
+            );
+
+            await transporter.sendMail({
+                from: mailConfig.auth.user,
+                to: email,
+                subject: `Xác minh tài khoản ${appConfig.appName}`,
+                text: `Chào mừng bạn đến với ${appConfig.appName}`,
+                html: `
+                <h1>Chào mừng bạn đến với ${appConfig.appName}</h1>
+                </br>
+                <h3>Vui lòng xác minh địa chỉ email bạn dùng để đăng ký tài khoản ${appConfig.appName}.</h3>
+                </br>
+                <p>Vui lòng click vào link bên dưới để xác nhận email của bạn.</p>
+                <a href="${appConfig.urlRoot}/register/verify/${token}" style="margin-bottom: 16px">${appConfig.urlRoot}/register/verify/${token}</a>
+                </br>
+                <h4>Wowo Admin</h4>
+                `,
+            });
+
+            res.render('pages/notification', {
+                layout: 'other',
+                title: `${appConfig.pageTitle.register} | ${appConfig.appName}`,
+                appName: appConfig.appName,
+                notification:
+                    'Chúc mừng bạn đã đăng ký thành công. Để hoàn tất đăng ký, vui lòng kiểm tra hộp thư để xác minh tài khoản !',
+            });
         }
     }
 
@@ -99,14 +100,14 @@ class RegisterController {
 
             res.render('pages/notification', {
                 layout: 'other',
-                title: 'Đăng Ký | Wowo Cinema',
-                notification:
-                    'Xác mình tài khoản thành công. Bây giờ bạn có thể sử dụng tài khoản để đăng nhập vào Wowo Cinema !',
+                title: `${appConfig.pageTitle.register} | ${appConfig.appName}`,
+                appName: appConfig.appName,
+                notification: `Xác mình tài khoản thành công. Bây giờ bạn có thể sử dụng tài khoản để đăng nhập vào ${appConfig.appName} !`,
             });
         } else {
             res.render('pages/404', {
                 layout: 'other',
-                title: 'Không tìm thấy trang',
+                title: appConfig.pageTitle.err404,
             });
         }
     }

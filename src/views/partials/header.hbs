@@ -14,21 +14,33 @@
                     <a href="/cinema.html">hệ thống rạp phim</a>
                     <ul class="submenu">
                         <li>
-                            <a href="/cinema.html">Wowo Cần Thơ</a>
+                            <a href="/cinema.html">wowo cần thơ</a>
                         </li>
                         <li>
-                            <a href="/cinema.html">Wowo Hồ Chí Minh</a>
+                            <a href="/cinema.html">wowo hồ chí minh</a>
                         </li>
                         <li>
-                            <a href="/cinema.html">Wowo Đà Nẵng</a>
+                            <a href="/cinema.html">wowo đà nẵng</a>
                         </li>
                         <li>
-                            <a href="/cinema.html">Wowo Hà Nội</a>
+                            <a href="/cinema.html">wowo hà nội</a>
                         </li>
                     </ul>
                 </li>
                 <li class="header-button pr-0">
-                    <a href="/login">đăng nhập</a>
+                    {{#if displayName}}
+                        <a class="truncated">{{displayName}}</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="/personal">thông tin tài khoản</a>
+                            </li>
+                            <li>
+                                <a href="/logout">đăng xuất</a>
+                            </li>
+                        </ul>
+                    {{else}}
+                        <a href="/login">đăng nhập</a>
+                    {{/if}}
                 </li>
             </ul>
             <div class="header-bar d-lg-none">

@@ -3,14 +3,14 @@
         <div class="padding-top padding-bottom">
             <div class="account-area">
                 <div class="section-header-3">
-                    <span class="cate"><a href="/">wowo cinema</a> </span>
+                    <span class="cate"><a href="/">{{appName}}</a> </span>
                     <h2 class="title">đăng ký</h2>
                 </div>
-                <form id="register-form" class="account-form">
+                <form id="register-form" class="account-form" method="POST" action="/register">
                     <div class="form-group">
+                        <label class="error">{{regErr}}</label>
                         <label for="email">email <span>*</span></label>
                         <input type="text" placeholder="Nhập email" id="email" name="email" />
-                        <label for="email" id="email-error" class="error" style="display: none;"></label>
                     </div>
                     <div class="form-group">
                         <label for="pass1">mật khẩu <span>*</span></label>
@@ -29,7 +29,7 @@
                         <input type="submit" value="đăng ký" />
                     </div>
                 </form>
-                <div class="option">
+                <div class="option register">
                     bạn đã có tài khoản?
                     <a href="/login">đăng nhập</a>
                 </div>

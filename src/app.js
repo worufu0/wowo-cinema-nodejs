@@ -2,10 +2,12 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const path = require('path');
+const cookieSession = require('cookie-session');
 const app = express();
 const port = process.env.PORT || 3000;
 const router = require('./routes');
 const db = require('./database');
+const authentication = require('./middlewares/authentication');
 
 // HTTP Logger
 app.use(logger('dev'));
@@ -22,7 +24,20 @@ app.engine('.hbs', exphbs({ extname: '.hbs' }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
 
-// Connect database
+// Cookie Session
+app.set('trust proxy', 1);
+app.use(
+    cookieSession({
+        name: 'session',
+        keys: [process.env.COOKIE_KEY || 'owow', 'amenic'],
+        maxAge: 24 * 60 * 60 * 1000,
+    })
+);
+
+// Authentication
+app.use(authentication);
+
+// Connect Database
 db.connect();
 
 // Router

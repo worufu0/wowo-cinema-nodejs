@@ -1,6 +1,13 @@
+const logoutR = require('./logout.r');
+const loginR = require('./login.r');
+const registerR = require('./register.r');
+const homeR = require('./home.r');
+const err404R = require('./404.r');
+
 module.exports = (app) => {
-    app.use('/login', require('./login.r'));
-    app.use('/register', require('./register.r'));
-    app.use('/', require('./home.r'));
-    app.use(require('./404.r'));
+    app.use('/logout', logoutR);
+    app.use('/login', loginR);
+    app.use('/register', registerR);
+    app.use('/', homeR);
+    app.use(err404R);
 };

@@ -552,29 +552,8 @@
                     maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
             },
-            submitHandler: (form) => {
-                $.ajax({
-                    url: '/register/validate',
-                    type: 'POST',
-                    data: $(form).serialize(),
-                    success: (ajaxRes) => {
-                        if (ajaxRes === true) {
-                            $.redirect(
-                                '/register',
-                                {
-                                    data: decodeURIComponent(
-                                        $(form).serialize()
-                                    ),
-                                },
-                                'POST'
-                            );
-                        } else {
-                            $('#email-error.error')
-                                .css('display', 'block')
-                                .html(ajaxRes);
-                        }
-                    },
-                });
+            errorPlacement: (error, element) => {
+                error.insertBefore(element);
             },
         });
         // Validate login form
@@ -602,6 +581,9 @@
                     minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                     maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
+            },
+            errorPlacement: (error, element) => {
+                error.insertBefore(element);
             },
         });
     });

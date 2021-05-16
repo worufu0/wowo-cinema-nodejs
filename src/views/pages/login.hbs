@@ -3,11 +3,12 @@
         <div class="padding-top padding-bottom">
             <div class="account-area">
                 <div class="section-header-3">
-                    <span class="cate"><a href="/">wowo cinema</a> </span>
+                    <span class="cate"><a href="/">{{appName}}</a> </span>
                     <h2 class="title">đăng nhập</h2>
                 </div>
-                <form id="login-form" class="account-form">
+                <form id="login-form" class="account-form" method="POST" action="/login">
                     <div class="form-group">
+                        <label class="error">{{authErr}}</label>
                         <label for="email">email <span>*</span></label>
                         <input type="text" placeholder="Nhập email" id="email" name="email" />
                     </div>
