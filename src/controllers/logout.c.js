@@ -1,7 +1,8 @@
 class LogoutController {
     // [GET] /logout
-    index(req, res, next) {
-        delete req.session.email;
+    index(req, res) {
+        delete req.session.userId;
+        delete req.session.passport;
         res.redirect('/');
     }
 }

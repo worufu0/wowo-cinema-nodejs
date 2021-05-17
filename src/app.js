@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const path = require('path');
 const cookieSession = require('cookie-session');
+const passport = require('passport');
 const app = express();
 const port = process.env.PORT || 3000;
 const router = require('./routes');
@@ -34,11 +35,14 @@ app.use(
     })
 );
 
-// Authentication
-app.use(authentication);
-
 // Connect Database
 db.connect();
+
+// Passport
+app.use(passport.initialize());
+
+// Authentication
+app.use(authentication);
 
 // Router
 router(app);

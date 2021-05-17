@@ -5,8 +5,8 @@ const loginOneTime = require('../middlewares/login-one-time');
 
 router.use(loginOneTime); // Login One Time
 
-router.get('/', registerC.index);
-router.post('/', registerC.register);
 router.get('/verify/:token', registerC.verify);
+router.post('/', registerC.register);
+router.get('/', registerC.index);
 
 module.exports = router;

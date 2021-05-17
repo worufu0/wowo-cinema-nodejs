@@ -1,12 +1,12 @@
 const { User } = require('../models');
 
 module.exports = async (req, res, next) => {
-    const { email } = req.session;
+    const id = req.session.userId;
 
-    if (email) {
+    if (id) {
         const user = await User.findOne({
             where: {
-                email: email,
+                uuid: id,
             },
         });
 
@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
             req.user = user;
             user.fullName
                 ? (res.locals.displayName = user.fullName)
-                : (res.locals.displayName = email);
+                : (res.locals.displayName = user.email);
         }
         next();
     } else {

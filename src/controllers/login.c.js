@@ -1,5 +1,32 @@
+const passport = require('passport');
+const FacebookStrategy = require('passport-facebook').Strategy;
 const { User } = require('../models');
+const stategyConfig = require('../configs/strategy');
 const appConfig = require('../configs/app');
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+passport.deserializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.use(
+    new FacebookStrategy(
+        stategyConfig.facebook,
+        async (accessToken, refreshToken, profile, cb) => {
+            await User.findOrCreate({
+                where: {
+                    uuid: profile.id,
+                    fullName: profile.displayName,
+                    verified: true,
+                    userType: 1,
+                },
+            });
+            cb(null, profile);
+        }
+    )
+);
 
 class LoginController {
     // [GET] /login
@@ -21,7 +48,7 @@ class LoginController {
         });
 
         if (user && user.password === pass) {
-            req.session.email = user.email;
+            req.session.userId = user.uuid;
             res.redirect('/');
         } else {
             res.render('pages/login', {

@@ -14,6 +14,7 @@ module.exports = {
             },
             email: {
                 type: Sequelize.STRING,
+                defaultValue: 'không có',
             },
             password: {
                 type: Sequelize.STRING,
@@ -28,7 +29,7 @@ module.exports = {
             },
             userType: {
                 type: Sequelize.INTEGER,
-                defaultValue: 1,
+                defaultValue: 0,
             },
             admin: {
                 type: Sequelize.BOOLEAN,

@@ -1,5 +1,5 @@
 module.exports = {
-    urlRoot: 'http://localhost:3000',
+    urlRoot: 'https://6572c7608765.ngrok.io',
     appName: 'Wowo Cinema',
     pageTitle: {
         home: 'Mua Vé',

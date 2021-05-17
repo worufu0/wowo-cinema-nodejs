@@ -1292,6 +1292,10 @@ input[type='submit'] {
     margin-top: -8px;
 }
 
+.section-header-3 .cate a {
+    color: inherit;
+}
+
 .section-header-3 .title {
     text-transform: uppercase;
     font-weight: 700;
