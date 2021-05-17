@@ -8157,6 +8157,11 @@ input[type='submit'] {
     display: block;
 }
 
+.account-area.center label.error {
+    text-align: center;
+    float: none;
+}
+
 /*Four-Not-Four-Section Starts Here*/
 .section-404 {
     min-height: 100vh;

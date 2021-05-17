@@ -1,8 +1,6 @@
 const { User } = require('../models');
 const appConfig = require('../configs/app');
-const passport = require('../libs/passport');
-
-passport.call();
+const passport = require('../libs/passport').call();
 
 class LoginController {
     // [GET] /login
@@ -31,7 +29,7 @@ class LoginController {
                 layout: 'other',
                 title: `${appConfig.pageTitle.login} | ${appConfig.appName}`,
                 appName: appConfig.appName,
-                authErr: 'Thông tin đăng nhập không chính xác',
+                logErr: 'Thông tin đăng nhập không chính xác',
             });
         }
     }

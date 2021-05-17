@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer');
 const TokenGenerator = require('uuid-token-generator');
 const { User } = require('../models');
-const appConfig = require('../configs/app');
 const mailConfig = require('../configs/email');
+const appConfig = require('../configs/app');
 
 class RegisterController {
     // [GET] /register

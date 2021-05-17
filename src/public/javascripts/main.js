@@ -586,5 +586,57 @@
                 error.insertBefore(element);
             },
         });
+        // Validate recovery form
+        $('#recovery-form').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                    minlength: 3,
+                    maxlength: 320,
+                },
+            },
+            messages: {
+                email: {
+                    required: 'Địa chỉ email không được trống',
+                    email: 'Địa chỉ email không hợp lệ',
+                },
+            },
+            errorPlacement: (error, element) => {
+                error.insertBefore(element);
+            },
+        });
+        // Validate reset form
+        $('#reset-form').validate({
+            rules: {
+                pass1: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 32,
+                },
+                pass2: {
+                    required: true,
+                    equalTo: '#pass1',
+                    minlength: 6,
+                    maxlength: 32,
+                },
+            },
+            messages: {
+                pass1: {
+                    required: 'Mật khẩu không được trống',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+                pass2: {
+                    required: 'Xác nhận mật khẩu không được trống',
+                    equalTo: 'Xác nhận mật khẩu không chính xác',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+            },
+            errorPlacement: (error, element) => {
+                error.insertBefore(element);
+            },
+        });
     });
 })(jQuery);
