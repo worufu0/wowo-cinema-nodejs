@@ -1,32 +1,8 @@
-const passport = require('passport');
-const FacebookStrategy = require('passport-facebook').Strategy;
 const { User } = require('../models');
-const stategyConfig = require('../configs/strategy');
 const appConfig = require('../configs/app');
+const passport = require('../libs/passport');
 
-passport.serializeUser((user, done) => {
-    done(null, user);
-});
-passport.deserializeUser((user, done) => {
-    done(null, user);
-});
-
-passport.use(
-    new FacebookStrategy(
-        stategyConfig.facebook,
-        async (accessToken, refreshToken, profile, cb) => {
-            await User.findOrCreate({
-                where: {
-                    uuid: profile.id,
-                    fullName: profile.displayName,
-                    verified: true,
-                    userType: 1,
-                },
-            });
-            cb(null, profile);
-        }
-    )
-);
+passport.call();
 
 class LoginController {
     // [GET] /login

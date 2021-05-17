@@ -1,5 +1,5 @@
 module.exports = {
-    urlRoot: 'https://6572c7608765.ngrok.io',
+    urlRoot: 'https://f884e7fcce2b.ngrok.io',
     appName: 'Wowo Cinema',
     pageTitle: {
         home: 'Mua Vé',
