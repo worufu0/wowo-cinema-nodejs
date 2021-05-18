@@ -8,17 +8,19 @@
                 </div>
                 <form id="login-form" class="account-form" method="POST">
                     <div class="form-group">
-                        <label class="error">{{logErr}}</label>
+                        <label class="error" for="email">{{logErr}}</label>
                         <label for="email">email <span>*</span></label>
-                        <input type="text" placeholder="Nhập địa chỉ email" id="email" name="email" />
+                        <input type="text" placeholder="Nhập địa chỉ email" id="email" name="email"
+                            value="{{rememberEmail}}" />
                     </div>
                     <div class="form-group">
                         <label for="pass">mật khẩu <span>*</span></label>
-                        <input type="password" placeholder="Nhập mật khẩu" id="pass" name="pass" />
+                        <input type="password" placeholder="Nhập mật khẩu" id="pass" name="pass"
+                            value="{{rememberPass}}" />
                     </div>
                     <div class="form-group checkgroup">
-                        <input type="checkbox" id="remember" name="remember" />
-                        <label for=" remember">ghi nhớ mật khẩu</label>
+                        <input type="checkbox" id="remember" name="remember" {{status}} />
+                        <label for="remember">ghi nhớ mật khẩu</label>
                         <a href="/recovery" class="forget">quên mật khẩu</a>
                     </div>
                     <div class="form-group text-center">

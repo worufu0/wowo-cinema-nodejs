@@ -3,8 +3,10 @@ const router = express.Router();
 const passport = require('passport');
 const loginC = require('../controllers/login.c');
 const loginOneTime = require('../middlewares/login-one-time');
+const rememberMe = require('../middlewares/remember-me');
 
 router.use(loginOneTime); // Login One Time
+router.use(rememberMe); // Remember Me
 
 router.get(
     '/google',

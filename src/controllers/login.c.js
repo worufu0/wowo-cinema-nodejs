@@ -6,25 +6,43 @@ const passport = require('../libs/passport').call();
 class LoginController {
     // [GET] /login
     index(req, res) {
+        let rememberEmail, rememberPass, status;
+
+        if (req.remember) {
+            rememberEmail = req.remember.user.email;
+            rememberPass = req.remember.user.pass;
+            status = req.remember.status;
+        }
+
         res.render('pages/login', {
             layout: 'other',
             title: `${appConfig.pageTitle.login} | ${appConfig.appName}`,
             appName: appConfig.appName,
+            rememberEmail: rememberEmail,
+            rememberPass: rememberPass,
+            status: status,
         });
     }
 
     // [POST] /login
     async login(req, res) {
         const { email, pass, remember } = req.body;
-        const hashPass = bcrypt.hashSync(pass, 10);
         const user = await User.findOne({
             where: {
                 email: email,
             },
         });
 
-        if (user && bcrypt.compareSync(pass, hashPass)) {
+        if (user && bcrypt.compareSync(pass, user.password)) {
             req.session.userId = user.uuid;
+
+            remember === 'on'
+                ? (req.session.remember = {
+                      email: email,
+                      pass: pass,
+                  })
+                : delete req.session.remember;
+
             res.redirect('/');
         } else {
             res.render('pages/login', {
