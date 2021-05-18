@@ -28,8 +28,11 @@ module.exports = {
         host: process.env.PROD_DB_HOSTNAME,
         port: process.env.PROD_DB_PORT,
         dialect: 'postgres',
+        force: true,
         dialectOptions: {
             bigNumberStrings: true,
+            ssl: true,
         },
+        ssl: true,
     },
 };

@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const TokenGenerator = require('uuid-token-generator');
+const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const mailConfig = require('../configs/email');
 const appConfig = require('../configs/app');
@@ -92,9 +93,10 @@ class RecoveryController {
     // [POST] /recovery/:token
     async change(req, res) {
         const token = new TokenGenerator(256, TokenGenerator.BASE62).generate();
+        const hashPash = bcrypt.hashSync(req.body.pass1, 10);
 
         await User.update(
-            { password: req.body.pass1, token: token },
+            { password: hashPash, token: token },
             {
                 where: {
                     token: req.params.token,

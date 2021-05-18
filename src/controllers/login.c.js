@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const appConfig = require('../configs/app');
 const passport = require('../libs/passport').call();
@@ -14,14 +15,15 @@ class LoginController {
 
     // [POST] /login
     async login(req, res) {
-        const { email, pass } = req.body;
+        const { email, pass, remember } = req.body;
+        const hashPass = bcrypt.hashSync(pass, 10);
         const user = await User.findOne({
             where: {
                 email: email,
             },
         });
 
-        if (user && user.password === pass) {
+        if (user && bcrypt.compareSync(pass, hashPass)) {
             req.session.userId = user.uuid;
             res.redirect('/');
         } else {

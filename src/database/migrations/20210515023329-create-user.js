@@ -14,18 +14,15 @@ module.exports = {
             },
             email: {
                 type: Sequelize.STRING,
-                defaultValue: 'không có',
             },
             password: {
                 type: Sequelize.STRING,
             },
             fullName: {
                 type: Sequelize.TEXT,
-                defaultValue: 'chưa đặt tên',
             },
             phone: {
                 type: Sequelize.STRING,
-                defaultValue: 'không có',
             },
             userType: {
                 type: Sequelize.INTEGER,

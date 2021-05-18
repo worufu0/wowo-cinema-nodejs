@@ -6,6 +6,7 @@
     "scripts": {
         "start": "node src/app.js",
         "dev": "nodemon src/app.js",
+        "release": "npx sequelize-cli db:migrate --config src/configs/database.js --migrations-path src/database/migrations && npx sequelize-cli db:seed:all --config src/configs/database.js --seeders-path src/database/seeders",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -19,7 +20,9 @@
     },
     "homepage": "https://github.com/worufu97/wowo-cinema-nodejs#readme",
     "dependencies": {
+        "bcrypt": "^5.0.1",
         "cookie-session": "^1.4.0",
+        "dotenv": "^9.0.2",
         "express": "^4.17.1",
         "express-handlebars": "^5.3.2",
         "morgan": "^1.10.0",
@@ -30,6 +33,7 @@
         "pg": "^8.6.0",
         "pg-hstore": "^2.3.3",
         "sequelize": "^6.6.2",
+        "sequelize-cli": "^6.2.0",
         "uuid-token-generator": "^1.0.0"
     }
 }

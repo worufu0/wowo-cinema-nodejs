@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const TokenGenerator = require('uuid-token-generator');
+const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const mailConfig = require('../configs/email');
 const appConfig = require('../configs/app');
@@ -34,11 +35,13 @@ class RegisterController {
                 regErr: 'Địa chỉ email đã được sử dụng',
             });
         } else {
+            const hashPass = bcrypt.hashSync(pass1, 10);
+
             await User.findOrCreate({
                 where: {
                     uuid: uuid,
                     email: email,
-                    password: pass1,
+                    password: hashPass,
                     userType: 0,
                 },
             });
