@@ -34,7 +34,7 @@ class LoginController {
         });
 
         if (user && bcrypt.compareSync(pass, user.password)) {
-            req.session.userId = user.uuid;
+            req.session.userId = user.id;
 
             remember === 'on'
                 ? (req.session.remember = {

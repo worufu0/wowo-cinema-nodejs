@@ -39,7 +39,7 @@ class RegisterController {
 
             await User.findOrCreate({
                 where: {
-                    uuid: uuid,
+                    id: uuid,
                     email: email,
                     password: hashPass,
                     userType: 0,
@@ -66,7 +66,7 @@ class RegisterController {
                 <h3>Vui lòng xác minh địa chỉ email bạn dùng để đăng ký tài khoản ${appConfig.appName}.</h3>
                 </br>
                 <p>Vui lòng click vào link bên dưới để xác nhận email của bạn.</p>
-                <a href="${appConfig.urlRoot}/register/verify/${token}" style="margin-bottom: 16px">${appConfig.urlRoot}/register/verify/${token}</a>
+                <a href="${process.env.URL_ROOT}/register/verify/${token}" style="margin-bottom: 16px">${process.env.URL_ROOT}/register/verify/${token}</a>
                 </br>
                 <h4>Wowo Admin</h4>
                 `,

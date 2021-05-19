@@ -1,41 +1,46 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('Users', {
+        await queryInterface.createTable('Movies', {
             id: {
                 allowNull: false,
                 primaryKey: true,
                 type: Sequelize.STRING,
             },
-            email: {
-                type: Sequelize.STRING,
-            },
-            password: {
-                type: Sequelize.STRING,
-            },
-            fullName: {
+            name: {
+                allowNull: false,
                 type: Sequelize.TEXT,
             },
-            phone: {
+            unsignedName: {
+                allowNull: false,
                 type: Sequelize.STRING,
             },
-            userType: {
-                allowNull: false,
+            category: {
+                type: Sequelize.TEXT,
+            },
+            time: {
                 type: Sequelize.INTEGER,
-                defaultValue: 0,
             },
-            admin: {
-                allowNull: false,
-                type: Sequelize.BOOLEAN,
-                defaultValue: false,
+            country: {
+                type: Sequelize.TEXT,
             },
-            token: {
+            director: {
+                type: Sequelize.TEXT,
+            },
+            trailer: {
                 type: Sequelize.STRING,
             },
-            verified: {
-                allowNull: false,
-                type: Sequelize.BOOLEAN,
-                defaultValue: false,
+            description: {
+                type: Sequelize.TEXT,
+            },
+            price: {
+                type: Sequelize.INTEGER,
+            },
+            openingDay: {
+                type: Sequelize.DATEONLY,
+            },
+            poster: {
+                type: Sequelize.STRING,
             },
             createdAt: {
                 allowNull: false,
@@ -48,6 +53,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('Users');
+        await queryInterface.dropTable('Movies');
     },
 };

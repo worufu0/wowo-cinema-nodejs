@@ -44,7 +44,7 @@ class RecoveryController {
                 text: `Đặt lại  mật khẩu`,
                 html: `
                 <p>Vui lòng click vào link bên dưới để đặt lại mật khẩu.</p>
-                <a href="${appConfig.urlRoot}/recovery/${token}" style="margin-bottom: 16px">${appConfig.urlRoot}/recovery/${token}</a>
+                <a href="${process.env.URL_ROOT}/recovery/${token}" style="margin-bottom: 16px">${process.env.URL_ROOT}/recovery/${token}</a>
                 </br>
                 <h4>Wowo Admin</h4>
                 `,
@@ -90,7 +90,7 @@ class RecoveryController {
         }
     }
 
-    // [POST] /recovery/:token
+    // [PATCH] /recovery/:token
     async change(req, res) {
         const token = new TokenGenerator(256, TokenGenerator.BASE62).generate();
         const hashPash = bcrypt.hashSync(req.body.pass1, 10);

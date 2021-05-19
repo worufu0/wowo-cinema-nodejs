@@ -3,10 +3,11 @@ const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const path = require('path');
 const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
 const passport = require('passport');
 const dotenv = require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 const router = require('./routes');
 const db = require('./database');
 const authentication = require('./middlewares/authentication');
@@ -31,10 +32,13 @@ app.set('trust proxy', 1);
 app.use(
     cookieSession({
         name: 'session',
-        keys: [process.env.COOKIE_KEY || 'secret'],
+        keys: [process.env.COOKIE_KEY],
         maxAge: 24 * 60 * 60 * 1000,
     })
 );
+
+// Method Override
+app.use(methodOverride('_method'));
 
 // Connect Database
 db.connect();

@@ -1,5 +1,4 @@
 module.exports = {
-    urlRoot: process.env.URL_ROOT || 'http://localhost:3000',
     appName: 'Wowo Cinema',
     pageTitle: {
         home: 'Mua Vé',

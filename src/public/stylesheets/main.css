@@ -1003,8 +1003,6 @@ input[type='submit'] {
 .gallery-item .gallery-thumb a,
 .gallery-item::before,
 .speak-con-wrapper::before,
-.sports-ticket::before,
-.sports-ticket::after,
 .client-section::after,
 .contact-container .bg-thumb::before,
 .contact-info .info-area::before {
@@ -1139,7 +1137,7 @@ input[type='submit'] {
 }
 
 .bg-one {
-    background-color: #032055;
+    background-color: transparent;
 }
 
 .bg-two {
@@ -1158,8 +1156,6 @@ input[type='submit'] {
     background-color: #01173f;
 }
 
-.sports-grid .movie-thumb .event-date,
-.event-grid .movie-thumb .event-date,
 .movie-grid .movie-thumb .event-date {
     background-image: -webkit-linear-gradient(45deg, #f54646 0%, #f53da1 100%);
 }
@@ -3268,36 +3264,22 @@ input[type='submit'] {
 }
 
 /*Movie-Grid Starts Here*/
-.sports-grid,
-.event-grid,
 .movie-grid {
     margin-bottom: 30px;
     overflow: hidden;
     border-radius: 7px 7px 5px 5px;
 }
 
-.sports-grid .movie-content,
-.event-grid .movie-content,
-.movie-grid .movie-content {
-    padding: 0 20px;
-}
-
-.sports-grid .movie-content .title,
-.event-grid .movie-content .title,
 .movie-grid .movie-content .title {
     padding: 23px 0;
     text-transform: capitalize;
-    border-bottom: 1px dashed #11326f;
+    font-size: 20px;
 }
 
-.sports-grid .movie-thumb,
-.event-grid .movie-thumb,
 .movie-grid .movie-thumb {
     position: relative;
 }
 
-.sports-grid .movie-thumb .event-date,
-.event-grid .movie-thumb .event-date,
 .movie-grid .movie-thumb .event-date {
     position: absolute;
     top: 0;
@@ -3306,55 +3288,39 @@ input[type='submit'] {
     border-radius: 0 0 30px 30px;
 }
 
-.sports-grid .movie-thumb .event-date .date-title,
-.event-grid .movie-thumb .event-date .date-title,
 .movie-grid .movie-thumb .event-date .date-title {
     font-size: 22px;
     margin-bottom: -5px;
 }
 
-.sports-grid .movie-thumb .event-date span,
-.event-grid .movie-thumb .event-date span,
 .movie-grid .movie-thumb .event-date span {
     font-weight: 600;
     font-size: 14px;
 }
 
-.sports-grid .movie-rating-percent,
-.event-grid .movie-rating-percent,
 .movie-grid .movie-rating-percent {
     padding: 17px 0;
 }
 
-.sports-grid:hover .c-thumb img,
-.event-grid:hover .c-thumb img,
 .movie-grid:hover .c-thumb img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
 
-.sports-grid:hover .movie-content .title a,
-.event-grid:hover .movie-content .title a,
 .movie-grid:hover .movie-content .title a {
     color: #31d7a9;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-    .sports-grid .title,
-    .event-grid .title,
     .movie-grid .title {
         font-size: 20px;
     }
-    .sports-grid span,
-    .event-grid span,
     .movie-grid span {
         font-size: 15px;
     }
 }
 
 @media (max-width: 575px) {
-    .sports-grid,
-    .event-grid,
     .movie-grid {
         max-width: 280px;
         margin-left: auto;
@@ -7091,180 +7057,6 @@ input[type='submit'] {
         margin: -100px 0 100px;
         position: relative;
         z-index: 1;
-    }
-}
-
-/*Sports-Ticket Starts Here*/
-.sports-ticket {
-    padding: 110px 15px 30px;
-    position: relative;
-    border-radius: 30px;
-    background: #ffffff;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-@media (max-width: 575px) {
-    .sports-ticket {
-        max-width: 345px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 106px;
-    }
-}
-
-.sports-ticket * {
-    position: relative;
-    z-index: 2;
-}
-
-.sports-ticket .ticket-title {
-    color: #5760fd;
-    margin-bottom: 2px;
-}
-
-@media (max-width: 575px) {
-    .sports-ticket .ticket-title {
-        font-size: 42px;
-    }
-}
-
-.sports-ticket .ticket-title sup {
-    font-weight: 400;
-    font-size: 60%;
-    top: -0.6em;
-}
-
-.sports-ticket p {
-    color: #001232;
-    margin: 0;
-    margin-bottom: 32px;
-}
-
-@media (max-width: 575px) {
-    .sports-ticket p {
-        margin-bottom: 22px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .sports-ticket p {
-        margin-bottom: 22px;
-    }
-}
-
-.sports-ticket p span {
-    font-weight: 700;
-}
-
-.sports-ticket .custom-button {
-    padding: 11px 44px;
-}
-
-.sports-ticket::before,
-.sports-ticket::after {
-    border-radius: 30px;
-}
-
-.sports-ticket::after {
-    width: calc(100% - 6px);
-    height: calc(100% - 6px);
-    z-index: 1;
-    background-color: #ffffff;
-}
-
-.sports-ticket::before {
-    height: 100%;
-    width: 100%;
-    background: -webkit-gradient(
-        linear,
-        left top,
-        right top,
-        color-stop(17%, #5560ff),
-        color-stop(63%, #aa52a1),
-        to(#ff4343)
-    );
-    background: linear-gradient(90deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
-    background: -webkit-linear-gradient(
-        90deg,
-        #5560ff 17%,
-        #aa52a1 63%,
-        #ff4343 100%
-    );
-}
-
-.sports-ticket .cate {
-    display: block;
-    width: auto;
-    background: linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
-    background: -webkit-linear-gradient(
-        169deg,
-        #5560ff 17%,
-        #aa52a1 63%,
-        #ff4343 100%
-    );
-    color: #ffffff;
-    z-index: 9;
-    border-radius: 0 30px 30px 0;
-    position: absolute;
-    left: 0;
-    top: 30px;
-    font-size: 20px;
-    text-transform: capitalize;
-    padding: 11px 40px;
-    max-width: 100%;
-    font-weight: 700;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .sports-ticket .cate {
-        font-size: 16px;
-        padding: 11px 20px;
-    }
-}
-
-@media (max-width: 575px) {
-    .sports-ticket .cate {
-        font-size: 16px;
-    }
-}
-
-.sports-ticket.style-two {
-    margin-bottom: 49px;
-}
-
-.sports-ticket.style-two .cate {
-    padding: 11px 25px;
-}
-
-.sports-ticket.style-two .t-button {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    -webkit-transform: translateX(-50%) translateY(50%);
-    transform: translateX(-50%) translateY(50%);
-    width: 38px;
-    line-height: 38px;
-    height: 38px;
-    border-radius: 50%;
-    color: #ffffff;
-    background-image: -webkit-linear-gradient(
-        169deg,
-        #5560ff 17%,
-        #aa52a1 63%,
-        #ff4343 100%
-    );
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-    .sports-ticket.style-two {
-        padding-top: 100px;
-        padding-bottom: 25px;
-    }
-    .sports-ticket.style-two .cate {
-        font-size: 16px;
-        padding: 8px 20px;
-        font-weight: 600;
     }
 }
 

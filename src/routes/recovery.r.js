@@ -5,7 +5,7 @@ const loginOneTime = require('../middlewares/login-one-time');
 
 router.use(loginOneTime); // Login One Time
 
-router.post('/:token', recoveryC.change);
+router.patch('/:token', recoveryC.change);
 router.get('/:token', recoveryC.reset);
 router.post('/', recoveryC.recovery);
 router.get('/', recoveryC.index);

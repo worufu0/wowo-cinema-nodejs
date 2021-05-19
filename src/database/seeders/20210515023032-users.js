@@ -1,15 +1,17 @@
 'use strict';
 
+const TokenGenerator = require('uuid-token-generator');
+const tokgen = new TokenGenerator();
 const bcrypt = require('bcrypt');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Users', [
             {
-                uuid: '1',
+                id: tokgen.generate(),
                 email: 'admin@wowo.com',
                 password: bcrypt.hashSync('123456', 10),
-                fullName: 'Admin',
+                fullName: 'Wowo Admin',
                 userType: 0,
                 admin: true,
                 verified: true,
