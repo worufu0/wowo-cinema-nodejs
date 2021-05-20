@@ -1251,7 +1251,6 @@ input[type='submit'] {
 
 .section-header-2 .left .title {
     text-transform: uppercase;
-    margin-bottom: 19px;
 }
 
 @media (max-width: 767px) {
@@ -3273,7 +3272,7 @@ input[type='submit'] {
 .movie-grid .movie-content .title {
     padding: 23px 0;
     text-transform: capitalize;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .movie-grid .movie-thumb {

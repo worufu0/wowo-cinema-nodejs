@@ -4,12 +4,24 @@ const appConfig = require('../configs/app');
 class HomeController {
     // [GET] /
     async index(req, res) {
-        const movies = await Movie.findAll();
+        const newMovies = await Movie.findAll({
+            offset: 0,
+            limit: 8,
+            order: [['openingDay', 'DESC']],
+        });
+        const popMovies = await Movie.findAll({
+            offset: 0,
+            limit: 8,
+            order: [['sold', 'DESC']],
+        });
+        const allMovies = await Movie.findAll();
 
         res.render('pages/home', {
             title: `${appConfig.pageTitle.home} | ${appConfig.appName}`,
             appName: appConfig.appName,
-            movies: movies,
+            newMovies: newMovies,
+            popMovies: popMovies,
+            allMovies: allMovies,
         });
     }
 }

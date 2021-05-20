@@ -42,6 +42,9 @@ module.exports = {
             poster: {
                 type: Sequelize.STRING,
             },
+            sold: {
+                type: Sequelize.INTEGER,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

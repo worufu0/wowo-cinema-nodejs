@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const appConfig = require('../configs/app');
-const passport = require('../libs/passport').call();
+const passport = require('../helpers/passport').call();
 
 class LoginController {
     // [GET] /login
