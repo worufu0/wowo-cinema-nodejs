@@ -41,14 +41,10 @@
                                 <img src="/images/ticket/city.png" alt="ticket" />
                             </div>
                             <span class="type">cụm rạp</span>
-                            <select class="select-bar">
-                                <option value="london">London</option>
-                                <option value="dhaka">dhaka</option>
-                                <option value="rosario">rosario</option>
-                                <option value="madrid">madrid</option>
-                                <option value="koltaka">kolkata</option>
-                                <option value="rome">rome</option>
-                                <option value="khoksa">khoksa</option>
+                            <select class="select-bar cinemas">
+                                {{#each cinemas}}
+                                    <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                {{/each}}
                             </select>
                         </div>
                         <div class="form-group">
@@ -56,33 +52,29 @@
                                 <img src="/images/ticket/cinema.png" alt="ticket" />
                             </div>
                             <span class="type">rạp</span>
-                            <select class="select-bar">
-                                <option value="Awaken">Awaken</option>
-                                <option value="dhaka">dhaka</option>
-                                <option value="rosario">rosario</option>
-                                <option value="madrid">madrid</option>
-                                <option value="koltaka">kolkata</option>
-                                <option value="rome">rome</option>
-                                <option value="khoksa">khoksa</option>
+                            <select class="select-bar rooms">
+                                {{#each rooms}}
+                                    <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                {{/each}}
                             </select>
                         </div>
                         <div class="form-group">
                             <div class="thumb">
                                 <img src="/images/ticket/date.png" alt="ticket" />
                             </div>
-                            <span class="type">ngày chiếu</span>
+                            <span class="type">năm</span>
                             <select class="select-bar">
-                                <option value="26-12-19">
-                                    23/10/2020
+                                <option value="2021">
+                                    2021
                                 </option>
-                                <option value="26-12-19">
-                                    24/10/2020
+                                <option value="2020">
+                                    2020
                                 </option>
-                                <option value="26-12-19">
-                                    25/10/2020
+                                <option value="2019">
+                                    2019
                                 </option>
-                                <option value="26-12-19">
-                                    26/10/2020
+                                <option value="2018">
+                                    2018
                                 </option>
                             </select>
                         </div>

@@ -1,16 +1,16 @@
-(function ($) {
+(($) => {
     'user strict';
     // Preloader Js
-    $(window).on('load', function () {
+    $(window).on('load', () => {
         $('.preloader').fadeOut(1000);
-        var img = $('.bg_img');
-        img.css('background-image', function () {
-            var bg = 'url(' + $(this).data('background') + ')';
+        let img = $('.bg_img');
+        img.css('background-image', () => {
+            let bg = 'url(' + $(this).data('background') + ')';
             return bg;
         });
         // filter functions
-        var $grid = $('.grid-area');
-        var filterFns = {};
+        let $grid = $('.grid-area');
+        let filterFns = {};
         $grid.isotope({
             itemSelector: '.grid-item',
             masonry: {
@@ -18,8 +18,8 @@
             },
         });
         // bind filter button click
-        $('ul.filter').on('click', 'li', function () {
-            var filterValue = $(this).attr('data-filter');
+        $('ul.filter').on('click', 'li', () => {
+            let filterValue = $(this).attr('data-filter');
             // use filterFn if matches value
             filterValue = filterFns[filterValue] || filterValue;
             $grid.isotope({
@@ -27,22 +27,22 @@
             });
         });
         // change is-checked class on buttons
-        $('ul.filter').each(function (i, buttonGroup) {
-            var $buttonGroup = $(buttonGroup);
-            $buttonGroup.on('click', 'li', function () {
+        $('ul.filter').each((i, buttonGroup) => {
+            let $buttonGroup = $(buttonGroup);
+            $buttonGroup.on('click', 'li', () => {
                 $buttonGroup.find('.active').removeClass('active');
                 $(this).addClass('active');
             });
         });
     });
-    $(document).ready(function () {
+    $(document).ready(() => {
         // Nice Select
         $('.select-bar').niceSelect();
         // Lightcase
         $('.video-popup').magnificPopup({
             type: 'iframe',
         });
-        $('body').each(function () {
+        $('body').each(() => {
             $(this)
                 .find('.img-pop')
                 .magnificPopup({
@@ -55,8 +55,8 @@
         // Wow js active
         new WOW().init();
         //Faq
-        $('.faq-wrapper .faq-title').on('click', function (e) {
-            var element = $(this).parent('.faq-item');
+        $('.faq-wrapper .faq-title').on('click', (e) => {
+            let element = $(this).parent('.faq-item');
             if (element.hasClass('open')) {
                 element.removeClass('open');
                 element.find('.faq-content').removeClass('open');
@@ -81,12 +81,12 @@
         });
 
         //MenuBar
-        $('.header-bar').on('click', function () {
+        $('.header-bar').on('click', () => {
             $('.menu').toggleClass('active');
             $('.header-bar').toggleClass('active');
             $('.overlay').toggleClass('active');
         });
-        $('.overlay').on('click', function () {
+        $('.overlay').on('click', () => {
             $('.menu').removeClass('active');
             $('.header-bar').removeClass('active');
             $('.overlay').removeClass('active');
@@ -96,18 +96,18 @@
         // drop down menu width overflow problem fix
         $('ul')
             .parent('li')
-            .hover(function () {
-                var menu = $(this).find('ul');
-                var menupos = $(menu).offset();
+            .hover(() => {
+                let menu = $(this).find('ul');
+                let menupos = $(menu).offset();
                 if (menupos.left + menu.width() > $(window).width()) {
-                    var newpos = -$(menu).width();
+                    let newpos = -$(menu).width();
                     menu.css({
                         left: newpos,
                     });
                 }
             });
-        $('.menu li a').on('click', function (e) {
-            var element = $(this).parent('li');
+        $('.menu li a').on('click', (e) => {
+            let element = $(this).parent('li');
             if (element.hasClass('open')) {
                 element.removeClass('open');
                 element.find('li').removeClass('open');
@@ -122,8 +122,8 @@
             }
         });
         // Scroll To Top
-        var scrollTop = $('.scrollToTop');
-        $(window).on('scroll', function () {
+        let scrollTop = $('.scrollToTop');
+        $(window).on('scroll', () => {
             if ($(this).scrollTop() < 500) {
                 scrollTop.removeClass('active');
             } else {
@@ -131,7 +131,7 @@
             }
         });
         //Click event to scroll to top
-        $('.scrollToTop').on('click', function () {
+        $('.scrollToTop').on('click', () => {
             $('html, body').animate(
                 {
                     scrollTop: 0,
@@ -141,32 +141,29 @@
             return false;
         });
         // Header Sticky Here
-        var headerOne = $('.header-section');
-        $(window).on('scroll', function () {
+        let headerOne = $('.header-section');
+        $(window).on('scroll', () => {
             if ($(this).scrollTop() < 1) {
                 headerOne.removeClass('header-active');
             } else {
                 headerOne.addClass('header-active');
             }
         });
-        $('.window-warning .lay').on('click', function () {
+        $('.window-warning .lay').on('click', () => {
             $('.window-warning').addClass('inActive');
         });
-        $('.seat-plan-wrapper li .movie-schedule .item').on(
-            'click',
-            function () {
-                $('.window-warning').removeClass('inActive');
-            }
-        );
+        $('.seat-plan-wrapper li .movie-schedule .item').on('click', () => {
+            $('.window-warning').removeClass('inActive');
+        });
         //Tab Section
-        $('.tab ul.tab-menu li').on('click', function (g) {
-            var tab = $(this).closest('.tab');
+        $('.tab ul.tab-menu li').on('click', (g) => {
+            let tab = $(this).closest('.tab');
             tab.find('li').siblings('li').removeClass('active');
             $(this).closest('li').addClass('active');
             g.preventDefault();
         });
-        $('.search-tab ul.tab-menu li').on('click', function (k) {
-            var search_tab = $(this).closest('.search-tab'),
+        $('.search-tab ul.tab-menu li').on('click', (k) => {
+            let search_tab = $(this).closest('.search-tab'),
                 searchIndex = $(this).closest('li').index();
             search_tab.find('li').siblings('li').removeClass('active');
             $(this).closest('li').addClass('active');
@@ -181,8 +178,8 @@
                 .show(10);
             k.preventDefault();
         });
-        $('.tabTwo ul.tab-menu li').on('click', function (g) {
-            var tabTwo = $(this).closest('.tabTwo'),
+        $('.tabTwo ul.tab-menu li').on('click', (g) => {
+            let tabTwo = $(this).closest('.tabTwo'),
                 index = $(this).closest('li').index();
             tabTwo.find('li').siblings('li').removeClass('active');
             $(this).closest('li').addClass('active');
@@ -198,22 +195,22 @@
             g.preventDefault();
         });
         //Odometer
-        $('.counter-item').each(function () {
-            $(this).isInViewport(function (status) {
+        $('.counter-item').each(() => {
+            $(this).isInViewport((status) => {
                 if (status === 'entered') {
                     for (
-                        var i = 0;
+                        let i = 0;
                         i < document.querySelectorAll('.odometer').length;
                         i++
                     ) {
-                        var el = document.querySelectorAll('.odometer')[i];
+                        let el = document.querySelectorAll('.odometer')[i];
                         el.innerHTML = el.getAttribute('data-odometer-final');
                     }
                 }
             });
         });
-        $('.social-icons li a').on('mouseover', function (e) {
-            var social = $(this).parent('li');
+        $('.social-icons li a').on('mouseover', (e) => {
+            let social = $(this).parent('li');
             if (social.children('a').hasClass('active')) {
                 social.siblings('li').children('a').removeClass('active');
                 $(this).addClass('active');
@@ -303,14 +300,14 @@
                 },
             },
         });
-        var owl = $('.casting-slider');
+        let owl = $('.casting-slider');
         owl.owlCarousel();
         // Go to the next item
-        $('.cast-next').on('click', function () {
+        $('.cast-next').on('click', () => {
             owl.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.cast-prev').on('click', function () {
+        $('.cast-prev').on('click', () => {
             owl.trigger('prev.owl.carousel', [300]);
         });
         $('.casting-slider-two').owlCarousel({
@@ -340,14 +337,14 @@
                 },
             },
         });
-        var owlTT = $('.casting-slider-two');
+        let owlTT = $('.casting-slider-two');
         owlTT.owlCarousel();
         // Go to the next item
-        $('.cast-next-2').on('click', function () {
+        $('.cast-next-2').on('click', () => {
             owlTT.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.cast-prev-2').on('click', function () {
+        $('.cast-prev-2').on('click', () => {
             owlTT.trigger('prev.owl.carousel', [300]);
         });
         $('.details-photos').owlCarousel({
@@ -375,8 +372,8 @@
                 },
             },
         });
-        var book = 0;
-        $('.seat-free img').on('click', function (e) {
+        let book = 0;
+        $('.seat-free img').on('click', (e) => {
             if (book == 0) {
                 $(this).attr('src', './assets/images/movie/seat01-free.png');
                 book = 1;
@@ -385,8 +382,8 @@
                 book = 0;
             }
         });
-        var bookTwo = 1;
-        $('.seat-free-two img').on('click', function (e) {
+        let bookTwo = 1;
+        $('.seat-free-two img').on('click', (e) => {
             if (bookTwo == 0) {
                 $(this).attr('src', './assets/images/movie/seat02-free.png');
                 bookTwo = 1;
@@ -396,18 +393,18 @@
             }
         });
         // shop cart + - start here
-        var CartPlusMinus = $('.cart-plus-minus');
+        let CartPlusMinus = $('.cart-plus-minus');
         CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');
         CartPlusMinus.append('<div class="inc qtybutton">+</div>');
-        $('.qtybutton').on('click', function () {
-            var $button = $(this);
-            var oldValue = $button.parent().find('input').val();
+        $('.qtybutton').on('click', () => {
+            let $button = $(this);
+            let oldValue = $button.parent().find('input').val();
             if ($button.text() === '+') {
-                var newVal = parseFloat(oldValue) + 1;
+                let newVal = parseFloat(oldValue) + 1;
             } else {
                 // Don't allow decrementing below zero
                 if (oldValue > 0) {
-                    var newVal = parseFloat(oldValue) - 1;
+                    let newVal = parseFloat(oldValue) - 1;
                 } else {
                     newVal = 1;
                 }
@@ -442,14 +439,14 @@
                 },
             },
         });
-        var owlT = $('.speaker-slider');
+        let owlT = $('.speaker-slider');
         owlT.owlCarousel();
         // Go to the next item
-        $('.speaker-next').on('click', function () {
+        $('.speaker-next').on('click', () => {
             owlT.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.speaker-prev').on('click', function () {
+        $('.speaker-prev').on('click', () => {
             owlT.trigger('prev.owl.carousel', [300]);
         });
         //Client SLider
@@ -470,7 +467,7 @@
                 day: 'Day',
                 days: 'Days',
             },
-            function () {
+            () => {
                 alert('Done!');
             }
         );
@@ -485,14 +482,14 @@
             autoplayHoverPause: true,
             margin: 30,
         });
-        var owlBela = $('.widget-slider');
+        let owlBela = $('.widget-slider');
         owlBela.owlCarousel();
         // Go to the next item
-        $('.widget-next').on('click', function () {
+        $('.widget-next').on('click', () => {
             owlBela.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.widget-prev').on('click', function () {
+        $('.widget-prev').on('click', () => {
             owlBela.trigger('prev.owl.carousel', [300]);
         });
         $('.blog-slider').owlCarousel({
@@ -504,14 +501,14 @@
             autoplayTimeout: 2500,
             autoplayHoverPause: true,
         });
-        var owlB = $('.blog-slider');
+        let owlB = $('.blog-slider');
         owlB.owlCarousel();
         // Go to the next item
-        $('.blog-next').on('click', function () {
+        $('.blog-next').on('click', () => {
             owlB.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.blog-prev').on('click', function () {
+        $('.blog-prev').on('click', () => {
             owlB.trigger('prev.owl.carousel', [300]);
         });
         // Validate register form
@@ -637,6 +634,21 @@
             errorPlacement: (error, element) => {
                 error.insertBefore(element);
             },
+        });
+        // Select cinema in search form
+        $('.select-bar.cinemas').on('change', () => {
+            $.ajax({
+                url: `/select`,
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    id: $('.select-bar.cinemas .selected').data('value'),
+                },
+                success: (res) => {
+                    $('.select-bar.rooms .current').html(res.current);
+                    $('.select-bar.rooms .list').html(res.result);
+                },
+            });
         });
     });
 })(jQuery);
