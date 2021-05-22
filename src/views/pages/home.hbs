@@ -29,53 +29,26 @@
             </div>
             <div class="tab-area">
                 <div class="tab-item active">
-                    <form class="ticket-search-form">
-                        <div class="form-group large">
-                            <input type="text" placeholder="Nhập tên phim" />
+                    <form class="ticket-search-form" action="/search">
+                        <div class="col-lg-7 form-group">
+                            <input id="searchInput" type="text" placeholder="Nhập tên phim" name="movie" />
+                            <button type="button" data-toggle="tooltip" data-placement="top"
+                                title="Bạn có thể tìm kiếm suất chiều của tất cả các phim thuộc cụm rạp nếu bạn không nhập tên phim.">
+                                <i class="far fa-question-circle"></i>
+                            </button>
                             <button type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
-                        <div class="form-group">
+                        <div class="col-lg-4 form-group">
                             <div class="thumb">
                                 <img src="/images/ticket/city.png" alt="ticket" />
                             </div>
                             <span class="type">cụm rạp</span>
-                            <select class="select-bar cinemas">
+                            <select class="select-bar cinemas" name="cinema">
                                 {{#each cinemas}}
-                                    <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                    <option value="{{this.dataValues.unsignedName}}">{{this.dataValues.name}}</option>
                                 {{/each}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <div class="thumb">
-                                <img src="/images/ticket/cinema.png" alt="ticket" />
-                            </div>
-                            <span class="type">rạp</span>
-                            <select class="select-bar rooms">
-                                {{#each rooms}}
-                                    <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <div class="thumb">
-                                <img src="/images/ticket/date.png" alt="ticket" />
-                            </div>
-                            <span class="type">năm</span>
-                            <select class="select-bar">
-                                <option value="2021">
-                                    2021
-                                </option>
-                                <option value="2020">
-                                    2020
-                                </option>
-                                <option value="2019">
-                                    2019
-                                </option>
-                                <option value="2018">
-                                    2018
-                                </option>
                             </select>
                         </div>
                     </form>

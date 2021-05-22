@@ -1,10 +1,10 @@
-(($) => {
+(function ($) {
     'user strict';
     // Preloader Js
-    $(window).on('load', () => {
+    $(window).on('load', function () {
         $('.preloader').fadeOut(1000);
         let img = $('.bg_img');
-        img.css('background-image', () => {
+        img.css('background-image', function () {
             let bg = 'url(' + $(this).data('background') + ')';
             return bg;
         });
@@ -18,7 +18,7 @@
             },
         });
         // bind filter button click
-        $('ul.filter').on('click', 'li', () => {
+        $('ul.filter').on('click', 'li', function () {
             let filterValue = $(this).attr('data-filter');
             // use filterFn if matches value
             filterValue = filterFns[filterValue] || filterValue;
@@ -27,22 +27,22 @@
             });
         });
         // change is-checked class on buttons
-        $('ul.filter').each((i, buttonGroup) => {
+        $('ul.filter').each(function (i, buttonGroup) {
             let $buttonGroup = $(buttonGroup);
-            $buttonGroup.on('click', 'li', () => {
+            $buttonGroup.on('click', 'li', function () {
                 $buttonGroup.find('.active').removeClass('active');
                 $(this).addClass('active');
             });
         });
     });
-    $(document).ready(() => {
+    $(document).ready(function () {
         // Nice Select
         $('.select-bar').niceSelect();
         // Lightcase
         $('.video-popup').magnificPopup({
             type: 'iframe',
         });
-        $('body').each(() => {
+        $('body').each(function () {
             $(this)
                 .find('.img-pop')
                 .magnificPopup({
@@ -55,7 +55,7 @@
         // Wow js active
         new WOW().init();
         //Faq
-        $('.faq-wrapper .faq-title').on('click', (e) => {
+        $('.faq-wrapper .faq-title').on('click', function (e) {
             let element = $(this).parent('.faq-item');
             if (element.hasClass('open')) {
                 element.removeClass('open');
@@ -81,12 +81,12 @@
         });
 
         //MenuBar
-        $('.header-bar').on('click', () => {
+        $('.header-bar').on('click', function () {
             $('.menu').toggleClass('active');
             $('.header-bar').toggleClass('active');
             $('.overlay').toggleClass('active');
         });
-        $('.overlay').on('click', () => {
+        $('.overlay').on('click', function () {
             $('.menu').removeClass('active');
             $('.header-bar').removeClass('active');
             $('.overlay').removeClass('active');
@@ -96,9 +96,9 @@
         // drop down menu width overflow problem fix
         $('ul')
             .parent('li')
-            .hover(() => {
+            .hover(function () {
                 let menu = $(this).find('ul');
-                let menupos = $(menu).offset();
+                let menupos = $(menu).offset;
                 if (menupos.left + menu.width() > $(window).width()) {
                     let newpos = -$(menu).width();
                     menu.css({
@@ -106,7 +106,7 @@
                     });
                 }
             });
-        $('.menu li a').on('click', (e) => {
+        $('.menu li a').on('click', function (e) {
             let element = $(this).parent('li');
             if (element.hasClass('open')) {
                 element.removeClass('open');
@@ -123,7 +123,7 @@
         });
         // Scroll To Top
         let scrollTop = $('.scrollToTop');
-        $(window).on('scroll', () => {
+        $(window).on('scroll', function () {
             if ($(this).scrollTop() < 500) {
                 scrollTop.removeClass('active');
             } else {
@@ -131,7 +131,7 @@
             }
         });
         //Click event to scroll to top
-        $('.scrollToTop').on('click', () => {
+        $('.scrollToTop').on('click', function () {
             $('html, body').animate(
                 {
                     scrollTop: 0,
@@ -142,27 +142,30 @@
         });
         // Header Sticky Here
         let headerOne = $('.header-section');
-        $(window).on('scroll', () => {
+        $(window).on('scroll', function () {
             if ($(this).scrollTop() < 1) {
                 headerOne.removeClass('header-active');
             } else {
                 headerOne.addClass('header-active');
             }
         });
-        $('.window-warning .lay').on('click', () => {
+        $('.window-warning .lay').on('click', function () {
             $('.window-warning').addClass('inActive');
         });
-        $('.seat-plan-wrapper li .movie-schedule .item').on('click', () => {
-            $('.window-warning').removeClass('inActive');
-        });
+        $('.seat-plan-wrapper li .movie-schedule .item').on(
+            'click',
+            function () {
+                $('.window-warning').removeClass('inActive');
+            }
+        );
         //Tab Section
-        $('.tab ul.tab-menu li').on('click', (g) => {
+        $('.tab ul.tab-menu li').on('click', function (g) {
             let tab = $(this).closest('.tab');
             tab.find('li').siblings('li').removeClass('active');
             $(this).closest('li').addClass('active');
             g.preventDefault();
         });
-        $('.search-tab ul.tab-menu li').on('click', (k) => {
+        $('.search-tab ul.tab-menu li').on('click', function (k) {
             let search_tab = $(this).closest('.search-tab'),
                 searchIndex = $(this).closest('li').index();
             search_tab.find('li').siblings('li').removeClass('active');
@@ -178,7 +181,7 @@
                 .show(10);
             k.preventDefault();
         });
-        $('.tabTwo ul.tab-menu li').on('click', (g) => {
+        $('.tabTwo ul.tab-menu li').on('click', function (g) {
             let tabTwo = $(this).closest('.tabTwo'),
                 index = $(this).closest('li').index();
             tabTwo.find('li').siblings('li').removeClass('active');
@@ -195,8 +198,8 @@
             g.preventDefault();
         });
         //Odometer
-        $('.counter-item').each(() => {
-            $(this).isInViewport((status) => {
+        $('.counter-item').each(function () {
+            $(this).isInViewport(function (status) {
                 if (status === 'entered') {
                     for (
                         let i = 0;
@@ -209,7 +212,7 @@
                 }
             });
         });
-        $('.social-icons li a').on('mouseover', (e) => {
+        $('.social-icons li a').on('mouseover', function (e) {
             let social = $(this).parent('li');
             if (social.children('a').hasClass('active')) {
                 social.siblings('li').children('a').removeClass('active');
@@ -303,11 +306,11 @@
         let owl = $('.casting-slider');
         owl.owlCarousel();
         // Go to the next item
-        $('.cast-next').on('click', () => {
+        $('.cast-next').on('click', function () {
             owl.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.cast-prev').on('click', () => {
+        $('.cast-prev').on('click', function () {
             owl.trigger('prev.owl.carousel', [300]);
         });
         $('.casting-slider-two').owlCarousel({
@@ -340,11 +343,11 @@
         let owlTT = $('.casting-slider-two');
         owlTT.owlCarousel();
         // Go to the next item
-        $('.cast-next-2').on('click', () => {
+        $('.cast-next-2').on('click', function () {
             owlTT.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.cast-prev-2').on('click', () => {
+        $('.cast-prev-2').on('click', function () {
             owlTT.trigger('prev.owl.carousel', [300]);
         });
         $('.details-photos').owlCarousel({
@@ -373,7 +376,7 @@
             },
         });
         let book = 0;
-        $('.seat-free img').on('click', (e) => {
+        $('.seat-free img').on('click', function (e) {
             if (book == 0) {
                 $(this).attr('src', './assets/images/movie/seat01-free.png');
                 book = 1;
@@ -383,7 +386,7 @@
             }
         });
         let bookTwo = 1;
-        $('.seat-free-two img').on('click', (e) => {
+        $('.seat-free-two img').on('click', function (e) {
             if (bookTwo == 0) {
                 $(this).attr('src', './assets/images/movie/seat02-free.png');
                 bookTwo = 1;
@@ -396,7 +399,7 @@
         let CartPlusMinus = $('.cart-plus-minus');
         CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');
         CartPlusMinus.append('<div class="inc qtybutton">+</div>');
-        $('.qtybutton').on('click', () => {
+        $('.qtybutton').on('click', function () {
             let $button = $(this);
             let oldValue = $button.parent().find('input').val();
             if ($button.text() === '+') {
@@ -442,11 +445,11 @@
         let owlT = $('.speaker-slider');
         owlT.owlCarousel();
         // Go to the next item
-        $('.speaker-next').on('click', () => {
+        $('.speaker-next').on('click', function () {
             owlT.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.speaker-prev').on('click', () => {
+        $('.speaker-prev').on('click', function () {
             owlT.trigger('prev.owl.carousel', [300]);
         });
         //Client SLider
@@ -467,7 +470,7 @@
                 day: 'Day',
                 days: 'Days',
             },
-            () => {
+            function () {
                 alert('Done!');
             }
         );
@@ -485,11 +488,11 @@
         let owlBela = $('.widget-slider');
         owlBela.owlCarousel();
         // Go to the next item
-        $('.widget-next').on('click', () => {
+        $('.widget-next').on('click', function () {
             owlBela.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.widget-prev').on('click', () => {
+        $('.widget-prev').on('click', function () {
             owlBela.trigger('prev.owl.carousel', [300]);
         });
         $('.blog-slider').owlCarousel({
@@ -504,11 +507,11 @@
         let owlB = $('.blog-slider');
         owlB.owlCarousel();
         // Go to the next item
-        $('.blog-next').on('click', () => {
+        $('.blog-next').on('click', function () {
             owlB.trigger('next.owl.carousel');
         });
         // Go to the previous item
-        $('.blog-prev').on('click', () => {
+        $('.blog-prev').on('click', function () {
             owlB.trigger('prev.owl.carousel', [300]);
         });
         // Validate register form
@@ -549,7 +552,7 @@
                     maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
             },
-            errorPlacement: (error, element) => {
+            errorPlacement: function (error, element) {
                 error.insertBefore(element);
             },
         });
@@ -579,7 +582,7 @@
                     maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
             },
-            errorPlacement: (error, element) => {
+            errorPlacement: function (error, element) {
                 error.insertBefore(element);
             },
         });
@@ -599,7 +602,7 @@
                     email: 'Địa chỉ email không hợp lệ',
                 },
             },
-            errorPlacement: (error, element) => {
+            errorPlacement: function (error, element) {
                 error.insertBefore(element);
             },
         });
@@ -631,22 +634,28 @@
                     maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
                 },
             },
-            errorPlacement: (error, element) => {
+            errorPlacement: function (error, element) {
                 error.insertBefore(element);
             },
         });
-        // Select cinema in search form
-        $('.select-bar.cinemas').on('change', () => {
+        // Ticket search form
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#searchInput').on('focusin', function () {
             $.ajax({
-                url: `/select`,
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    id: $('.select-bar.cinemas .selected').data('value'),
-                },
-                success: (res) => {
-                    $('.select-bar.rooms .current').html(res.current);
-                    $('.select-bar.rooms .list').html(res.result);
+                url: '/search/get-source',
+                method: 'GET',
+                success: function (res) {
+                    $('#searchInput').autocomplete({
+                        source: res,
+                        select: function (event, ui) {
+                            const cinema = $('.cinemas .option.selected').data(
+                                'value'
+                            );
+                            console.log(cinema);
+                            location.href = `/search?movie=${ui.item.value}&cinema=${cinema}`;
+                            return false;
+                        },
+                    });
                 },
             });
         });

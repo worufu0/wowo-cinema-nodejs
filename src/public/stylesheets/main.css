@@ -3827,13 +3827,24 @@ input[type='submit'] {
     outline: none;
     background: transparent;
     border: none;
-    color: #90a5e8;
-    height: 45px;
-    width: 45px;
-    text-align: right;
+    text-align: center;
     line-height: 45px;
     position: absolute;
     top: 0;
+}
+
+.ticket-search-form .form-group button:nth-child(2) {
+    color: #5d6377;
+    height: 36px;
+    width: 36px;
+    right: 36px;
+    cursor: default;
+}
+
+.ticket-search-form .form-group button:nth-child(3) {
+    color: #90a5e8;
+    height: 45px;
+    width: 45px;
     right: 0;
 }
 

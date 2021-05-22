@@ -1,3 +1,5 @@
+const movieR = require('./movie.r');
+const searchR = require('./search.r');
 const recoveryR = require('./recovery.r');
 const passportR = require('./passport.r');
 const logoutR = require('./logout.r');
@@ -7,6 +9,8 @@ const homeR = require('./home.r');
 const err404R = require('./404.r');
 
 module.exports = (app) => {
+    app.use('/movie', movieR);
+    app.use('/search', searchR);
     app.use('/recovery', recoveryR);
     app.use('/passport', passportR);
     app.use('/logout', logoutR);

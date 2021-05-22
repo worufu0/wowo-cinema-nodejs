@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const homeC = require('../controllers/home.c');
+const movieC = require('../controllers/movie.c');
 
-router.get('/', homeC.index);
+router.get('/:unsignedName', movieC.index);
 
 module.exports = router;

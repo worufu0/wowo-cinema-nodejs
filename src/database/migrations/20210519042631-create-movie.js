@@ -27,7 +27,7 @@ module.exports = {
             director: {
                 type: Sequelize.TEXT,
             },
-            trailer: {
+            video: {
                 type: Sequelize.STRING,
             },
             description: {
@@ -39,7 +39,7 @@ module.exports = {
             openingDay: {
                 type: Sequelize.DATEONLY,
             },
-            poster: {
+            image: {
                 type: Sequelize.STRING,
             },
             sold: {
