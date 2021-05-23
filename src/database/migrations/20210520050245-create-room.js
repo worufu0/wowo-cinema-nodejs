@@ -16,7 +16,6 @@ module.exports = {
                 references: {
                     model: 'Cinemas',
                     key: 'id',
-                    as: 'cinemaId',
                 },
             },
             roomTypeId: {
@@ -24,7 +23,6 @@ module.exports = {
                 references: {
                     model: 'RoomTypes',
                     key: 'id',
-                    as: 'roomTypeId',
                 },
             },
             row: {

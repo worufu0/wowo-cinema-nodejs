@@ -4,8 +4,9 @@ module.exports = {
         await queryInterface.createTable('Movies', {
             id: {
                 allowNull: false,
+                autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.STRING,
+                type: Sequelize.INTEGER,
             },
             name: {
                 allowNull: false,
@@ -32,9 +33,6 @@ module.exports = {
             },
             description: {
                 type: Sequelize.TEXT,
-            },
-            price: {
-                type: Sequelize.INTEGER,
             },
             openingDay: {
                 type: Sequelize.DATEONLY,

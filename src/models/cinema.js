@@ -1,5 +1,7 @@
 'use strict';
+
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
     class Cinema extends Model {
         /**
@@ -9,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             this.hasMany(models.Room, { foreignKey: 'cinemaId' });
+            this.belongsToMany(models.Movie, {
+                through: 'MovieCinema',
+                foreignKey: 'movieId',
+            });
         }
     }
     Cinema.init(

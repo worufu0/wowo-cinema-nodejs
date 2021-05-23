@@ -1936,6 +1936,7 @@ input[type='submit'] {
         rgba(0, 18, 50, 0.134891) 0%,
         #001232 90%
     );
+    backdrop-filter: blur(4px);
 }
 
 .details-banner.seat-plan-banner::before {
@@ -1965,7 +1966,7 @@ input[type='submit'] {
 
 .details-banner-wrapper .details-banner-thumb {
     position: absolute;
-    top: 10px;
+    top: -50px;
     left: 0;
     display: none;
     border: 1px solid #17305f;
@@ -2114,7 +2115,6 @@ input[type='submit'] {
 
 .book-wrapper .left-side {
     margin: -10px -15px;
-    margin-bottom: 20px;
 }
 
 .book-wrapper .left-side .item {

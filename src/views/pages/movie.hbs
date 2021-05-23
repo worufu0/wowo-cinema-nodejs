@@ -2,40 +2,23 @@
     <div class="container">
         <div class="details-banner-wrapper">
             <div class="details-banner-thumb">
-                <img src="/images/movie/poster/poster-{{movie.dataValues.image}}.webp" alt="poster" />
-                <a href="https://www.youtube.com/embed/KGeBMAgc46E" class="video-popup">
-                    <img src="/images/movie/video-button.png" alt="movie" />
+                <img src="/images/movie/poster/poster-{{movie.dataValues.image}}.jpg" alt="poster" />
+                <a href="https://www.youtube.com/watch?v={{movie.dataValues.video}}" class="video-popup">
+                    <img src="/images/movie/icon/video-button.png" alt="play" />
                 </a>
             </div>
             <div class="details-banner-content offset-lg-3">
-                <h3 class="title">Tên Phim</h3>
-                <a class="button">hài</a>
+                <h3 class="title">{{movie.dataValues.name}}</h3>
+                <a class="button">{{movie.dataValues.category}}</a>
                 <div class="social-and-duration">
                     <div class="duration-area">
                         <div class="item">
-                            <i class="fas fa-calendar-alt"></i><span>30-02-2021</span>
+                            <i class="fas fa-calendar-alt"></i><span>{{movie.dataValues.openingDay}}</span>
                         </div>
                         <div class="item">
-                            <i class="far fa-clock"></i><span>2 giờ 50 phút</span>
+                            <i class="far fa-clock"></i><span>{{movie.dataValues.time}} phút</span>
                         </div>
                     </div>
-                    <ul class="social-share">
-                        <li>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -49,23 +32,22 @@
                 <div class="item">
                     <div class="item-header">
                         <div class="thumb">
-                            <img src="/images/movie/tomato2.png" alt="movie" />
+                            <img src="/images/movie/icon/director.png" alt="director" />
                         </div>
-                        <span style="font-weight: bold">Đạo diễn</span>
+                        <p>
+                            <b>Đạo diễn:</b> {{movie.dataValues.director}}
+                        </p>
                     </div>
-                    <p>Tony Tèo</p>
                 </div>
                 <div class="item">
                     <div class="item-header">
                         <div class="thumb">
-                            <img src="/images/movie/cake2.png" alt="movie" />
+                            <img src="/images/movie/icon/country.png" alt="country" />
                         </div>
-                        <span style="font-weight: bold">Quốc gia</span>
+                        <p><b>Quốc gia:</b> {{movie.dataValues.country}}</p>
                     </div>
-                    <p>Việt Nam</p>
                 </div>
             </div>
-            <a href="#0" class="custom-button">mua vé</a>
         </div>
     </div>
 </section>
@@ -73,85 +55,82 @@
 <section class="movie-details-section padding-top padding-bottom">
     <div class="container">
         <div class="row justify-content-center flex-wrap-reverse mb--50">
-            <div class="col-lg-3 col-sm-10 col-md-6 mb-50">
-                <div class="widget-1 widget-tags">
-                    <ul>
-                        <li>
-                            <a>2D</a>
-                        </li>
-                        <li>
-                            <a>imax 2D</a>
-                        </li>
-                        <li>
-                            <a>4DX</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-9 mb-50">
+            <div class="col-lg-12 mb-50">
                 <div class="movie-details">
-                    <h3 class="title">hình ảnh</h3>
-                    <div class="details-photos owl-carousel">
-                        <div class="thumb">
-                            <a href="/images/movie/movie-details01.jpg" class="img-pop">
-                                <img src="/images/movie/movie-details01.jpg" alt="movie" />
-                            </a>
+                    {{#if images}}
+                        <h3 class="title">hình ảnh</h3>
+                        <div class="details-photos owl-carousel">
+                            {{#each images}}
+                                <div class="thumb">
+                                    <a href="/images/movie/image/movie-{{this.dataValues.name}}.jpg" class="img-pop">
+                                        <img src="/images/movie/image/movie-{{this.dataValues.name}}.jpg" alt="image" />
+                                    </a>
+                                </div>
+                            {{/each}}
                         </div>
-                        <div class="thumb">
-                            <a href="/images/movie/movie-details02.jpg" class="img-pop">
-                                <img src="/images/movie/movie-details02.jpg" alt="movie" />
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="/images/movie/movie-details03.jpg" class="img-pop">
-                                <img src="/images/movie/movie-details03.jpg" alt="movie" />
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="/images/movie/movie-details01.jpg" class="img-pop">
-                                <img src="/images/movie/movie-details01.jpg" alt="movie" />
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="/images/movie/movie-details02.jpg" class="img-pop">
-                                <img src="/images/movie/movie-details02.jpg" alt="movie" />
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="/images/movie/movie-details03.jpg" class="img-pop">
-                                <img src="/images/movie/movie-details03.jpg" alt="movie" />
-                            </a>
-                        </div>
-                    </div>
+                    {{/if}}
                     <div class="tab summery-review">
                         <ul class="tab-menu">
-                            <li>tóm tắt</li>
+                            <li class="active">suất chiếu</li>
+                            <li>nội dung phim</li>
                         </ul>
                         <div class="tab-area">
-                            <div>
+                            <div class="tab-item active">
                                 <div class="item">
-                                    <h5 class="sub-title">Synopsis</h5>
-                                    <p>
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit.
-                                        Proin vehicula eros sit amet est
-                                        tincidunt aliquet. Fusce laoreet
-                                        ligula ac ultrices eleifend.
-                                        Donec hendrerit fringilla odio,
-                                        ut feugiat mi convallis nec.
-                                        Fusce elit ex, blandit vitae
-                                        mattis sit amet, iaculis ac
-                                        elit. Ut diam mauris, viverra
-                                        sit amet dictum vel, aliquam ac
-                                        quam. Ut mi nisl, fringilla sit
-                                        amet erat et, convallis
-                                        porttitor ligula. Sed auctor,
-                                        orci id luctus venenatis, dui
-                                        dolor euismod risus, et pharetra
-                                        orci lectus quis sapien. Duis
-                                        blandit ipsum ac consectetur
-                                        scelerisque.
-                                    </p>
+                                    <div class="row">
+                                        <form class="col-lg-12 ticket-search-form mb-4 justify-content-start">
+                                            <div class="form-group">
+                                                <div class="thumb">
+                                                    <img src="/images/ticket/city.png" alt="ticket" />
+                                                </div>
+                                                <span class="type">cụm rạp</span>
+                                                <select class="select-bar cinemas" name="cinema">
+                                                    {{#each cinemas}}
+                                                        <option value="{{this.dataValues.unsignedName}}">
+                                                            {{this.dataValues.name}}
+                                                        </option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="ticket-plan-section">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-12 mb-5 mb-lg-0">
+                                                <ul class="seat-plan-wrapper bg-five">
+                                                    <li>
+                                                        <div class="movie-name">
+                                                            <div class="icons">
+                                                                <i class="fas fa-film"></i>
+                                                                <i class="">2D</i>
+                                                            </div>
+                                                            <a href="#0" class="name">Genesis Cinema</a>
+                                                        </div>
+                                                        <div class="movie-schedule">
+                                                            <div class="item">
+                                                                09:40
+                                                            </div>
+                                                            <div class="item">
+                                                                13:45
+                                                            </div>
+                                                            <div class="item">
+                                                                15:45
+                                                            </div>
+                                                            <div class="item">
+                                                                19:50
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-item">
+                                <div class="item">
+                                    <h5 class="sub-title">{{movie.dataValues.name}}</h5>
+                                    <p>{{movie.dataValues.description}}</p>
                                 </div>
                             </div>
                         </div>
