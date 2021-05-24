@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             this.hasMany(models.MovieImage, { foreignKey: 'movieId' });
-            this.belongsToMany(models.Cinema, {
-                through: 'MovieCinema',
-                foreignKey: 'cinemaId',
-            });
             this.belongsToMany(models.ShowTime, {
                 through: 'ShowTime',
                 foreignKey: 'movieId',
