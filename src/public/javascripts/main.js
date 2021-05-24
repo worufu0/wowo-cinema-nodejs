@@ -362,8 +362,10 @@
             autoplay: true,
             autoplayTimeout: 5000,
             smartSpeed: 1000,
-            margin: 30,
+            margin: 20,
             nav: false,
+            autoWidth: true,
+            loop: true,
             responsive: {
                 0: {
                     items: 1,
@@ -649,7 +651,7 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('#searchInput').on('focusin', function () {
             $.ajax({
-                url: '/search/get-source',
+                url: '/search/autocomplete',
                 method: 'GET',
                 success: function (res) {
                     $('#searchInput').autocomplete({
@@ -658,8 +660,7 @@
                             const cinema = $('.cinemas .option.selected').data(
                                 'value'
                             );
-                            console.log(cinema);
-                            location.href = `/search?movie=${ui.item.value}&cinema=${cinema}`;
+                            location.href = `/movie/${ui.item.value}?cinema=${cinema}`;
                             return false;
                         },
                     });

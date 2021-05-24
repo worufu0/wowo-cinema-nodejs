@@ -46,14 +46,7 @@ class RegisterController {
                 },
             });
 
-            await User.update(
-                { token: token },
-                {
-                    where: {
-                        email: email,
-                    },
-                }
-            );
+            await User.update({ token: token }, { where: { email: email } });
 
             await transporter.sendMail({
                 from: mailConfig.auth.user,
@@ -86,19 +79,13 @@ class RegisterController {
     async verify(req, res) {
         const tokgen = new TokenGenerator(256, TokenGenerator.BASE62);
         const user = await User.findOne({
-            where: {
-                token: req.params.token,
-            },
+            where: { token: req.params.token },
         });
 
         if (user && user.verified === false) {
             await User.update(
                 { verified: true, token: tokgen.generate() },
-                {
-                    where: {
-                        token: req.params.token,
-                    },
-                }
+                { where: { token: req.params.token } }
             );
 
             res.render('pages/notification', {

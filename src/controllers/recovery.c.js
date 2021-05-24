@@ -50,14 +50,7 @@ class RecoveryController {
                 `,
             });
 
-            await User.update(
-                { token: token },
-                {
-                    where: {
-                        email: email,
-                    },
-                }
-            );
+            await User.update({ token: token }, { where: { email: email } });
 
             res.render('pages/notification', {
                 layout: 'other',
@@ -71,9 +64,7 @@ class RecoveryController {
     // [GET] /recovery/:token
     async reset(req, res) {
         const user = await User.findOne({
-            where: {
-                token: req.params.token,
-            },
+            where: { token: req.params.token },
         });
 
         if (user) {
@@ -97,11 +88,7 @@ class RecoveryController {
 
         await User.update(
             { password: hashPash, token: token },
-            {
-                where: {
-                    token: req.params.token,
-                },
-            }
+            { where: { token: req.params.token } }
         );
 
         res.render('pages/notification', {

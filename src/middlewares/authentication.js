@@ -5,9 +5,7 @@ module.exports = async (req, res, next) => {
 
     if (id) {
         const user = await User.findOne({
-            where: {
-                id: id,
-            },
+            where: { id: id },
         });
 
         if (user) {

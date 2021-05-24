@@ -47,7 +47,7 @@
                             <span class="type">cụm rạp</span>
                             <select class="select-bar cinemas" name="cinema">
                                 {{#each cinemas}}
-                                    <option value="{{this.dataValues.unsignedName}}">{{this.dataValues.name}}</option>
+                                    <option value="{{this.unsignedName}}">{{this.name}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -75,15 +75,14 @@
                                         <div class="item">
                                             <div class="movie-grid">
                                                 <div class="movie-thumb c-thumb">
-                                                    <a href="/movie/{{this.dataValues.unsignedName}}">
-                                                        <img src="/images/movie/poster/poster-{{this.dataValues.image}}.jpg"
+                                                    <a href="/movie/{{this.unsignedName}}">
+                                                        <img src="/images/movie/poster/poster-{{this.image}}.jpg"
                                                             alt="poster" />
                                                     </a>
                                                 </div>
                                                 <div class="movie-content bg-one">
                                                     <h5 class="title m-0">
-                                                        <a
-                                                            href="/movie/{{this.dataValues.unsignedName}}">{{this.dataValues.name}}</a>
+                                                        <a href="/movie/{{this.unsignedName}}">{{this.name}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -107,15 +106,14 @@
                                         <div class="item">
                                             <div class="movie-grid">
                                                 <div class="movie-thumb c-thumb">
-                                                    <a href="/movie/{{this.dataValues.unsignedName}}">
-                                                        <img src="/images/movie/poster/poster-{{this.dataValues.image}}.jpg"
+                                                    <a href="/movie/{{this.unsignedName}}">
+                                                        <img src="/images/movie/poster/poster-{{this.image}}.jpg"
                                                             alt="poster" />
                                                     </a>
                                                 </div>
                                                 <div class="movie-content bg-one">
                                                     <h5 class="title m-0">
-                                                        <a
-                                                            href="/movie/{{this.dataValues.unsignedName}}">{{this.dataValues.name}}</a>
+                                                        <a href="/movie/{{this.unsignedName}}">{{this.name}}</a>
                                                     </h5>
                                                 </div>
                                             </div>

@@ -7,4 +7,9 @@ module.exports = {
         reset: 'Đặt Lại Mật Khẩu',
         err404: 'Không Tìm Thấy Trang',
     },
+    queryDefault: {
+        cinema: {
+            unsignedName: 'wowo-can-tho',
+        },
+    },
 };

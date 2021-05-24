@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     RoomType.init(
         {
-            typeName: DataTypes.STRING,
+            name: DataTypes.STRING,
         },
         {
             sequelize,

@@ -28,9 +28,7 @@ class LoginController {
     async login(req, res) {
         const { email, pass, remember } = req.body;
         const user = await User.findOne({
-            where: {
-                email: email,
-            },
+            where: { email: email },
         });
 
         if (user && bcrypt.compareSync(pass, user.password)) {

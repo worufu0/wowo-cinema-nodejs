@@ -12,16 +12,13 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             this.hasMany(models.MovieImage, { foreignKey: 'movieId' });
-            this.belongsToMany(models.ShowTime, {
-                through: 'ShowTime',
-                foreignKey: 'movieId',
-            });
+            this.hasMany(models.ShowTime, { foreignKey: 'movieId' });
         }
     }
     Movie.init(
         {
-            name: DataTypes.TEXT,
-            unsignedName: DataTypes.STRING,
+            name: { type: DataTypes.TEXT, unique: true },
+            unsignedName: { type: DataTypes.STRING, unique: true },
             category: DataTypes.TEXT,
             time: DataTypes.INTEGER,
             country: DataTypes.TEXT,

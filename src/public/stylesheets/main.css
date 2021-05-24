@@ -4566,8 +4566,7 @@ input[type='submit'] {
     padding: 30px;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
-    margin: -5px;
+    margin: 0 -15px;
 }
 
 .seat-plan-wrapper li .movie-schedule .item {
@@ -4588,7 +4587,7 @@ input[type='submit'] {
     cursor: pointer;
     -webkit-transition: all ease 0.3s;
     transition: all ease 0.3s;
-    margin: 5px;
+    margin: 0 15px;
 }
 
 .seat-plan-wrapper li .movie-schedule .item:hover {
@@ -9468,3 +9467,7 @@ aside {
     }
 }
 /*# sourceMappingURL=main.css.map */
+.movie-details .owl-carousel .owl-item {
+    height: 250px;
+    width: 100%;
+}
