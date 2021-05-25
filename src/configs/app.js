@@ -9,6 +9,7 @@ module.exports = {
     },
     queryDefault: {
         cinema: {
+            id: 1,
             unsignedName: 'wowo-can-tho',
         },
     },

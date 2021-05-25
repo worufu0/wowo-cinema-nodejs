@@ -23,7 +23,7 @@ module.exports = {
                 },
             },
             time: {
-                type: Sequelize.TIME,
+                type: Sequelize.STRING,
             },
             price: {
                 type: Sequelize.INTEGER,

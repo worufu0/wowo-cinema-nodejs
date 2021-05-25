@@ -4,7 +4,7 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Rooms', [
             {
-                name: 'CT101',
+                name: 'CT 101',
                 cinemaId: 1,
                 roomTypeId: 1,
                 row: 12,
@@ -13,7 +13,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'CT102',
+                name: 'CT 102',
                 cinemaId: 1,
                 roomTypeId: 1,
                 row: 10,
@@ -22,7 +22,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'CT103',
+                name: 'CT 103',
                 cinemaId: 1,
                 roomTypeId: 1,
                 row: 10,
@@ -31,7 +31,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'CT201',
+                name: 'CT 201',
                 cinemaId: 1,
                 roomTypeId: 2,
                 row: 12,
@@ -40,7 +40,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'CT202',
+                name: 'CT 202',
                 cinemaId: 1,
                 roomTypeId: 2,
                 row: 10,
@@ -49,7 +49,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'CT301',
+                name: 'CT 301',
                 cinemaId: 1,
                 roomTypeId: 3,
                 row: 8,
@@ -58,7 +58,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'CT302',
+                name: 'CT 302',
                 cinemaId: 1,
                 roomTypeId: 3,
                 row: 8,
@@ -67,7 +67,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM101',
+                name: 'HCM 101',
                 cinemaId: 2,
                 roomTypeId: 1,
                 row: 12,
@@ -76,7 +76,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM102',
+                name: 'HCM 102',
                 cinemaId: 2,
                 roomTypeId: 1,
                 row: 12,
@@ -85,7 +85,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM103',
+                name: 'HCM 103',
                 cinemaId: 2,
                 roomTypeId: 1,
                 row: 12,
@@ -94,7 +94,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM104',
+                name: 'HCM 104',
                 cinemaId: 2,
                 roomTypeId: 1,
                 row: 12,
@@ -103,7 +103,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM105',
+                name: 'HCM 105',
                 cinemaId: 2,
                 roomTypeId: 1,
                 row: 12,
@@ -112,7 +112,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM201',
+                name: 'HCM 201',
                 cinemaId: 2,
                 roomTypeId: 2,
                 row: 10,
@@ -121,7 +121,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM202',
+                name: 'HCM 202',
                 cinemaId: 2,
                 roomTypeId: 2,
                 row: 10,
@@ -130,7 +130,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM203',
+                name: 'HCM 203',
                 cinemaId: 2,
                 roomTypeId: 2,
                 row: 10,
@@ -139,7 +139,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM301',
+                name: 'HCM 301',
                 cinemaId: 2,
                 roomTypeId: 3,
                 row: 8,
@@ -148,7 +148,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HCM302',
+                name: 'HCM 302',
                 cinemaId: 2,
                 roomTypeId: 3,
                 row: 8,
@@ -157,7 +157,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'VT101',
+                name: 'VT 101',
                 cinemaId: 3,
                 roomTypeId: 1,
                 row: 12,
@@ -166,7 +166,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'VT102',
+                name: 'VT 102',
                 cinemaId: 3,
                 roomTypeId: 1,
                 row: 10,
@@ -175,7 +175,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'VT103',
+                name: 'VT 103',
                 cinemaId: 3,
                 roomTypeId: 1,
                 row: 10,
@@ -184,7 +184,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'VT104',
+                name: 'VT 104',
                 cinemaId: 3,
                 roomTypeId: 1,
                 row: 10,
@@ -193,7 +193,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'VT201',
+                name: 'VT 201',
                 cinemaId: 3,
                 roomTypeId: 2,
                 row: 8,
@@ -202,7 +202,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN101',
+                name: 'DN 101',
                 cinemaId: 4,
                 roomTypeId: 1,
                 row: 12,
@@ -211,7 +211,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN102',
+                name: 'DN 102',
                 cinemaId: 4,
                 roomTypeId: 1,
                 row: 12,
@@ -220,7 +220,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN103',
+                name: 'DN 103',
                 cinemaId: 4,
                 roomTypeId: 1,
                 row: 12,
@@ -229,7 +229,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN104',
+                name: 'DN 104',
                 cinemaId: 4,
                 roomTypeId: 1,
                 row: 12,
@@ -238,7 +238,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN201',
+                name: 'DN 201',
                 cinemaId: 4,
                 roomTypeId: 2,
                 row: 10,
@@ -247,7 +247,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN202',
+                name: 'DN 202',
                 cinemaId: 4,
                 roomTypeId: 2,
                 row: 10,
@@ -256,7 +256,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN203',
+                name: 'DN 203',
                 cinemaId: 4,
                 roomTypeId: 2,
                 row: 10,
@@ -265,7 +265,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN301',
+                name: 'DN 301',
                 cinemaId: 4,
                 roomTypeId: 3,
                 row: 8,
@@ -274,7 +274,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'DN302',
+                name: 'DN 302',
                 cinemaId: 4,
                 roomTypeId: 3,
                 row: 8,
@@ -283,7 +283,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'NT101',
+                name: 'NT 101',
                 cinemaId: 5,
                 roomTypeId: 1,
                 row: 10,
@@ -292,7 +292,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'NT102',
+                name: 'NT 102',
                 cinemaId: 5,
                 roomTypeId: 1,
                 row: 10,
@@ -301,7 +301,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'NT103',
+                name: 'NT 103',
                 cinemaId: 5,
                 roomTypeId: 1,
                 row: 10,
@@ -310,7 +310,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'NT201',
+                name: 'NT 201',
                 cinemaId: 5,
                 roomTypeId: 2,
                 row: 8,
@@ -319,7 +319,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'NT202',
+                name: 'NT 202',
                 cinemaId: 5,
                 roomTypeId: 2,
                 row: 8,
@@ -328,7 +328,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN101',
+                name: 'HN 101',
                 cinemaId: 6,
                 roomTypeId: 1,
                 row: 16,
@@ -337,7 +337,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN102',
+                name: 'HN 102',
                 cinemaId: 6,
                 roomTypeId: 1,
                 row: 16,
@@ -346,7 +346,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN103',
+                name: 'HN 103',
                 cinemaId: 6,
                 roomTypeId: 1,
                 row: 16,
@@ -355,7 +355,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN104',
+                name: 'HN 104',
                 cinemaId: 6,
                 roomTypeId: 1,
                 row: 16,
@@ -364,7 +364,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN201',
+                name: 'HN 201',
                 cinemaId: 6,
                 roomTypeId: 2,
                 row: 12,
@@ -373,7 +373,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN202',
+                name: 'HN 202',
                 cinemaId: 6,
                 roomTypeId: 2,
                 row: 12,
@@ -382,7 +382,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN203',
+                name: 'HN 203',
                 cinemaId: 6,
                 roomTypeId: 2,
                 row: 12,
@@ -391,7 +391,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN301',
+                name: 'HN 301',
                 cinemaId: 6,
                 roomTypeId: 3,
                 row: 8,
@@ -400,7 +400,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN302',
+                name: 'HN 302',
                 cinemaId: 6,
                 roomTypeId: 3,
                 row: 8,
@@ -409,7 +409,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: 'HN303',
+                name: 'HN 303',
                 cinemaId: 6,
                 roomTypeId: 3,
                 row: 8,

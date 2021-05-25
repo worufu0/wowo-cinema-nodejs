@@ -166,7 +166,7 @@ module.exports = {
             {
                 movieId: 3,
                 roomId: 26,
-                time: '9:00',
+                time: '09:00',
                 price: 105,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -222,7 +222,7 @@ module.exports = {
             {
                 movieId: 4,
                 roomId: 10,
-                time: '9:30',
+                time: '09:30',
                 price: 105,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -270,7 +270,7 @@ module.exports = {
             {
                 movieId: 5,
                 roomId: 13,
-                time: '9:00',
+                time: '09:00',
                 price: 75,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -438,7 +438,7 @@ module.exports = {
             {
                 movieId: 9,
                 roomId: 12,
-                time: '9:00',
+                time: '09:00',
                 price: 105,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -662,7 +662,7 @@ module.exports = {
             {
                 movieId: 14,
                 roomId: 6,
-                time: '9:00',
+                time: '09:00',
                 price: 95,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -758,7 +758,7 @@ module.exports = {
             {
                 movieId: 17,
                 roomId: 4,
-                time: '9:30',
+                time: '09:30',
                 price: 90,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -814,7 +814,7 @@ module.exports = {
             {
                 movieId: 19,
                 roomId: 5,
-                time: '9:30',
+                time: '09:30',
                 price: 75,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -1118,7 +1118,7 @@ module.exports = {
             {
                 movieId: 25,
                 roomId: 16,
-                time: '9:30',
+                time: '09:30',
                 price: 115,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -1166,7 +1166,7 @@ module.exports = {
             {
                 movieId: 25,
                 roomId: 46,
-                time: '9:00',
+                time: '09:00',
                 price: 115,
                 createdAt: new Date(),
                 updatedAt: new Date(),

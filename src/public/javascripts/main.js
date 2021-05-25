@@ -667,5 +667,76 @@
                 },
             });
         });
+        // Change query cinemas option
+        const queryCinema = new URLSearchParams(window.location.search).get(
+            'cinema'
+        );
+        if (queryCinema) {
+            $('.list .option.selected').removeClass('selected');
+            $(`[data-value="${queryCinema}"]`).addClass('selected');
+            $('.current').text($('.list .option.selected').text());
+        }
+        // Change query cinemas option
+        $('.query-cinemas').on('change', function () {
+            $.ajax({
+                url: '/movie/change-cinema',
+                method: 'GET',
+                data: {
+                    id: $('#title').data('value'),
+                    cinema: $('.list .option.selected').data('value'),
+                },
+                success: function (res) {
+                    window.history.replaceState(
+                        '',
+                        '',
+                        `${window.location.pathname}?cinema=${$(
+                            '.list .option.selected'
+                        ).data('value')}`
+                    );
+
+                    if (res) {
+                        let roomPartElement = '';
+                        let showTimePartElement = '';
+                        let ShowTimesElement = '';
+                        res.Rooms.forEach((room) => {
+                            roomPartElement = `
+                                <div class="movie-name">
+                                    <div class="icons">
+                                        <i class="fas fa-film"></i>
+                                        <i>${room.RoomType.name}</i>
+                                    </div>
+                                    <a class="name">${room.name}</a>
+                                </div>`;
+
+                            let showTimeElement = '';
+                            room.ShowTimes.forEach((showTime) => {
+                                showTimeElement += `<div class="item">${showTime.time}</div>`;
+                            });
+
+                            showTimePartElement = `
+                                <div class="movie-schedule">
+                                    ${showTimeElement}
+                                </div>`;
+
+                            ShowTimesElement += `
+                                <li>
+                                    ${roomPartElement}
+                                    ${showTimePartElement}
+                                </li>`;
+                        });
+
+                        $('.showtimes').html(
+                            `<ul class="seat-plan-wrapper bg-five">
+                                ${ShowTimesElement}
+                            </ul`
+                        );
+                    } else {
+                        $('.showtimes').html(
+                            '<p>hiện tại không có suất chiếu tại cụm rạp này.</p>'
+                        );
+                    }
+                },
+            });
+        });
     });
 })(jQuery);

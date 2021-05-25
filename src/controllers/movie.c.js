@@ -25,12 +25,10 @@ class MovieController {
                 await Cinema.findOne({
                     include: {
                         model: Room,
-                        //order: [['name', 'ASC']],
                         include: [
                             RoomType,
                             {
                                 model: ShowTime,
-                                //order: [['time', 'ASC']],
                                 where: { movieId: movie.id },
                             },
                         ],
@@ -40,6 +38,10 @@ class MovieController {
                             req.query.cinema ||
                             appConfig.queryDefault.cinema.unsignedName,
                     },
+                    order: [
+                        [Room, 'name', 'ASC'],
+                        [Room, ShowTime, 'time', 'ASC'],
+                    ],
                 })
             )
         );
@@ -49,6 +51,39 @@ class MovieController {
             movie: movie,
             cinema: cinema,
         });
+    }
+
+    // [GET] /movie/change-cinema
+    async changeCinema(req, res) {
+        const cinema = JSON.parse(
+            JSON.stringify(
+                await Cinema.findOne({
+                    include: {
+                        model: Room,
+                        include: [
+                            RoomType,
+                            {
+                                model: ShowTime,
+                                where: {
+                                    movieId: req.query.id || null,
+                                },
+                            },
+                        ],
+                    },
+                    where: {
+                        unsignedName:
+                            req.query.cinema ||
+                            appConfig.queryDefault.cinema.unsignedName,
+                    },
+                    order: [
+                        [Room, 'name', 'ASC'],
+                        [Room, ShowTime, 'time', 'ASC'],
+                    ],
+                })
+            )
+        );
+
+        res.json(cinema);
     }
 }
 

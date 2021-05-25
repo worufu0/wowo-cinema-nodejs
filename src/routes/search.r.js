@@ -3,5 +3,6 @@ const router = express.Router();
 const searchC = require('../controllers/search.c');
 
 router.get('/autocomplete', searchC.autoComplete);
+router.get('/', searchC.index);
 
 module.exports = router;

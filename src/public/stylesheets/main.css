@@ -4531,6 +4531,7 @@ input[type='submit'] {
     margin-left: 20px;
     color: #dbe2fb;
     text-transform: uppercase;
+    cursor: default;
 }
 
 .seat-plan-wrapper li .movie-name .location-icon {
@@ -4545,6 +4546,7 @@ input[type='submit'] {
 
 .seat-plan-wrapper li .movie-name .icons {
     color: #9aace5;
+    cursor: default;
 }
 
 .seat-plan-wrapper li .movie-name .icons i {
@@ -9470,4 +9472,12 @@ aside {
 .movie-details .owl-carousel .owl-item {
     height: 250px;
     width: 100%;
+}
+.ui-autocomplete {
+    background-color: #1047d0;
+    color: #fff;
+    border: none !important;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
