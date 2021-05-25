@@ -7072,9 +7072,6 @@ input[type='submit'] {
 }
 
 /*Gallery-Section-Two Starts Here*/
-.gallery-section {
-    background: #011440;
-}
 
 .gallery-section .section-header-3 p {
     font-size: 16px;
@@ -9469,6 +9466,9 @@ aside {
     }
 }
 /*# sourceMappingURL=main.css.map */
+input:-webkit-autofill {
+    background-color: rebeccapurple !important;
+}
 .movie-details .owl-carousel .owl-item {
     height: 250px;
     width: 100%;
@@ -9480,4 +9480,19 @@ aside {
     max-height: 200px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+.gallery-section .tab-menu {
+    display: flex;
+    justify-content: flex-start;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 100px;
+    border-bottom: 1px solid #1a2a47;
+}
+.gallery-section .tab-menu li {
+    margin-right: 30px;
+}
+.gallery-section .tab-menu li.active {
+    color: #31d7a9;
+    border-bottom: 1px solid #31d7a9;
 }
