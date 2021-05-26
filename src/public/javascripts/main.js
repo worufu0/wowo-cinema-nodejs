@@ -523,6 +523,12 @@
         $('.blog-prev').on('click', function () {
             owlB.trigger('prev.owl.carousel', [300]);
         });
+        // Active nav header
+        $(
+            `.menu .nav-header[data-value='${
+                window.location.pathname.split('/')[1]
+            }']`
+        ).addClass('active');
         // Validate register form
         $('#register-form').validate({
             rules: {

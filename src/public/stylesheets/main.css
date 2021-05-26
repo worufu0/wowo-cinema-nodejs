@@ -4574,7 +4574,7 @@ input[type='submit'] {
     cursor: pointer;
     -webkit-transition: all ease 0.3s;
     transition: all ease 0.3s;
-    margin: 0 15px;
+    margin: 10px;
 }
 
 .seat-plan-wrapper li .movie-schedule .item:hover {

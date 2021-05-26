@@ -8,10 +8,13 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="/" class="active">trang chủ</a>
+                    <a href="/" class="nav-header" data-value="">trang chủ</a>
                 </li>
                 <li>
-                    <a href="#">hệ thống rạp phim</a>
+                    <a href="/movie/all" class="nav-header" data-value="movie">phim</a>
+                </li>
+                <li>
+                    <a href="#" class="nav-header" data-value="cinema">hệ thống rạp phim</a>
                     <ul class="submenu">
                         {{#each cinemas}}
                             <li>
