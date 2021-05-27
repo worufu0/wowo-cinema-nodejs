@@ -50,7 +50,7 @@ class MovieController {
             res.render('pages/movie', {
                 title: `${movie.name} | ${appConfig.appName}`,
                 movie: movie,
-                //cinema: cinema,
+                cinema: cinema,
                 helpers: {
                     formatDate: (date, locale, format) => {
                         return require('moment')(date)
@@ -65,7 +65,10 @@ class MovieController {
                 },
             });
         } else {
-            res.send('not found');
+            res.render('pages/404', {
+                layout: 'other',
+                title: appConfig.pageTitle.err404,
+            });
         }
     }
 

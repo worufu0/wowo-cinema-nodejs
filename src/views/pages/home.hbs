@@ -23,38 +23,83 @@
                         <h6 class="category">
                             chào mừng bạn đến với {{appName}}!
                         </h6>
-                        <h3 class="title">bạn đang tìm phim gì?</h3>
+                        <h3 class="title">bạn đang tìm gì?</h3>
                     </div>
+                </div>
+                <div class="col-lg-6 mb-20">
+                    <ul class="tab-menu ticket-tab-menu">
+                        <li class="active">
+                            <span>phim / cụm rạp</span>
+                        </li>
+                        <li>
+                            <span>tất cả phim / rạp</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="tab-area">
                 <div class="tab-item active">
                     <form class="ticket-search-form" autocomplete="off" action="/search">
+                        <div class="col-lg-5 form-group">
+                            <div class="thumb">
+                                <img src="/images/ticket/cinema.png" alt="cinema" />
+                            </div>
+                            <span class="type">cụm rạp</span>
+                            <select id="cinema-select" class="select-bar cinemas" name="cinema">
+                                {{#each cinemas}}
+                                    <option value="{{this.unsignedName}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
                         <div class="col-lg-7 form-group">
                             <input id="searchInput" type="text" placeholder="Nhập tên phim" name="movie" />
+                            <small id="searchHelp" class="form-text text-danger">{{searchErr}}</small>
                             <button type="button" data-toggle="tooltip" data-placement="top"
-                                title="Chỉ cho phép tìm kiếm có dấu, không phân biệt hoa, thường. Bạn có thể tìm kiếm suất chiều của tất cả các phim thuộc cụm rạp nếu bạn không nhập tên phim.">
+                                title="Chỉ cho phép tìm kiếm có dấu, không phân biệt chữ hoa, thường.">
                                 <i class="far fa-question-circle"></i>
                             </button>
                             <button type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
-                        <div class="col-lg-4 form-group">
+                    </form>
+                </div>
+                <div class="tab-item">
+                    <form class="ticket-search-form" autocomplete="off" action="/search">
+                        <div class="col-lg-5 form-group justify-content-center">
                             <div class="thumb">
-                                <img src="/images/ticket/city.png" alt="ticket" />
+                                <img src="/images/ticket/cinema.png" alt="cinema" />
                             </div>
                             <span class="type">cụm rạp</span>
-                            <select class="select-bar cinemas" name="cinema">
+                            <select id="cinema-select2" class="select-bar cinemas2" name="cinema2">
                                 {{#each cinemas}}
                                     <option value="{{this.unsignedName}}">{{this.name}}</option>
                                 {{/each}}
                             </select>
                         </div>
+                        <div class="col-lg-5 form-group justify-content-center">
+                            <div class="thumb">
+                                <img src="/images/ticket/room.png" alt="room2">
+                            </div>
+                            <span class="type">rạp</span>
+                            <select id="room-select2" class="select-bar rooms2" name="room2">
+                                {{#each rooms}}
+                                    <option value="{{this.id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-lg-2 form-group justify-content-center">
+                            <div></div>
+                            <div></div>
+                            <button type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
@@ -65,10 +110,10 @@
                 <div class="tab">
                     <div class="section-header-1">
                         <h2 class="title">mới công chiếu</h2>
-                        <a class="view-all" href="/all?page=1">xem tất cả</a>
+                        <a class="view-all" href="/movie/all">xem tất cả</a>
                     </div>
                     <div class="tab-area">
-                        <div class="tab-item active">
+                        <div>
                             <div class="mb-50 justify-content-center">
                                 <div class="owl-carousel owl-theme tab-slider">
                                     {{#each newMovies}}
@@ -96,10 +141,10 @@
                 <div class="tab">
                     <div class="section-header-1">
                         <h2 class="title">xem nhiều nhất</h2>
-                        <a class="view-all" href="/all?page=1">xem tất cả</a>
+                        <a class="view-all" href="/movie/all">xem tất cả</a>
                     </div>
                     <div class="tab-area">
-                        <div class="tab-item active">
+                        <div>
                             <div class="mb-10 justify-content-center">
                                 <div class="owl-carousel owl-theme tab-slider">
                                     {{#each popMovies}}

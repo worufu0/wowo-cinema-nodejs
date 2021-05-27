@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
-const { Movie } = require('../models');
+const { Movie, Room, Cinema } = require('../models');
+const appConfig = require('../configs/app');
 
 class SearchController {
     // [GET] /search
@@ -14,10 +15,13 @@ class SearchController {
                     `/movie/${movie.unsignedName}?cinema=${req.query.cinema}`
                 );
             } else {
-                res.send('not found');
+                res.locals.searchErr = 'asdasdas';
+                res.redirect('back');
             }
         } else {
-            res.send('empty');
+            res.redirect(
+                `/cinema/${req.query.cinema2}?room=${req.query.room2}`
+            );
         }
     }
 
@@ -31,6 +35,26 @@ class SearchController {
         }));
 
         res.json(movies);
+    }
+
+    // [GET] /search/select-room
+    async selectRoom(req, res) {
+        const rooms = JSON.parse(
+            JSON.stringify(
+                await Room.findAll({
+                    include: [
+                        {
+                            model: Cinema,
+                            where: {
+                                unsignedName: req.query.cinema,
+                            },
+                        },
+                    ],
+                })
+            )
+        );
+
+        res.json(rooms);
     }
 }
 

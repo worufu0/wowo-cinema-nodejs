@@ -673,22 +673,42 @@
                 },
             });
         });
-        // Change query cinemas option
+        // Change query cinema
         const queryCinema = new URLSearchParams(window.location.search).get(
             'cinema'
         );
         if (queryCinema) {
             $('.list .option.selected').removeClass('selected');
-            $(`[data-value="${queryCinema}"]`).addClass('selected');
+            $(`.list .option[data-value="${queryCinema}"]`).addClass(
+                'selected'
+            );
             $('.current').text($('.list .option.selected').text());
+            $('.tab-item').removeClass('active');
+            $('.tab-item.dynamic').addClass('active');
+            $('.tab-menu li').removeClass('active');
+            $('.tab-menu li.dynamic').addClass('active');
         }
-        // Change query cinemas option
+
+        // Change query room
+        const queryRoom = new URLSearchParams(window.location.search).get(
+            'room'
+        );
+        $('.room-border').first().addClass('active');
+        if (queryRoom) {
+            $('.room-border').removeClass('active');
+            $(`.room-border[data-value="${queryRoom}"]`).addClass('active');
+            $('.tab-item').removeClass('active');
+            $('.tab-item.dynamic').addClass('active');
+            $('.tab-menu li').removeClass('active');
+            $('.tab-menu li.dynamic').addClass('active');
+        }
+        // Change cinemas select
         $('.query-cinemas').on('change', function () {
             $.ajax({
                 url: '/movie/change-cinema',
                 method: 'GET',
                 data: {
-                    id: $('#title').data('value'),
+                    id: $('#movie-name').data('value'),
                     cinema: $('.list .option.selected').data('value'),
                 },
                 success: function (res) {
@@ -708,7 +728,7 @@
                             roomPartElement = `
                                 <div class="movie-name">
                                     <div class="icons">
-                                        <i class="fas fa-film"></i>
+                                        <i class="fas fa-video"></i>
                                         <i>${room.RoomType.name}</i>
                                     </div>
                                     <a class="name">${room.name}</a>
@@ -744,5 +764,97 @@
                 },
             });
         });
+        // Change rooms select
+        $('.room-border').on('click', function () {
+            $('.room-border').removeClass('active');
+            $(this).addClass('active');
+
+            $.ajax({
+                url: '/cinema/change-room',
+                method: 'GET',
+                data: {
+                    id: $('#cinema-name').data('value'),
+                    room: $('.room-border.active').data('value'),
+                },
+                success: function (res) {
+                    window.history.replaceState(
+                        '',
+                        '',
+                        `${window.location.pathname}?room=${$(
+                            '.room-border.active'
+                        ).data('value')}`
+                    );
+
+                    if (res.length !== 0) {
+                        let moviePartElement = '';
+                        let showTimePartElement = '';
+                        let ShowTimesElement = '';
+                        res.forEach((movie) => {
+                            moviePartElement = `
+                                <div class="movie-name long">
+                                    <img class="mini-poster" src="/images/movie/poster/poster-${movie.image}.jpg" alt="mini-poster" />
+                                    <a class="name">${movie.name}</a>
+                                </div>`;
+
+                            let showTimeElement = '';
+                            movie.ShowTimes.forEach((showTime) => {
+                                showTimeElement += `<div class="item">${showTime.time}</div>`;
+                            });
+
+                            showTimePartElement = `
+                                <div class="movie-schedule short">
+                                    ${showTimeElement}
+                                </div>`;
+
+                            ShowTimesElement += `
+                                <li>
+                                    ${moviePartElement}
+                                    ${showTimePartElement}
+                                </li>`;
+                        });
+
+                        $('.showtimes').html(
+                            `<ul class="seat-plan-wrapper bg-five">
+                                ${ShowTimesElement}
+                            </ul`
+                        );
+                    } else {
+                        $('.showtimes').html(
+                            '<p>hiện tại không có suất chiếu tại rạp này.</p>'
+                        );
+                    }
+                },
+            });
+        });
+        $('.cinemas2').on('change', function () {
+            $.ajax({
+                url: '/search/select-room',
+                method: 'GET',
+                data: {
+                    cinema: $('.cinemas2 .list .option.selected').data('value'),
+                },
+                success: function (res) {
+                    let options = '',
+                        lis = '';
+                    res.forEach((room) => {
+                        options += `<option value="${room.id}">${room.name}</option>`;
+                        if (lis === '') {
+                            lis += `<li data-value="${room.id}" class="option selected">${room.name}</li>`;
+                        } else {
+                            lis += `<li data-value="${room.id}" class="option">${room.name}</li>`;
+                        }
+                    });
+
+                    $('#room-select2').html(options);
+                    $('.nice-select.rooms2 ul').html(lis);
+                    $('.nice-select.rooms2 span').html(res[0].name);
+                },
+            });
+        });
+        if (queryCinema) {
+            $('.list .option.selected').removeClass('selected');
+            $(`[data-value="${queryCinema}"]`).addClass('selected');
+            $('.current').text($('.list .option.selected').text());
+        }
     });
 })(jQuery);

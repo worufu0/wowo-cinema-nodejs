@@ -3672,7 +3672,7 @@ input[type='submit'] {
 .ticket-tab-menu {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-bottom: -10px;
 }
 
@@ -3683,17 +3683,18 @@ input[type='submit'] {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    padding: 5px 10px;
+    padding: 5px 20px;
     min-height: 50px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    width: calc(33.33% - 7px);
+    width: auto;
     background-color: #7d78ff;
     border-radius: 25px;
     -webkit-transition: all ease 0.3s;
     transition: all ease 0.3s;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .ticket-tab-menu li.active {
@@ -3719,7 +3720,6 @@ input[type='submit'] {
     font-weight: 700;
     color: #ffffff;
     text-transform: uppercase;
-    padding-left: 10px;
 }
 
 @media (max-width: 767px) {
@@ -3816,6 +3816,9 @@ input[type='submit'] {
     line-height: 45px;
     position: absolute;
     top: 0;
+    right: 0;
+    width: 45px;
+    height: 35px;
 }
 
 .ticket-search-form .form-group button:nth-child(2) {
@@ -3830,7 +3833,7 @@ input[type='submit'] {
     color: #90a5e8;
     height: 45px;
     width: 45px;
-    right: 0;
+    right: 30px;
 }
 
 .ticket-search-form .form-group .thumb {
@@ -9490,4 +9493,57 @@ input:-webkit-autofill {
 }
 .all-showtimes .movie-list {
     flex-direction: column;
+}
+.gallery-item img {
+    height: 200px;
+    object-fit: cover;
+}
+.gallery-item img.big {
+    height: 430px;
+    object-fit: cover;
+}
+.room-in-cinema {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10%;
+    border: 1px solid rgba(49, 215, 169, 0.5);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+.room-border:hover .room-in-cinema:nth-child(2) {
+    display: flex;
+    color: #f1481f;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: normal;
+}
+.room-border:hover .room-in-cinema:nth-child(1),
+.room-in-cinema:nth-child(2) {
+    display: none;
+}
+.room-border.active .room-in-cinema:nth-child(1) {
+    background-color: rgba(49, 215, 169, 0.5);
+}
+.seat-plan-wrapper li .movie-name.long {
+    width: 60%;
+}
+.seat-plan-wrapper li .movie-schedule.short {
+    width: calc(100% - 60%);
+}
+.movie-name.long .mini-poster {
+    object-fit: cover;
+    width: 60px;
+    height: 80px;
+}
+.tab-menu {
+    user-select: none;
 }

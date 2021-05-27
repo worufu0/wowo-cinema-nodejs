@@ -8,7 +8,7 @@
                 </a>
             </div>
             <div class="details-banner-content offset-lg-3">
-                <h3 id="title" class="title" data-value="{{movie.id}}">{{movie.name}}</h3>
+                <h3 id="movie-name" class="title" data-value={{movie.id}}>{{movie.name}}</h3>
                 <a class="button">{{movie.category}}</a>
                 <div class="social-and-duration">
                     <div class="duration-area">
@@ -72,17 +72,23 @@
                     {{/if}}
                     <div class="tab summery-review">
                         <ul class="tab-menu">
-                            <li class="active">suất chiếu</li>
-                            <li>nội dung phim</li>
+                            <li class="active">nội dung phim</li>
+                            <li class="dynamic">suất chiếu</li>
                         </ul>
                         <div class="tab-area">
                             <div class="tab-item active">
+                                <div class="item">
+                                    <h5 class="sub-title">{{movie.name}}</h5>
+                                    <p>{{movie.description}}</p>
+                                </div>
+                            </div>
+                            <div class="tab-item dynamic">
                                 <div class="item">
                                     <div class="row">
                                         <form class="col-lg-12 ticket-search-form mb-4 justify-content-start">
                                             <div class="form-group">
                                                 <div class="thumb">
-                                                    <img src="/images/ticket/city.png" alt="ticket" />
+                                                    <img src="/images/ticket/cinema.png" alt="cinema" />
                                                 </div>
                                                 <span class="type">cụm rạp</span>
                                                 <select class="select-bar query-cinemas" name="cinema">
@@ -104,7 +110,7 @@
                                                             <li>
                                                                 <div class="movie-name">
                                                                     <div class="icons">
-                                                                        <i class="fas fa-film"></i>
+                                                                        <i class="fas fa-video"></i>
                                                                         <i>{{this.RoomType.name}}</i>
                                                                     </div>
                                                                     <a class="name">{{this.name}}</a>
@@ -112,7 +118,7 @@
                                                                 <div class="movie-schedule">
                                                                     {{#each this.ShowTimes}}
                                                                         <div class="item">
-                                                                            {{formatDateTime this.time 'vi' 'LT DD [/] MM'}}
+                                                                            {{formatDateTime this.time 'vi' 'LT Do [/] MM'}}
                                                                         </div>
                                                                     {{/each}}
                                                                 </div>
@@ -125,12 +131,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tab-item">
-                                <div class="item">
-                                    <h5 class="sub-title">{{movie.name}}</h5>
-                                    <p>{{movie.description}}</p>
                                 </div>
                             </div>
                         </div>
