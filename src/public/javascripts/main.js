@@ -402,7 +402,6 @@
             smartSpeed: 1000,
             margin: 20,
             nav: false,
-            autoWidth: true,
             loop: true,
             responsive: {
                 0: {

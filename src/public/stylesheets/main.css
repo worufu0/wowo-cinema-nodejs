@@ -3776,6 +3776,8 @@ input[type='submit'] {
 }
 
 .ticket-search-form .form-group {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
     position: relative;
     -webkit-box-align: center;
@@ -4556,7 +4558,6 @@ input[type='submit'] {
     padding: 30px;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    margin: 0 -15px;
 }
 
 .seat-plan-wrapper li .movie-schedule .item {
@@ -4608,8 +4609,8 @@ input[type='submit'] {
 }
 
 @media (max-width: 767px) {
-    .seat-plan-wrapper li .movie-name,
-    .seat-plan-wrapper li .movie-schedule {
+    .seat-plan-wrapper li .movie-name:not(.long),
+    .seat-plan-wrapper li .movie-schedule:not(.short) {
         width: 100%;
         border: none;
     }
@@ -9457,8 +9458,13 @@ aside {
 input:-webkit-autofill {
     background-color: rebeccapurple !important;
 }
-.movie-details .owl-carousel .owl-item {
-    height: 250px;
+.movie-details .owl-carousel.owl-stage {
+    display: flex;
+}
+.movie-details .owl-carousel .owl-item img {
+    height: 200px;
+    display: block;
+    object-fit: cover;
 }
 .ui-autocomplete {
     background-color: #1047d0;
@@ -9545,4 +9551,27 @@ input:-webkit-autofill {
 }
 .tab-menu {
     user-select: none;
+}
+.searchSubmit2 {
+    position: relative !important;
+    right: 0 !important;
+}
+@media screen and (max-width: 992px) {
+    .seat-plan-wrapper li .movie-schedule .item {
+        min-width: 70px;
+    }
+    .seat-plan-wrapper li .movie-name.long,
+    .seat-plan-wrapper li .movie-schedule.short {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .seat-plan-wrapper li .movie-name.long .name {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 10px;
+        text-align: center;
+    }
 }

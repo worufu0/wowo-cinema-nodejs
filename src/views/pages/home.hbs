@@ -23,7 +23,7 @@
                         <h6 class="category">
                             chào mừng bạn đến với {{appName}}!
                         </h6>
-                        <h3 class="title">bạn đang tìm gì?</h3>
+                        <h3 class="title">bạn đang tìm phim gì?</h3>
                     </div>
                 </div>
                 <div class="col-lg-6 mb-20">
@@ -40,7 +40,7 @@
             <div class="tab-area">
                 <div class="tab-item active">
                     <form class="ticket-search-form" autocomplete="off" action="/search">
-                        <div class="col-lg-5 form-group">
+                        <div class="col-lg-5 col-md-7 form-group">
                             <div class="thumb">
                                 <img src="/images/ticket/cinema.png" alt="cinema" />
                             </div>
@@ -51,7 +51,7 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="col-lg-7 form-group">
+                        <div class="col-lg-7 col-md-5 form-group">
                             <input id="searchInput" type="text" placeholder="Nhập tên phim" name="movie" />
                             <small id="searchResponse" class="form-text text-danger">{{searchResponse}}</small>
                             <button type="button" data-toggle="tooltip" data-placement="top"
@@ -66,7 +66,7 @@
                 </div>
                 <div class="tab-item">
                     <form class="ticket-search-form" autocomplete="off" action="/search">
-                        <div class="col-lg-5 form-group justify-content-center">
+                        <div class="col-lg-5 col-md-5 col-sm-6 form-group">
                             <div class="thumb">
                                 <img src="/images/ticket/cinema.png" alt="cinema" />
                             </div>
@@ -77,7 +77,7 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="col-lg-5 form-group justify-content-center">
+                        <div class="col-lg-5 col-md-4 col-sm-6 form-group">
                             <div class="thumb">
                                 <img src="/images/ticket/room.png" alt="room2">
                             </div>
@@ -88,10 +88,10 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="col-lg-2 form-group justify-content-center">
+                        <div class="col-lg-2 col-md-3 col-sm-12 form-group">
                             <div></div>
                             <div></div>
-                            <button type="submit">
+                            <button type="submit" class="searchSubmit2">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
