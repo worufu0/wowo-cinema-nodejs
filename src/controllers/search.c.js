@@ -15,8 +15,8 @@ class SearchController {
                     `/movie/${movie.unsignedName}?cinema=${req.query.cinema}`
                 );
             } else {
-                res.locals.searchErr = 'asdasdas';
-                res.redirect('back');
+                req.session.searchResult = false;
+                res.redirect('/');
             }
         } else {
             res.redirect(

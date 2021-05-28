@@ -34,12 +34,19 @@ class HomeController {
             )
         );
 
+        let searchResponse;
+        if (req.session.searchResult === false) {
+            searchResponse = 'Không tìm thấy kết quả phù hợp.';
+        }
+        delete req.session.searchResult;
+
         res.render('pages/home', {
             title: appConfig.appName,
             appName: appConfig.appName,
             rooms: rooms,
             newMovies: newMovies,
             popMovies: popMovies,
+            searchResponse: searchResponse,
         });
     }
 }

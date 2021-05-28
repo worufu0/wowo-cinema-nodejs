@@ -17,6 +17,9 @@ module.exports = {
             address: {
                 type: Sequelize.TEXT,
             },
+            map: {
+                type: Sequelize.STRING(500),
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

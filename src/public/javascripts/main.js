@@ -856,5 +856,8 @@
             $(`[data-value="${queryCinema}"]`).addClass('selected');
             $('.current').text($('.list .option.selected').text());
         }
+        $('#searchInput').on('click', function () {
+            $('#searchResponse').empty();
+        });
     });
 })(jQuery);

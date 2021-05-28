@@ -114,6 +114,68 @@ class MovieController {
 
         res.json(cinema);
     }
+
+    // [GET] /movie/all
+    async all(req, res) {
+        if (req.query.page === '0') {
+            res.redirect('/movie/all');
+        } else if (req.query.page < 0) {
+            res.redirect(`/movie/all?page=${-req.query.page}`);
+        } else {
+            // Query and paging
+            const pageSize = 12;
+            const currentPage = parseInt(req.query.page) || 1;
+            const movies = JSON.parse(
+                JSON.stringify(
+                    await Movie.findAndCountAll({
+                        offset: (currentPage - 1) * pageSize,
+                        limit: pageSize,
+                    })
+                )
+            );
+            const totalPage = Math.ceil(movies.count / pageSize);
+            const pageNumberArray = [];
+            let max, min;
+            if (currentPage === 1) {
+                pageNumberArray.push(
+                    { value: null },
+                    { value: currentPage, active: 'active' },
+                    { value: currentPage + 1 }
+                );
+                min = true;
+            } else if (currentPage === totalPage) {
+                pageNumberArray.push(
+                    { value: currentPage - 1 },
+                    { value: currentPage, active: 'active' },
+                    { value: null }
+                );
+                max = true;
+            } else {
+                pageNumberArray.push(
+                    { value: currentPage - 1 },
+                    { value: currentPage, active: 'active' },
+                    { value: currentPage + 1 }
+                );
+            }
+
+            res.render('pages/all', {
+                title: `${appConfig.pageTitle.movie} | ${appConfig.appName}`,
+                movies: movies,
+                pageNumberArray: pageNumberArray,
+                currentPage: currentPage,
+                min: min,
+                max: max,
+                helpers: {
+                    add: (a, b) => {
+                        return a + b;
+                    },
+                    minus: (a, b) => {
+                        return a - b;
+                    },
+                },
+            });
+        }
+    }
 }
 
 module.exports = new MovieController();
