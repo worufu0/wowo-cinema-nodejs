@@ -34,8 +34,6 @@
                 $(this).addClass('active');
             });
         });
-    });
-    $(document).ready(function () {
         // Nice Select
         $('.select-bar').niceSelect();
         // Lightcase
@@ -229,6 +227,46 @@
                 $(this).addClass('active');
             }
         });
+
+        let book = 0;
+        $('.seat-free img').on('click', function (e) {
+            if (book == 0) {
+                $(this).attr('src', './assets/images/movie/seat01-free.png');
+                book = 1;
+            } else if (book == 1) {
+                $(this).attr('src', './assets/images/movie/seat01-booked.png');
+                book = 0;
+            }
+        });
+        let bookTwo = 1;
+        $('.seat-free-two img').on('click', function (e) {
+            if (bookTwo == 0) {
+                $(this).attr('src', './assets/images/movie/seat02-free.png');
+                bookTwo = 1;
+            } else if (bookTwo == 1) {
+                $(this).attr('src', './assets/images/movie/seat02-booked.png');
+                bookTwo = 0;
+            }
+        });
+        // shop cart + - start here
+        let CartPlusMinus = $('.cart-plus-minus');
+        CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');
+        CartPlusMinus.append('<div class="inc qtybutton">+</div>');
+        $('.qtybutton').on('click', function () {
+            let $button = $(this);
+            let oldValue = $button.parent().find('input').val();
+            if ($button.text() === '+') {
+                let newVal = parseFloat(oldValue) + 1;
+            } else {
+                // Don't allow decrementing below zero
+                if (oldValue > 0) {
+                    let newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 1;
+                }
+            }
+            $button.parent().find('input').val(newVal);
+        });
         $('.tab-slider').owlCarousel({
             loop: true,
             responsiveClass: true,
@@ -383,45 +421,6 @@
                     items: 3,
                 },
             },
-        });
-        let book = 0;
-        $('.seat-free img').on('click', function (e) {
-            if (book == 0) {
-                $(this).attr('src', './assets/images/movie/seat01-free.png');
-                book = 1;
-            } else if (book == 1) {
-                $(this).attr('src', './assets/images/movie/seat01-booked.png');
-                book = 0;
-            }
-        });
-        let bookTwo = 1;
-        $('.seat-free-two img').on('click', function (e) {
-            if (bookTwo == 0) {
-                $(this).attr('src', './assets/images/movie/seat02-free.png');
-                bookTwo = 1;
-            } else if (bookTwo == 1) {
-                $(this).attr('src', './assets/images/movie/seat02-booked.png');
-                bookTwo = 0;
-            }
-        });
-        // shop cart + - start here
-        let CartPlusMinus = $('.cart-plus-minus');
-        CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');
-        CartPlusMinus.append('<div class="inc qtybutton">+</div>');
-        $('.qtybutton').on('click', function () {
-            let $button = $(this);
-            let oldValue = $button.parent().find('input').val();
-            if ($button.text() === '+') {
-                let newVal = parseFloat(oldValue) + 1;
-            } else {
-                // Don't allow decrementing below zero
-                if (oldValue > 0) {
-                    let newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 1;
-                }
-            }
-            $button.parent().find('input').val(newVal);
         });
         //Speaker Slider
         $('.speaker-slider').owlCarousel({
