@@ -22,7 +22,7 @@
             <div class="tab-area">
                 <div class="tab-item active">
                     <div class="section-header-3">
-                        <h2 id="cinema-name" class="title" data-value="{{cinema.id}}">{{cinema.name}}</h2>
+                        <h2 id="cinema-name" class="title" data-value="{{cinema.unsignedName}}">{{cinema.name}}</h2>
                         <p>
                             rạp chiếu phim với công nghệ tiên tiến nhất trên thế giới hiện nay, từ thiết kế phòng chiếu
                             vô cùng choáng ngợp đến hiệu ứng âm thanh và hình ảnh đỉnh cao.
@@ -122,7 +122,8 @@
                                                 <img class="mini-poster"
                                                     src="/images/movie/poster/poster-{{this.image}}.jpg"
                                                     alt="mini-poster" />
-                                                <a class="name">{{this.name}}</a>
+                                                <a href="/movie/{{this.unsignedName}}?cinema={{../cinema.unsignedName}}"
+                                                    class="name">{{this.name}}</a>
                                             </div>
                                             <div class="movie-schedule short">
                                                 {{#each this.ShowTimes}}

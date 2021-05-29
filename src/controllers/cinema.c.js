@@ -1,3 +1,4 @@
+const moment = require('moment');
 const {
     Cinema,
     CinemaImage,
@@ -55,9 +56,7 @@ class CinemaController {
                 movies: movies,
                 helpers: {
                     formatDateTime: (dateTime, locale, format) => {
-                        return require('moment')(dateTime)
-                            .locale(locale)
-                            .format(format);
+                        return moment(dateTime).locale(locale).format(format);
                     },
                 },
             });
@@ -89,7 +88,7 @@ class CinemaController {
         if (movies.length !== 0) {
             movies.forEach((movie) => {
                 movie.ShowTimes.forEach((ShowTime) => {
-                    ShowTime.time = require('moment')(ShowTime.time)
+                    ShowTime.time = moment(ShowTime.time)
                         .locale('vi')
                         .format('LT DD [/] MM');
                 });

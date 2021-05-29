@@ -4521,7 +4521,6 @@ input[type='submit'] {
     margin-left: 20px;
     color: #dbe2fb;
     text-transform: uppercase;
-    cursor: default;
 }
 
 .seat-plan-wrapper li .movie-name .location-icon {

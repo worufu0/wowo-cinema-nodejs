@@ -729,7 +729,7 @@
                                         <i class="fas fa-video"></i>
                                         <i>${room.RoomType.name}</i>
                                     </div>
-                                    <a class="name">${room.name}</a>
+                                    <a href="/cinema/${res.unsignedName}?room=${room.id}" class="name">${room.name}</a>
                                 </div>`;
 
                             let showTimeElement = '';
@@ -771,7 +771,6 @@
                 url: '/cinema/change-room',
                 method: 'GET',
                 data: {
-                    id: $('#cinema-name').data('value'),
                     room: $('.room-border.active').data('value'),
                 },
                 success: function (res) {
@@ -790,8 +789,14 @@
                         res.forEach((movie) => {
                             moviePartElement = `
                                 <div class="movie-name long">
-                                    <img class="mini-poster" src="/images/movie/poster/poster-${movie.image}.jpg" alt="mini-poster" />
-                                    <a class="name">${movie.name}</a>
+                                    <img class="mini-poster" src="/images/movie/poster/poster-${
+                                        movie.image
+                                    }.jpg" alt="mini-poster" />
+                                    <a href="/movie/${
+                                        movie.unsignedName
+                                    }?cinema=${$('#cinema-name').data(
+                                'value'
+                            )}" class="name">${movie.name}</a>
                                 </div>`;
 
                             let showTimeElement = '';

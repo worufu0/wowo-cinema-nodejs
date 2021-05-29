@@ -1,3 +1,4 @@
+const moment = require('moment');
 const {
     Cinema,
     Room,
@@ -53,14 +54,10 @@ class MovieController {
                 cinema: cinema,
                 helpers: {
                     formatDate: (date, locale, format) => {
-                        return require('moment')(date)
-                            .locale(locale)
-                            .format(format);
+                        return moment(date).locale(locale).format(format);
                     },
                     formatDateTime: (dateTime, locale, format) => {
-                        return require('moment')(dateTime)
-                            .locale(locale)
-                            .format(format);
+                        return moment(dateTime).locale(locale).format(format);
                     },
                 },
             });
@@ -105,7 +102,7 @@ class MovieController {
         if (cinema) {
             cinema.Rooms.forEach((Room) => {
                 Room.ShowTimes.forEach((ShowTime) => {
-                    ShowTime.time = require('moment')(ShowTime.time)
+                    ShowTime.time = moment(ShowTime.time)
                         .locale('vi')
                         .format('LT DD [/] MM');
                 });
