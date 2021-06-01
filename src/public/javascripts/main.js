@@ -228,25 +228,40 @@
             }
         });
 
-        let book = 0;
-        $('.seat-free img').on('click', function (e) {
-            if (book == 0) {
-                $(this).attr('src', './assets/images/movie/seat01-free.png');
-                book = 1;
-            } else if (book == 1) {
-                $(this).attr('src', './assets/images/movie/seat01-booked.png');
-                book = 0;
+        $('.seat-free').on('click', function (e) {
+            if ($(this).attr('book') === '0') {
+                $(this)
+                    .children('img')
+                    .attr('src', '/images/seat/seat01-booked.png');
+                $(this).attr('book', '1');
+            } else {
+                $(this)
+                    .children('img')
+                    .attr('src', '/images/seat/seat01-free.png');
+                $(this).attr('book', '0');
             }
-        });
-        let bookTwo = 1;
-        $('.seat-free-two img').on('click', function (e) {
-            if (bookTwo == 0) {
-                $(this).attr('src', './assets/images/movie/seat02-free.png');
-                bookTwo = 1;
-            } else if (bookTwo == 1) {
-                $(this).attr('src', './assets/images/movie/seat02-booked.png');
-                bookTwo = 0;
-            }
+
+            let bookedSeats = [];
+            $('.seat-free[book="1"]').each(function () {
+                bookedSeats.push($(this).data('name'));
+            });
+
+            $.ajax({
+                url: '/seat/select-seat',
+                method: 'GET',
+                data: {
+                    bookedSeats: bookedSeats,
+                    id: $('#show-time').data('id'),
+                    price: $('#show-time').data('price'),
+                },
+                success: function (res) {
+                    $('#booked-seats').html(res.bookedSeats);
+                    $('#total').html(res.total);
+                    res.href
+                        ? $('#checkout').attr('href', res.href)
+                        : $('#checkout').removeAttr('href');
+                },
+            });
         });
         // shop cart + - start here
         let CartPlusMinus = $('.cart-plus-minus');
@@ -734,7 +749,7 @@
 
                             let showTimeElement = '';
                             room.ShowTimes.forEach((showTime) => {
-                                showTimeElement += `<div class="item">${showTime.time}</div>`;
+                                showTimeElement += `<a href="/seat?w=1&showtime=${showTime.id}"><div class="item">${showTime.time}</div></a>`;
                             });
 
                             showTimePartElement = `
@@ -801,7 +816,7 @@
 
                             let showTimeElement = '';
                             movie.ShowTimes.forEach((showTime) => {
-                                showTimeElement += `<div class="item">${showTime.time}</div>`;
+                                showTimeElement += `<a href="/seat?w=2&showtime=${showTime.id}"><div class="item">${showTime.time}</div></a>`;
                             });
 
                             showTimePartElement = `
@@ -829,6 +844,7 @@
                 },
             });
         });
+        // Change rooms search
         $('.cinemas2').on('change', function () {
             $.ajax({
                 url: '/search/select-room',
@@ -861,6 +877,38 @@
         }
         $('#searchInput').on('click', function () {
             $('#searchResponse').empty();
+        });
+        // Personal info edit
+        $('.edit').on('click', function () {
+            $(`.edit-input[data-map="${$(this).attr('id')}"]`).css(
+                'display',
+                'flex'
+            );
+            $(this).parent().css('display', 'none');
+            $(`.edit-input[data-map="${$(this).attr('id')}"]`).val(
+                `${$(this).parent().text().trim()}`
+            );
+            $(`.edit-input[data-map="${$(this).attr('id')}"]`).focus();
+        });
+        $('.edit-input').on('keypress', function (e) {
+            if (e.which === 13) {
+                $.ajax({
+                    url: '/personal/edit-info',
+                    method: 'PATCH',
+                    data: { type: $(this).data('map'), data: $(this).val() },
+                    success: function (res) {
+                        $(`.edit-input[data-map="${res.type}"]`).css(
+                            'display',
+                            'none'
+                        );
+                        $(`.edit#${res.type}`).parent().css('display', 'flex');
+                        $(`.edit#${res.type}`)
+                            .parent()
+                            .children('span')
+                            .text(res.data);
+                    },
+                });
+            }
         });
     });
 })(jQuery);

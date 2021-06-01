@@ -118,9 +118,11 @@
                                                                 </div>
                                                                 <div class="movie-schedule">
                                                                     {{#each this.ShowTimes}}
-                                                                        <div class="item">
-                                                                            {{formatDateTime this.time 'vi' 'LT Do [/] MM'}}
-                                                                        </div>
+                                                                        <a href="/seat?w=1&showtime={{this.id}}">
+                                                                            <div class="item">
+                                                                                {{formatDateTime this.time 'vi' 'LT Do [/] MM'}}
+                                                                            </div>
+                                                                        </a>
                                                                     {{/each}}
                                                                 </div>
                                                             </li>

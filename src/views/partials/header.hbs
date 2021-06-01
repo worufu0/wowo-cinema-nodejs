@@ -24,8 +24,15 @@
                     </ul>
                 </li>
                 <li class="header-button pr-0">
-                    {{#if displayName}}
-                        <a class="truncated">{{displayName}}</a>
+                    {{#if user}}
+                        {{#ifEqual user.userType 0}}
+                            <a class="truncated">{{../user.name}}</a>
+                    {{else}}
+                        <a class="truncated">
+                            <img src="{{../user.avatar}}" alt="avatar">
+                            {{../user.name}}
+                        </a>
+                        {{/ifEqual}}
                         <ul class="submenu">
                             <li>
                                 <a href="/personal">thông tin tài khoản</a>

@@ -1,3 +1,4 @@
+const seatR = require('./seat.r');
 const personalR = require('./personal.r');
 const cinemaR = require('./cinema.r');
 const movieR = require('./movie.r');
@@ -11,6 +12,7 @@ const homeR = require('./home.r');
 const err404R = require('./404.r');
 
 module.exports = (app) => {
+    app.use('/seat', seatR);
     app.use('/personal', personalR);
     app.use('/cinema', cinemaR);
     app.use('/movie', movieR);

@@ -18,6 +18,10 @@ module.exports = {
             },
             phone: {
                 type: Sequelize.STRING,
+                defaultValue: 'Chưa cập nhật',
+            },
+            avatar: {
+                type: Sequelize.STRING(500),
             },
             userType: {
                 allowNull: false,

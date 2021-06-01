@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
             name: DataTypes.STRING,
             unsignedName: DataTypes.STRING,
             address: DataTypes.TEXT,
-            map: DataTypes.STRING(500),
         },
         {
             sequelize,

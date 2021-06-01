@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node src/app.js",
         "dev": "nodemon src/app.js",
-        "release": "npx sequelize-cli db:migrate --config src/configs/database.js --migrations-path src/database/migrations && npx sequelize-cli db:seed:all --config src/configs/database.js --seeders-path src/database/seeders",
+        "release": "cd src && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+        "unrelease": "cd src && npx sequelize-cli db:seed:undo:all && npx sequelize-cli db:migrate:undo:all",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

@@ -18,8 +18,10 @@ exports.call = () => {
             async (accessToken, refreshToken, profile, done) => {
                 await User.findOrCreate({
                     where: {
-                        id: profile.id,
-                        fullName: profile.displayName,
+                        id: profile._json.id,
+                        fullName: profile._json.name,
+                        email: profile._json.email,
+                        avatar: profile._json.picture.data.url,
                         verified: true,
                         userType: 1,
                     },
@@ -35,8 +37,10 @@ exports.call = () => {
             async (accessToken, refreshToken, profile, done) => {
                 await User.findOrCreate({
                     where: {
-                        id: profile.id,
-                        fullName: profile.displayName,
+                        id: profile._json.sub,
+                        fullName: profile._json.name,
+                        email: profile._json.email,
+                        avatar: profile._json.picture,
                         verified: true,
                         userType: 2,
                     },

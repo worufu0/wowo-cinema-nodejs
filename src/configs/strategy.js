@@ -2,6 +2,7 @@ module.exports = {
     facebook: {
         clientID: process.env.FB_CLIENT_ID,
         clientSecret: process.env.FB_CLIENT_SECRET,
+        profileFields: ['id', 'displayName', 'email', 'picture.type(large)'],
         callbackURL: `${
             process.env.URL_ROOT || 'http://localhost:3000'
         }/passport/facebook`,

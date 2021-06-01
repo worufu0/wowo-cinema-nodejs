@@ -22,8 +22,32 @@ app.use(express.urlencoded({ extended: false }));
 // Static
 app.use(express.static(path.join(__dirname, 'public')));
 
+const moment = require('moment');
+
 // View Engine
-app.engine('.hbs', exphbs({ extname: '.hbs' }));
+app.engine(
+    '.hbs',
+    exphbs({
+        extname: '.hbs',
+        helpers: {
+            ifEqual: (a, b, options) => {
+                return a === b ? options.fn(this) : options.inverse(this);
+            },
+            formatDate: (date, locale, format) => {
+                return moment(date).locale(locale).format(format);
+            },
+            formatDateTime: (dateTime, locale, format) => {
+                return moment(dateTime).locale(locale).format(format);
+            },
+            add: (a, b) => {
+                return a + b;
+            },
+            minus: (a, b) => {
+                return a - b;
+            },
+        },
+    })
+);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
 

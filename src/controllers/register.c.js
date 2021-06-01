@@ -95,7 +95,7 @@ class RegisterController {
                 notification: `Xác mình tài khoản thành công. Bây giờ bạn có thể sử dụng tài khoản để đăng nhập vào ${appConfig.appName} !`,
             });
         } else {
-            res.render('pages/404', {
+            res.status(404).render('pages/404', {
                 layout: 'other',
                 title: appConfig.pageTitle.err404,
             });

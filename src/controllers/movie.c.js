@@ -52,17 +52,9 @@ class MovieController {
                 title: `${movie.name} | ${appConfig.appName}`,
                 movie: movie,
                 cinema: cinema,
-                helpers: {
-                    formatDate: (date, locale, format) => {
-                        return moment(date).locale(locale).format(format);
-                    },
-                    formatDateTime: (dateTime, locale, format) => {
-                        return moment(dateTime).locale(locale).format(format);
-                    },
-                },
             });
         } else {
-            res.render('pages/404', {
+            res.status(404).render('pages/404', {
                 layout: 'other',
                 title: appConfig.pageTitle.err404,
             });
@@ -162,14 +154,6 @@ class MovieController {
                 currentPage: currentPage,
                 min: min,
                 max: max,
-                helpers: {
-                    add: (a, b) => {
-                        return a + b;
-                    },
-                    minus: (a, b) => {
-                        return a - b;
-                    },
-                },
             });
         }
     }

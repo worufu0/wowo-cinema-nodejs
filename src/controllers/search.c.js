@@ -1,6 +1,5 @@
 const { Op } = require('sequelize');
 const { Movie, Room, Cinema } = require('../models');
-const appConfig = require('../configs/app');
 
 class SearchController {
     // [GET] /search

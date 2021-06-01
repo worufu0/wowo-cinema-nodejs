@@ -1,20 +1,19 @@
 'use strict';
 
-const TokenGenerator = require('uuid-token-generator');
-const tokgen = new TokenGenerator();
 const bcrypt = require('bcrypt');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.bulkInsert('Users', [
+        return await queryInterface.bulkInsert('Users', [
             {
-                id: tokgen.generate(),
+                id: '1',
                 email: 'admin@wowo.com',
                 password: bcrypt.hashSync('123456', 10),
                 fullName: 'Wowo Admin',
                 userType: 0,
                 admin: true,
                 verified: true,
+                avatar: 'admin.png',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
@@ -22,6 +21,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        return queryInterface.bulkDelete('Users', null, {});
+        return await queryInterface.bulkDelete('Users', null, {});
     },
 };

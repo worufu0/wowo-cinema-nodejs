@@ -9,35 +9,44 @@
 <section class="speaker-single padding-top pt-lg-0">
     <div class="container">
         <div class="speaker-wrapper bg-six padding-top padding-bottom">
-            <div class="speaker-thumb">
-                <img src="/images/personal/avatar/avatar.png" alt="avatar" />
-            </div>
             <div class="speaker-content">
-                <div class="author">
-                    <h2 class="title">{{user.name}}</h2>
-                </div>
-                <div class="speak-con-wrapper">
-                    <div class="speak-con-area">
-                        <div class="item">
-                            <div class="item-thumb">
-                                <img src="/images/personal/icon/email-line.png" alt="email" />
-                            </div>
-                            <div class="item-content email">
-                                <span class="up text-left">Email:</span>
-                                <span class="up">{{user.email}}</span>
-                            </div>
+                <form autocomplete="off">
+                    <div class="author">
+                        <div class="d-flex justify-content-between">
+                            <h2 class="title" style="display: flex">
+                                <span>{{user.name}}</span>
+                                <i id="fullName" class="fas fa-edit edit ml-2" style="font-size:16px"></i>
+                            </h2>
+                            <input data-map="fullName" type="text" class="edit-input pr-2" maxlength="32">
                         </div>
-                        <div class="item">
-                            <div class="item-content tel">
-                                <span class="up text-right">Tel:</span>
-                                <span class="up">{{user.phone}}</span>
+                    </div>
+                    <div class="speak-con-wrapper">
+                        <div class="speak-con-area">
+                            <div class="item">
+                                <div class="item-thumb d-flex align-items-center">
+                                    <img src="/images/personal/icon/email-line.png" alt="email" />
+                                </div>
+                                <div class="item-content email">
+                                    <span class="up text-left">Email:</span>
+                                    <span class="up">{{user.email}}</span>
+                                </div>
                             </div>
-                            <div class="item-thumb">
-                                <img src="/images/personal/icon/phone-line.png" alt="phone" />
+                            <div class="item">
+                                <div class="item-content tel">
+                                    <span class="up text-right">Số điện thoại:</span>
+                                    <span class="up" style="display: flex">
+                                        <i id="phone" class="fas fa-edit edit mr-2"></i>
+                                        <span>{{user.phone}}</span>
+                                    </span>
+                                    <input data-map="phone" type="tel" class="edit-input pr-2" maxlength="10">
+                                </div>
+                                <div class="item-thumb d-flex align-items-center">
+                                    <img src="/images/personal/icon/phone-line.png" alt="phone" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 <a href="#" class="custom-button">đổi mật khẩu</a>
                 <div class="content">
                     <h3 class="subtitle">lịch sử mua vé</h3>

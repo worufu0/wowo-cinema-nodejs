@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            this.hasMany(models.Booking, { foreignKey: 'userId' });
         }
     }
     User.init(
@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             password: DataTypes.STRING,
             fullName: DataTypes.TEXT,
             phone: DataTypes.STRING,
+            avatar: DataTypes.STRING(500),
             userType: DataTypes.INTEGER,
             admin: DataTypes.BOOLEAN,
             token: DataTypes.STRING,

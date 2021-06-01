@@ -14,10 +14,8 @@ module.exports = async (req, res, next) => {
 
         if (user) {
             req.user = user;
-            user.fullName
-                ? (res.locals.displayName = user.fullName)
-                : (res.locals.displayName = user.email);
         }
+
         next();
     } else {
         next();

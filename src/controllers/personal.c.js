@@ -4,16 +4,19 @@ const appConfig = require('../configs/app');
 class PersonalController {
     // [GET] /personal
     async index(req, res) {
-        const user = {
-            name: req.user.fullName,
-            email: req.user.email,
-            phone: req.user.phone,
-        };
-
         res.render('pages/personal', {
             title: `${appConfig.pageTitle.personal} | ${appConfig.appName}`,
-            user: user,
         });
+    }
+
+    // [GET] /personal/edit-info
+    async editInfo(req, res) {
+        const user = await User.findOne({ where: { id: req.user.id } });
+
+        user[`${req.body.type}`] = req.body.data;
+        await user.save();
+
+        res.json(req.body);
     }
 }
 

@@ -2,7 +2,7 @@
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.bulkInsert('ShowTimes', [
+        return await queryInterface.bulkInsert('ShowTimes', [
             {
                 movieId: 1,
                 roomId: 16,
@@ -1599,6 +1599,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        return queryInterface.bulkDelete('ShowTimes', null, {});
+        return await queryInterface.bulkDelete('ShowTimes', null, {});
     },
 };

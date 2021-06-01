@@ -1,4 +1,3 @@
-const moment = require('moment');
 const {
     Cinema,
     CinemaImage,
@@ -27,13 +26,7 @@ class CinemaController {
             )
         );
 
-        if (
-            cinema &&
-            cinema.Rooms.find(
-                (room) =>
-                    room.id === parseInt(req.query.room) || !req.query.room
-            )
-        ) {
+        if (cinema) {
             const movies = JSON.parse(
                 JSON.stringify(
                     await Movie.findAll({
@@ -50,18 +43,20 @@ class CinemaController {
                 )
             );
 
+            const validQuery = cinema.Rooms.find(
+                (room) =>
+                    room.id === parseInt(req.query.room) || !req.query.room
+            );
+
             res.render('pages/cinema', {
                 title: `${cinema.name} | ${appConfig.appName}`,
                 cinema: cinema,
                 movies: movies,
-                helpers: {
-                    formatDateTime: (dateTime, locale, format) => {
-                        return moment(dateTime).locale(locale).format(format);
-                    },
-                },
+                apiKey: process.env.GG_API_KEY,
+                validQuery: validQuery,
             });
         } else {
-            res.render('pages/404', {
+            res.status(404).render('pages/404', {
                 layout: 'other',
                 title: appConfig.pageTitle.err404,
             });
@@ -88,7 +83,7 @@ class CinemaController {
         if (movies.length !== 0) {
             movies.forEach((movie) => {
                 movie.ShowTimes.forEach((ShowTime) => {
-                    ShowTime.time = moment(ShowTime.time)
+                    ShowTime.time = require('moment')(ShowTime.time)
                         .locale('vi')
                         .format('LT DD [/] MM');
                 });

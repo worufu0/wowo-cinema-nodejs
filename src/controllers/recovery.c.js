@@ -74,7 +74,7 @@ class RecoveryController {
                 appName: appConfig.appName,
             });
         } else {
-            res.render('pages/404', {
+            res.status(404).render('pages/404', {
                 layout: 'other',
                 title: appConfig.pageTitle.err404,
             });

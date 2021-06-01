@@ -11,10 +11,13 @@ router.use(rememberMe); // Remember Me
 router.get(
     '/google',
     passport.authenticate('google', {
-        scope: ['https://www.googleapis.com/auth/plus.login'],
+        scope: ['https://www.googleapis.com/auth/plus.login', 'email'],
     })
 );
-router.get('/facebook', passport.authenticate('facebook'));
+router.get(
+    '/facebook',
+    passport.authenticate('facebook', { scope: ['email'] })
+);
 router.post('/', loginC.login);
 router.get('/', loginC.index);
 

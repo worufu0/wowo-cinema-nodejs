@@ -2,7 +2,7 @@
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.bulkInsert('Movies', [
+        return await queryInterface.bulkInsert('Movies', [
             {
                 name: 'Thanh Gươm Diệt Quỷ: Chuyến Tàu Vô Tận',
                 unsignedName: 'thanh-guom-diet-quy-chuyen-tau-vo-tan',
@@ -487,6 +487,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        return queryInterface.bulkDelete('Movies', null, {});
+        return await queryInterface.bulkDelete('Movies', null, {});
     },
 };

@@ -13,134 +13,154 @@
 </section>
 
 <section class="gallery-section padding-top padding-bottom bg-one">
-    <div class="container">
-        <div class="tab">
-            <ul class="tab-menu">
-                <li class="active">thông tin rạp</li>
-                <li class="dynamic">tất cả suất chiếu</li>
-            </ul>
-            <div class="tab-area">
-                <div class="tab-item active">
-                    <div class="section-header-3">
-                        <h2 id="cinema-name" class="title" data-value="{{cinema.unsignedName}}">{{cinema.name}}</h2>
-                        <p>
-                            rạp chiếu phim với công nghệ tiên tiến nhất trên thế giới hiện nay, từ thiết kế phòng chiếu
-                            vô cùng choáng ngợp đến hiệu ứng âm thanh và hình ảnh đỉnh cao.
-                        </p>
-                    </div>
-                    <div class="
+    {{#if validQuery}}
+        <div class="container">
+            <div class="tab">
+                <ul class="tab-menu">
+                    <li class="active">thông tin rạp</li>
+                    <li class="dynamic">tất cả suất chiếu</li>
+                </ul>
+                <div class="tab-area">
+                    <div class="tab-item active">
+                        <div class="section-header-3">
+                            <h2 id="cinema-name" class="title" data-value="{{cinema.unsignedName}}">{{cinema.name}}</h2>
+                            <p>
+                                rạp chiếu phim với công nghệ tiên tiến nhất trên thế giới hiện nay, từ thiết kế phòng
+                                chiếu
+                                vô cùng choáng ngợp đến hiệu ứng âm thanh và hình ảnh đỉnh cao.
+                            </p>
+                        </div>
+                        <div class="
                         row
                         justify-content-center
                         gallery-wrapper
                         mb-50
                     ">
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="gallery-item two">
-                                <div class="gallery-thumb">
-                                    <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-2.jpg" class="img-pop">
-                                        <i class="flaticon-loupe"></i>
-                                    </a>
-                                    <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-2.jpg" alt="cinema-2" />
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="gallery-item two">
+                                    <div class="gallery-thumb">
+                                        <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-2.jpg"
+                                            class="img-pop">
+                                            <i class="flaticon-loupe"></i>
+                                        </a>
+                                        <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-2.jpg"
+                                            alt="cinema-2" />
+                                    </div>
+                                </div>
+                                <div class="gallery-item two">
+                                    <div class="gallery-thumb">
+                                        <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-3.jpg"
+                                            class="img-pop">
+                                            <i class="flaticon-loupe"></i>
+                                        </a>
+                                        <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-3.jpg"
+                                            alt="cinema-3" />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="gallery-item two">
-                                <div class="gallery-thumb">
-                                    <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-3.jpg" class="img-pop">
-                                        <i class="flaticon-loupe"></i>
-                                    </a>
-                                    <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-3.jpg" alt="cinema-3" />
+                            <div class="col-sm-6 col-lg-3 order-lg-1">
+                                <div class="gallery-item two">
+                                    <div class="gallery-thumb">
+                                        <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-4.jpg"
+                                            class="img-pop">
+                                            <i class="flaticon-loupe"></i>
+                                        </a>
+                                        <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-4.jpg"
+                                            alt="cinema-4" />
+                                    </div>
+                                </div>
+                                <div class="gallery-item two">
+                                    <div class="gallery-thumb">
+                                        <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-5.jpg"
+                                            class="img-pop">
+                                            <i class="flaticon-loupe"></i>
+                                        </a>
+                                        <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-5.jpg"
+                                            alt="cinema-5" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="gallery-item two">
+                                    <div class="gallery-thumb">
+                                        <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-1.jpg"
+                                            class="img-pop">
+                                            <i class="flaticon-loupe"></i>
+                                        </a>
+                                        <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-1.jpg"
+                                            alt="cinema-1" class="big" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-3 order-lg-1">
-                            <div class="gallery-item two">
-                                <div class="gallery-thumb">
-                                    <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-4.jpg" class="img-pop">
-                                        <i class="flaticon-loupe"></i>
-                                    </a>
-                                    <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-4.jpg" alt="cinema-4" />
-                                </div>
-                            </div>
-                            <div class="gallery-item two">
-                                <div class="gallery-thumb">
-                                    <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-5.jpg" class="img-pop">
-                                        <i class="flaticon-loupe"></i>
-                                    </a>
-                                    <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-5.jpg" alt="cinema-5" />
-                                </div>
-                            </div>
+                        <div class="section-header-3">
+                            <p>
+                                <b>Địa chỉ: </b>{{cinema.address}}
+                            </p>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="gallery-item two">
-                                <div class="gallery-thumb">
-                                    <a href="/images/cinema/cinema-{{cinema.CinemaImage.name}}-1.jpg" class="img-pop">
-                                        <i class="flaticon-loupe"></i>
-                                    </a>
-                                    <img src="/images/cinema/cinema-{{cinema.CinemaImage.name}}-1.jpg" alt="cinema-1"
-                                        class="big" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-header-3">
-                        <p>
-                            <b>Địa chỉ: </b>{{cinema.address}}
-                        </p>
-                    </div>
-                    <div class="
+                        <div class="
                         row
                         justify-content-center">
-                        <div class="col-lg-8">
-                            <p style="text-align: center;"><iframe
-                                    src="https://www.google.com/maps/embed?pb={{cinema.map}}" width="100%" height="450"
-                                    allowfullscreen="" loading="lazy"></iframe></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-item dynamic">
-                    <div class="ticket-plan-section mt-50">
-                        <div class="row justify-content-center mb-50">
-                            <div class="col-lg-12 text-center">
-                                <h3 style="text-transform: uppercase;">danh sách rạp</h3>
+                            <div class="col-lg-8">
+                                <p style="text-align: center;">
+                                    <iframe width="600" height="450" loading="lazy" allowfullscreen
+                                        src="https://www.google.com/maps/embed/v1/place?key={{apiKey}}&q={{cinema.address}}">
+                                    </iframe>
+                                </p>
                             </div>
                         </div>
-                        <div class="row justify-content-center mb-50">
-                            {{#each cinema.Rooms}}
-                                <div data-value={{this.id}} class="room-border col-auto mb-4"
-                                    style="display: flex; justify-content: center">
-                                    <div class="room-in-cinema">{{this.name}}</div>
-                                    <div class="room-in-cinema">{{this.RoomType.name}}</div>
+                    </div>
+                    <div class="tab-item dynamic">
+                        <div class="ticket-plan-section mt-50">
+                            <div class="row justify-content-center mb-50">
+                                <div class="col-lg-12 text-center">
+                                    <h3 style="text-transform: uppercase;">danh sách rạp</h3>
                                 </div>
-                            {{/each}}
-                        </div>
-                        <div class="showtimes">
-                            {{#if movies}}
-                                <ul class="seat-plan-wrapper bg-five">
-                                    {{#each movies}}
-                                        <li>
-                                            <div class="movie-name long">
-                                                <img class="mini-poster"
-                                                    src="/images/movie/poster/poster-{{this.image}}.jpg"
-                                                    alt="mini-poster" />
-                                                <a href="/movie/{{this.unsignedName}}?cinema={{../cinema.unsignedName}}"
-                                                    class="name">{{this.name}}</a>
-                                            </div>
-                                            <div class="movie-schedule short">
-                                                {{#each this.ShowTimes}}
-                                                    <div class="item">
-                                                        {{formatDateTime this.time 'vi' 'LT Do [/] MM'}}
-                                                    </div>
-                                                {{/each}}
-                                            </div>
-                                        </li>
-                                    {{/each}}
-                                </ul>
-                            {{else}}
-                                <p>hiện tại không có suất chiếu tại rạp này.</p>
-                            {{/if}}
+                            </div>
+                            <div class="row justify-content-center mb-50">
+                                {{#each cinema.Rooms}}
+                                    <div data-value={{this.id}} class="room-border col-auto mb-4"
+                                        style="display: flex; justify-content: center">
+                                        <div class="room-in-cinema">{{this.name}}</div>
+                                        <div class="room-in-cinema">{{this.RoomType.name}}</div>
+                                    </div>
+                                {{/each}}
+                            </div>
+                            <div class="showtimes">
+                                {{#if movies}}
+                                    <ul class="seat-plan-wrapper bg-five">
+                                        {{#each movies}}
+                                            <li>
+                                                <div class="movie-name long">
+                                                    <img class="mini-poster"
+                                                        src="/images/movie/poster/poster-{{this.image}}.jpg"
+                                                        alt="mini-poster" />
+                                                    <a href="/movie/{{this.unsignedName}}?cinema={{../cinema.unsignedName}}"
+                                                        class="name">{{this.name}}</a>
+                                                </div>
+                                                <div class="movie-schedule short">
+                                                    {{#each this.ShowTimes}}
+                                                        <a href="/seat?w=2&showtime={{this.id}}">
+                                                            <div class="item">
+                                                                {{formatDateTime this.time 'vi' 'LT Do [/] MM'}}
+                                                            </div>
+                                                        </a>
+                                                    {{/each}}
+                                                </div>
+                                            </li>
+                                        {{/each}}
+                                    </ul>
+                                {{else}}
+                                    <p>hiện tại không có suất chiếu tại rạp này.</p>
+                                {{/if}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+    {{else}}
+        <div class="col-lg-12">
+            <p style="text-align: center;">không có dữ liệu.</p>
         </div>
+    {{/if}}
 </section>
