@@ -60,7 +60,9 @@
                         </div>
                     </div>
                 </form>
-                <a href="/personal/change-password" class="custom-button" target="_blank">thay đổi mật khẩu</a>
+                {{#ifEqual user.userType 0}}
+                    <a href="/personal/change-password" class="custom-button" target="_blank">thay đổi mật khẩu</a>
+                {{/ifEqual}}
                 <div class="content">
                     <div class="blog-comment">
                         <h5 class="title">lịch sử mua vé</h5>

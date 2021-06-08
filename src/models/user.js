@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
             userType: DataTypes.INTEGER,
             admin: DataTypes.BOOLEAN,
             token: DataTypes.STRING,
-            phoneVerified: DataTypes.BOOLEAN,
             mailVerified: DataTypes.BOOLEAN,
         },
         {

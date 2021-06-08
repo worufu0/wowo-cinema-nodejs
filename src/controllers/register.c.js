@@ -49,7 +49,6 @@ class RegisterController {
                     userType: 0,
                 },
             });
-
             await User.update({ token: token }, { where: { email: email } });
 
             await transporter.sendMail({

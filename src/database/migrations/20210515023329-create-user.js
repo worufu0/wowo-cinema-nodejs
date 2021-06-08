@@ -36,11 +36,6 @@ module.exports = {
             token: {
                 type: Sequelize.STRING,
             },
-            phoneVerified: {
-                allowNull: false,
-                type: Sequelize.BOOLEAN,
-                defaultValue: false,
-            },
             mailVerified: {
                 allowNull: false,
                 type: Sequelize.BOOLEAN,
