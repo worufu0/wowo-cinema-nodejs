@@ -24,7 +24,7 @@ module.exports = {
             bookingTime: {
                 type: Sequelize.DATE,
             },
-            total: {
+            pay: {
                 type: Sequelize.INTEGER,
             },
             createdAt: {

@@ -10,7 +10,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 const router = require('./routes');
 const db = require('./database');
+const errorHandler = require('./middlewares/error-handler');
+const clientErrorHandler = require('./middlewares/client-error-handler');
+const logError = require('./middlewares/log-error');
 const authentication = require('./middlewares/authentication');
+const hbsHelper = require('./helpers/handlebars');
 
 // HTTP Logger
 app.use(logger('dev'));
@@ -22,30 +26,12 @@ app.use(express.urlencoded({ extended: false }));
 // Static
 app.use(express.static(path.join(__dirname, 'public')));
 
-const moment = require('moment');
-
 // View Engine
 app.engine(
     '.hbs',
     exphbs({
         extname: '.hbs',
-        helpers: {
-            ifEqual: (a, b, options) => {
-                return a === b ? options.fn(this) : options.inverse(this);
-            },
-            formatDate: (date, locale, format) => {
-                return moment(date).locale(locale).format(format);
-            },
-            formatDateTime: (dateTime, locale, format) => {
-                return moment(dateTime).locale(locale).format(format);
-            },
-            add: (a, b) => {
-                return a + b;
-            },
-            minus: (a, b) => {
-                return a - b;
-            },
-        },
+        helpers: hbsHelper,
     })
 );
 app.set('views', path.join(__dirname, 'views'));
@@ -63,6 +49,11 @@ app.use(
 
 // Method Override
 app.use(methodOverride('_method'));
+
+// Error handler
+app.use(errorHandler);
+app.use(clientErrorHandler);
+app.use(logError);
 
 // Connect Database
 db.connect();

@@ -1,0 +1,152 @@
+{{#if showTime}}
+    <section class="details-banner hero-area bg_img seat-plan-banner"
+        data-background="/images/movie/banner/banner-{{showTime.Movie.image}}.jpg">
+        <div class="container">
+            <div class="details-banner-wrapper">
+                <div class="details-banner-content style-two">
+                    <div id="show-time" class="d-none" data-id="{{showTime.id}}" data-price="{{showTime.price}}"></div>
+                    <h3 class="title">
+                        {{showTime.Movie.name}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-title bg-one">
+        <div class="container">
+            <div class="page-title-area">
+                <div class="item md-order-1">
+                    <a href="{{back}}" class="custom-button back-button">
+                        <i class="flaticon-double-right-arrows-angles"></i>quay lại
+                    </a>
+                </div>
+                <div class="item date-item">
+                    <span class="date">{{showTime.Room.Cinema.name}} | {{showTime.Room.name}} |
+                        {{showTime.Room.RoomType.name}}</span>
+                </div>
+                <div class="item">
+                    <h5 class="title">{{formatDateTime showTime.time 'vi' 'LT'}}</h5>
+                    <p style="margin-left: -16px; text-align: right">
+                        {{formatDateTime showTime.time 'vi' 'Do-MM-YYYY'}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="movie-facility padding-bottom padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="checkout-widget checkout-contact">
+                        <h5 class="title">thông tin liên hệ</h5>
+                        <form id="contact-form" class="checkout-contact-form" autocomplete="off">
+                            <div class="form-group">
+                                <label for="fullName">
+                                    Tên của bạn
+                                </label>
+                                <input type="text" id="fullName" name="fullName" value="{{info.fullName}}" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">
+                                    Địa chỉ email
+                                </label>
+                                <input type="email" id="email" name="email" value="{{info.email}}" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">
+                                    Số điện thoại
+                                    <span>*</span>
+                                </label>
+                                <span id="err-phone" style="font-size: 12px" class="text-danger"></span>
+                                <input type="tel" id="phone" name="phone" value="{{info.phone}}"
+                                    placeholder="Nhập số điện thoại" maxlength="10"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                            </div>
+                            <div id="submit-container"
+                                class="form-group d-flex flex-column justify-content-end align-items-start">
+                                <input id="submit-send" type="submit" value="gửi mã" class="custom-button" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="checkout-widget checkout-card mb-0">
+                        <h5 class="title">hình thức thanh toán</h5>
+                        <ul class="payment-option">
+                            <li class="active">
+                                <a href="#0">
+                                    <img src="/images/payment/paypal.png" alt="thanh toán" />
+                                    <span>paypal</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <form id="payment-form" class="payment-card-form" autocomplete="off" method="POST">
+                            <div class="form-group">
+                                <p id="err-checkout" class="text-danger font-italic"></p>
+                                <input id="pay-submit" type="submit" class="custom-button" value="thanh toán" />
+                            </div>
+                        </form>
+                        <p class="notice">
+                            khi chọn "THANH TOÁN" đồng nghĩa là bạn chấp nhận với
+                            <a href="#0">các điều khoản và điều kiện</a>
+                            của chúng tôi
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="booking-summery bg-one">
+                        <h4 class="title">thông tin đặt vé</h4>
+                        <ul>
+                            <li>
+                                <h6 class="subtitle">{{showTime.Movie.name}}</h6>
+                                <span class="info">{{showTime.Movie.category}} - {{showTime.Movie.time}} phút</span>
+                            </li>
+                            <li>
+                                <h6 class="subtitle">
+                                    <span>{{showTime.Room.Cinema.name}}</span><span>{{showTime.Room.name}}</span>
+                                </h6>
+                                <div class="info">
+                                    <span>{{formatDateTime showTime.time 'vi' 'llll'}}</span>
+                                    <span>{{showTime.Room.RoomType.name}}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <h6 class="subtitle mb-0">
+                                    <span>giá vé</span><span>{{formatCurrency showTime.price 'vi' 'VND'}}</span>
+                                </h6>
+                            </li>
+                        </ul>
+                        <ul class="side-shape">
+                            <li>
+                                <h6 class="subtitle">
+                                    <span>số lượng</span><span>{{calInfo.count}}</span>
+                                </h6>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <span class="info"><span>tổng giá
+                                        vé</span><span>{{formatCurrency calInfo.total 'vi' 'VND'}}</span></span>
+                                <span class="info"><span>giảm giá</span><span>{{calInfo.discount}}%</span></span>
+                                <span class="info"><span>thuế vat</span><span>{{calInfo.vat}}%</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="proceed-area text-center">
+                        <h6 class="subtitle">
+                            <span>tổng thanh toán</span><span>{{formatCurrency calInfo.pay 'vi' 'VND'}}</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{else}}
+    <section class="details-banner hero-area bg_img seat-plan-banner" data-background="/images/banner/banner04.jpg">
+        <div class="col-lg-12">
+            <p style="text-align: center;">
+                không có dữ liệu.
+            </p>
+        </div>
+    </section>
+{{/if}}

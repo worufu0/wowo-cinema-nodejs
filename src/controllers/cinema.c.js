@@ -1,3 +1,5 @@
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.CRYPT_KEY);
 const {
     Cinema,
     CinemaImage,
@@ -42,11 +44,11 @@ class CinemaController {
                     })
                 )
             );
-
             const validQuery = cinema.Rooms.find(
                 (room) =>
                     room.id === parseInt(req.query.room) || !req.query.room
             );
+            const back = cryptr.encrypt(req.originalUrl);
 
             res.render('pages/cinema', {
                 title: `${cinema.name} | ${appConfig.appName}`,
@@ -54,6 +56,7 @@ class CinemaController {
                 movies: movies,
                 apiKey: process.env.GG_API_KEY,
                 validQuery: validQuery,
+                back: back,
             });
         } else {
             res.status(404).render('pages/404', {
@@ -79,6 +82,7 @@ class CinemaController {
                 })
             )
         );
+        const back = cryptr.encrypt(req.query.back);
 
         if (movies.length !== 0) {
             movies.forEach((movie) => {
@@ -90,7 +94,10 @@ class CinemaController {
             });
         }
 
-        res.json(movies);
+        res.json({
+            movies: movies,
+            back: back,
+        });
     }
 }
 

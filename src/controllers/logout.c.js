@@ -3,6 +3,7 @@ class LogoutController {
     index(req, res) {
         delete req.session.userId;
         delete req.session.passport;
+        delete req.user;
         res.redirect('/');
     }
 }

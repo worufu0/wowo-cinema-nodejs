@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.CRYPT_KEY);
 const { User } = require('../models');
 const appConfig = require('../configs/app');
 const passport = require('../helpers/passport').call();
@@ -7,6 +9,7 @@ class LoginController {
     // [GET] /login
     index(req, res) {
         let rememberEmail, rememberPass, status;
+        const back = req.query.back;
 
         if (req.remember) {
             rememberEmail = req.remember.user.email;
@@ -21,6 +24,7 @@ class LoginController {
             rememberEmail: rememberEmail,
             rememberPass: rememberPass,
             status: status,
+            back: back,
         });
     }
 
@@ -41,7 +45,9 @@ class LoginController {
                   })
                 : delete req.session.remember;
 
-            res.redirect('/');
+            req.body.back
+                ? res.redirect(cryptr.decrypt(req.body.back))
+                : res.redirect('/');
         } else {
             res.render('pages/login', {
                 layout: 'other',

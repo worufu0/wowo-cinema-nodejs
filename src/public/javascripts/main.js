@@ -227,17 +227,73 @@
                 $(this).addClass('active');
             }
         });
+        // Change query seat
+        const querySeat = new URLSearchParams(window.location.search).get(
+            'seat'
+        );
+        if (window.location.pathname === '/booking' && querySeat) {
+            querySeat.split(' ').forEach((seatName) => {
+                $(`.seat-free[data-name="${seatName}"]`).attr('book', '1');
+                $(`.seat-free[data-name="${seatName}"] img`).attr(
+                    'src',
+                    '/images/booking/seat01-booked.png'
+                );
+            });
 
+            let bookedSeats = [];
+            $('.seat-free[book="1"]').each(function () {
+                bookedSeats.push($(this).data('name'));
+            });
+            bookedSeats.length !== 0
+                ? $('#booked-seats').html(bookedSeats.join(', '))
+                : $('#booked-seats').html('chưa chọn');
+
+            let total = (
+                bookedSeats.length *
+                $('#show-time').data('price') *
+                1000
+            ).toLocaleString('vi', {
+                style: 'currency',
+                currency: 'VND',
+            });
+            $('#total').html(total);
+
+            let urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('seat', bookedSeats.join('+'));
+            window.history.pushState(
+                '',
+                '',
+                `${window.location.pathname}?${decodeURIComponent(
+                    urlSearchParams
+                )}`
+            );
+
+            $.ajax({
+                url: '/booking/select-seat',
+                method: 'GET',
+                data: { back: window.location.href },
+                success: function (res) {
+                    urlSearchParams.set('back', res);
+                    let href = `/checkout?${decodeURIComponent(
+                        urlSearchParams
+                    )}`;
+                    bookedSeats.length !== 0
+                        ? $('#checkout').attr('href', href)
+                        : $('#checkout').removeAttr('href');
+                },
+            });
+        }
+        // Select seat
         $('.seat-free').on('click', function (e) {
             if ($(this).attr('book') === '0') {
                 $(this)
                     .children('img')
-                    .attr('src', '/images/seat/seat01-booked.png');
+                    .attr('src', '/images/booking/seat01-booked.png');
                 $(this).attr('book', '1');
             } else {
                 $(this)
                     .children('img')
-                    .attr('src', '/images/seat/seat01-free.png');
+                    .attr('src', '/images/booking/seat01-free.png');
                 $(this).attr('book', '0');
             }
 
@@ -245,20 +301,44 @@
             $('.seat-free[book="1"]').each(function () {
                 bookedSeats.push($(this).data('name'));
             });
+            bookedSeats.length !== 0
+                ? $('#booked-seats').html(bookedSeats.join(', '))
+                : $('#booked-seats').html('chưa chọn');
+
+            let total = (
+                bookedSeats.length *
+                $('#show-time').data('price') *
+                1000
+            ).toLocaleString('vi', {
+                style: 'currency',
+                currency: 'VND',
+            });
+            $('#total').html(total);
+
+            let urlSearchParams = new URLSearchParams(window.location.search);
+
+            bookedSeats.length !== 0
+                ? urlSearchParams.set('seat', bookedSeats.join('+'))
+                : urlSearchParams.delete('seat');
+            window.history.pushState(
+                '',
+                '',
+                `${window.location.pathname}?${decodeURIComponent(
+                    urlSearchParams
+                )}`
+            );
 
             $.ajax({
-                url: '/seat/select-seat',
+                url: '/booking/select-seat',
                 method: 'GET',
-                data: {
-                    bookedSeats: bookedSeats,
-                    id: $('#show-time').data('id'),
-                    price: $('#show-time').data('price'),
-                },
+                data: { back: window.location.href },
                 success: function (res) {
-                    $('#booked-seats').html(res.bookedSeats);
-                    $('#total').html(res.total);
-                    res.href
-                        ? $('#checkout').attr('href', res.href)
+                    urlSearchParams.set('back', res);
+                    let href = `/checkout?${decodeURIComponent(
+                        urlSearchParams
+                    )}`;
+                    bookedSeats.length !== 0
+                        ? $('#checkout').attr('href', href)
                         : $('#checkout').removeAttr('href');
                 },
             });
@@ -666,6 +746,48 @@
                 error.insertBefore(element);
             },
         });
+        // Change password form validate
+        $('#change-password-form').validate({
+            rules: {
+                pass1: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 32,
+                },
+                pass2: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 32,
+                },
+                pass3: {
+                    required: true,
+                    equalTo: '#pass2',
+                    minlength: 6,
+                    maxlength: 32,
+                },
+            },
+            messages: {
+                pass1: {
+                    required: 'Mật khẩu hiện tại không được trống',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+                pass2: {
+                    required: 'Mật khẩu mới không được trống',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+                pass3: {
+                    required: 'Xác nhận mật khẩu không được trống',
+                    equalTo: 'Xác nhận mật khẩu không chính xác',
+                    minlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                    maxlength: 'Mật khẩu phải có độ dài từ 6 đến 32 kí tự',
+                },
+            },
+            errorPlacement: function (error, element) {
+                error.insertBefore(element);
+            },
+        });
         // Ticket search form
         $('[data-toggle="tooltip"]').tooltip();
         $('#searchInput').on('focusin', function () {
@@ -701,7 +823,6 @@
             $('.tab-menu li').removeClass('active');
             $('.tab-menu li.dynamic').addClass('active');
         }
-
         // Change query room
         const queryRoom = new URLSearchParams(window.location.search).get(
             'room'
@@ -717,39 +838,40 @@
         }
         // Change cinemas select
         $('.query-cinemas').on('change', function () {
+            window.history.replaceState(
+                '',
+                '',
+                `${window.location.pathname}?cinema=${$(
+                    '.list .option.selected'
+                ).data('value')}`
+            );
+
             $.ajax({
                 url: '/movie/change-cinema',
                 method: 'GET',
                 data: {
                     id: $('#movie-name').data('value'),
                     cinema: $('.list .option.selected').data('value'),
+                    back: window.location.href,
                 },
                 success: function (res) {
-                    window.history.replaceState(
-                        '',
-                        '',
-                        `${window.location.pathname}?cinema=${$(
-                            '.list .option.selected'
-                        ).data('value')}`
-                    );
-
-                    if (res) {
+                    if (res.cinema) {
                         let roomPartElement = '';
                         let showTimePartElement = '';
                         let ShowTimesElement = '';
-                        res.Rooms.forEach((room) => {
+                        res.cinema.Rooms.forEach((room) => {
                             roomPartElement = `
                                 <div class="movie-name">
                                     <div class="icons">
                                         <i class="fas fa-video"></i>
                                         <i>${room.RoomType.name}</i>
                                     </div>
-                                    <a href="/cinema/${res.unsignedName}?room=${room.id}" class="name">${room.name}</a>
+                                    <a href="/cinema/${res.cinema.unsignedName}?room=${room.id}" class="name">${room.name}</a>
                                 </div>`;
 
                             let showTimeElement = '';
                             room.ShowTimes.forEach((showTime) => {
-                                showTimeElement += `<a href="/seat?w=1&showtime=${showTime.id}"><div class="item">${showTime.time}</div></a>`;
+                                showTimeElement += `<a href="/booking?showtime=${showTime.id}&back=${res.back}"><div class="item">${showTime.time}</div></a>`;
                             });
 
                             showTimePartElement = `
@@ -782,26 +904,27 @@
             $('.room-border').removeClass('active');
             $(this).addClass('active');
 
+            window.history.replaceState(
+                '',
+                '',
+                `${window.location.pathname}?room=${$(
+                    '.room-border.active'
+                ).data('value')}`
+            );
+
             $.ajax({
                 url: '/cinema/change-room',
                 method: 'GET',
                 data: {
                     room: $('.room-border.active').data('value'),
+                    back: window.location.href,
                 },
                 success: function (res) {
-                    window.history.replaceState(
-                        '',
-                        '',
-                        `${window.location.pathname}?room=${$(
-                            '.room-border.active'
-                        ).data('value')}`
-                    );
-
-                    if (res.length !== 0) {
+                    if (res.movies.length !== 0) {
                         let moviePartElement = '';
                         let showTimePartElement = '';
                         let ShowTimesElement = '';
-                        res.forEach((movie) => {
+                        res.movies.forEach((movie) => {
                             moviePartElement = `
                                 <div class="movie-name long">
                                     <img class="mini-poster" src="/images/movie/poster/poster-${
@@ -816,7 +939,7 @@
 
                             let showTimeElement = '';
                             movie.ShowTimes.forEach((showTime) => {
-                                showTimeElement += `<a href="/seat?w=2&showtime=${showTime.id}"><div class="item">${showTime.time}</div></a>`;
+                                showTimeElement += `<a href="/booking?showtime=${showTime.id}&back=${res.back}"><div class="item">${showTime.time}</div></a>`;
                             });
 
                             showTimePartElement = `
@@ -886,29 +1009,160 @@
             );
             $(this).parent().css('display', 'none');
             $(`.edit-input[data-map="${$(this).attr('id')}"]`).val(
-                `${$(this).parent().text().trim()}`
+                `${$(this).parent().children('span.map-content').text().trim()}`
             );
             $(`.edit-input[data-map="${$(this).attr('id')}"]`).focus();
         });
-        $('.edit-input').on('keypress', function (e) {
+        $('.edit-input').on('keyup', function (e) {
             if (e.which === 13) {
-                $.ajax({
-                    url: '/personal/edit-info',
-                    method: 'PATCH',
-                    data: { type: $(this).data('map'), data: $(this).val() },
-                    success: function (res) {
-                        $(`.edit-input[data-map="${res.type}"]`).css(
-                            'display',
-                            'none'
-                        );
-                        $(`.edit#${res.type}`).parent().css('display', 'flex');
-                        $(`.edit#${res.type}`)
-                            .parent()
-                            .children('span')
-                            .text(res.data);
-                    },
-                });
+                if ($(this).attr('data-map') === 'phone') {
+                    if (
+                        $(this).val()[0] === '0' &&
+                        $(this).val().length === 10
+                    ) {
+                        $.ajax({
+                            url: '/personal/edit-info',
+                            method: 'PATCH',
+                            data: {
+                                type: $(this).data('map'),
+                                data: $(this).val(),
+                            },
+                            success: function (res) {
+                                $(`.edit-input[data-map="${res.type}"]`).css(
+                                    'display',
+                                    'none'
+                                );
+                                $(`.edit#${res.type}`)
+                                    .parent()
+                                    .css('display', 'flex');
+                                $(`.edit#${res.type}`)
+                                    .parent()
+                                    .children('span.map-content')
+                                    .text(res.data);
+                            },
+                        });
+                        $('#phone-empty').remove();
+                    }
+                } else {
+                    $.ajax({
+                        url: '/personal/edit-info',
+                        method: 'PATCH',
+                        data: {
+                            type: $(this).data('map'),
+                            data: $(this).val(),
+                        },
+                        success: function (res) {
+                            $(`.edit-input[data-map="${res.type}"]`).css(
+                                'display',
+                                'none'
+                            );
+                            $(`.edit#${res.type}`)
+                                .parent()
+                                .css('display', 'flex');
+                            $(`.edit#${res.type}`)
+                                .parent()
+                                .children('span.map-content')
+                                .text(res.data);
+                        },
+                    });
+                }
+            } else if (e.which === 27) {
+                $(`.edit-input[data-map="${$(this).data('map')}"]`).css(
+                    'display',
+                    'none'
+                );
+                $(`.edit#${$(this).data('map')}`)
+                    .parent()
+                    .css('display', 'flex');
             }
+        });
+        // Send and verify tel
+        $('#phone').on('focus', function () {
+            $('#err-phone').empty();
+        });
+        $('#submit-send').click(function (e) {
+            e.preventDefault();
+            if ($('#phone').val().length === 10) {
+                $('#phone').prop('readonly', true);
+                submitVerification(e);
+            } else {
+                $('#err-phone').text('Số điện thoại không hợp lệ');
+            }
+        });
+        function submitVerification(
+            e,
+            send = true,
+            notification = 'nhập mã gồm 6 chữ được gửi qua tin nhắn'
+        ) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/checkout/send',
+                data: {
+                    send: send,
+                    phone: $('#phone').val(),
+                },
+                success: function (res) {
+                    if (res) {
+                        $('#submit-container').html(
+                            `<span style="font-size: 12px" class="mb-2">${notification} <a id="submit-resend" href="#">gửi lại mã</a></span>
+                            <div class="d-flex">
+                                <input id="otp" class="mr-4" type="text" maxlength="6" placeholder="Nhập mã OTP"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\\..*)\\./g, '$1');" />
+                                <input id="submit-verify" type="submit" value="xác nhận" class="custom-button" style="padding: 0 20px" />
+                            </div>`
+                        );
+                        $('#submit-verify').click(function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                type: 'POST',
+                                url: '/checkout/verify',
+                                data: {
+                                    otp: $('#otp').val(),
+                                    phone: $('#phone').val(),
+                                },
+                                success: function (res) {
+                                    if (res) {
+                                        $('#submit-container').html(
+                                            `<div class="d-flex align-items-center color-theme">
+                                                <i class="fas fa-check-circle mr-2"></i>
+                                                <span>đã xác nhận</span>
+                                            </div>`
+                                        );
+                                    } else {
+                                        submitVerification(
+                                            e,
+                                            false,
+                                            'mã OTP không chính xác !'
+                                        );
+                                    }
+                                },
+                            });
+                        });
+                        $('#submit-resend').click(function (e) {
+                            e.preventDefault();
+                            submitVerification(e);
+                        });
+                    }
+                },
+            });
+        }
+        // Payment submit
+        $('#pay-submit').on('click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/checkout/allow-payment',
+                success: function (res) {
+                    if (res) {
+                        $('#payment-form').submit();
+                    } else {
+                        $('#err-checkout').text(
+                            'vui lòng xác nhận trước khi thanh toán'
+                        );
+                    }
+                },
+            });
         });
     });
 })(jQuery);

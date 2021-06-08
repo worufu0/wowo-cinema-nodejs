@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const TokenGenerator = require('uuid-token-generator');
+const shortid = require('shortid');
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const mailConfig = require('../configs/email');
@@ -17,9 +18,6 @@ class RegisterController {
 
     // [POST] /register
     async register(req, res) {
-        const transporter = nodemailer.createTransport(mailConfig);
-        const uuid = new TokenGenerator().generate();
-        const token = new TokenGenerator(256, TokenGenerator.BASE62).generate();
         const { email, pass1, pass2 } = req.body;
         const user = await User.findOne({
             where: {
@@ -35,7 +33,13 @@ class RegisterController {
                 regErr: 'Địa chỉ email đã được sử dụng',
             });
         } else {
+            const transporter = nodemailer.createTransport(mailConfig);
+            const uuid = shortid.generate();
             const hashPass = bcrypt.hashSync(pass1, 10);
+            const token = new TokenGenerator(
+                256,
+                TokenGenerator.BASE62
+            ).generate();
 
             await User.findOrCreate({
                 where: {
@@ -82,9 +86,9 @@ class RegisterController {
             where: { token: req.params.token },
         });
 
-        if (user && user.verified === false) {
+        if (user && user.mailVerified === false) {
             await User.update(
-                { verified: true, token: tokgen.generate() },
+                { mailVerified: true, token: tokgen.generate() },
                 { where: { token: req.params.token } }
             );
 

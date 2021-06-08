@@ -25,7 +25,7 @@ class RecoveryController {
                 email: email,
                 userType: 0,
                 admin: false,
-                verified: true,
+                mailVerified: true,
             },
         });
 

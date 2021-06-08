@@ -18,7 +18,7 @@ module.exports = {
             },
             phone: {
                 type: Sequelize.STRING,
-                defaultValue: 'Chưa cập nhật',
+                defaultValue: null,
             },
             avatar: {
                 type: Sequelize.STRING(500),
@@ -36,7 +36,12 @@ module.exports = {
             token: {
                 type: Sequelize.STRING,
             },
-            verified: {
+            phoneVerified: {
+                allowNull: false,
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
+            },
+            mailVerified: {
                 allowNull: false,
                 type: Sequelize.BOOLEAN,
                 defaultValue: false,

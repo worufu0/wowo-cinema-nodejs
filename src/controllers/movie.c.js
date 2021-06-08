@@ -1,4 +1,5 @@
-const moment = require('moment');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.CRYPT_KEY);
 const {
     Cinema,
     Room,
@@ -47,11 +48,13 @@ class MovieController {
                     })
                 )
             );
+            const back = cryptr.encrypt(req.originalUrl);
 
             res.render('pages/movie', {
                 title: `${movie.name} | ${appConfig.appName}`,
                 movie: movie,
                 cinema: cinema,
+                back: back,
             });
         } else {
             res.status(404).render('pages/404', {
@@ -90,18 +93,22 @@ class MovieController {
                 })
             )
         );
+        const back = cryptr.encrypt(req.query.back);
 
         if (cinema) {
             cinema.Rooms.forEach((Room) => {
                 Room.ShowTimes.forEach((ShowTime) => {
-                    ShowTime.time = moment(ShowTime.time)
+                    ShowTime.time = require('moment')(ShowTime.time)
                         .locale('vi')
                         .format('LT DD [/] MM');
                 });
             });
         }
 
-        res.json(cinema);
+        res.json({
+            cinema: cinema,
+            back: back,
+        });
     }
 
     // [GET] /movie/all

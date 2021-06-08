@@ -10,11 +10,17 @@
     <div class="container">
         <div class="speaker-wrapper bg-six padding-top padding-bottom">
             <div class="speaker-content">
-                <form autocomplete="off">
+                <form id="personal-form" autocomplete="off">
                     <div class="author">
                         <div class="d-flex justify-content-between">
                             <h2 class="title" style="display: flex">
-                                <span>{{user.name}}</span>
+                                <span class="map-content">
+                                    {{#if user.name}}
+                                        {{user.name}}
+                                    {{else}}
+                                        {{user.email}}
+                                    {{/if}}
+                                </span>
                                 <i id="fullName" class="fas fa-edit edit ml-2" style="font-size:16px"></i>
                             </h2>
                             <input data-map="fullName" type="text" class="edit-input pr-2" maxlength="32">
@@ -27,18 +33,25 @@
                                     <img src="/images/personal/icon/email-line.png" alt="email" />
                                 </div>
                                 <div class="item-content email">
-                                    <span class="up text-left">Email:</span>
+                                    <span class="up text-left">email:</span>
                                     <span class="up">{{user.email}}</span>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="item-content tel">
-                                    <span class="up text-right">Số điện thoại:</span>
-                                    <span class="up" style="display: flex">
+                                    <span class="up text-right">số điện thoại:</span>
+                                    <span class="up align-items-center" style="display: flex">
                                         <i id="phone" class="fas fa-edit edit mr-2"></i>
-                                        <span>{{user.phone}}</span>
+                                        <span class="map-content">{{user.phone}}</span>
+                                        {{#unless user.phone}}
+                                            <span id='phone-empty'>chưa cập nhật</span>
+                                        {{/unless}}
                                     </span>
-                                    <input data-map="phone" type="tel" class="edit-input pr-2" maxlength="10">
+                                    <span class="up align-items-center" style="display: flex">
+                                        <input data-map="phone" type="tel" class="edit-input pr-2" maxlength="10"
+                                            oninput=" this.value=this.value.replace(/[^0-9.]/g, ''
+                                        ).replace(/(\..*)\./g, '$1' );">
+                                    </span>
                                 </div>
                                 <div class="item-thumb d-flex align-items-center">
                                     <img src="/images/personal/icon/phone-line.png" alt="phone" />
@@ -47,39 +60,39 @@
                         </div>
                     </div>
                 </form>
-                <a href="#" class="custom-button">đổi mật khẩu</a>
+                <a href="/personal/change-password" class="custom-button" target="_blank">thay đổi mật khẩu</a>
                 <div class="content">
-                    <h3 class="subtitle">lịch sử mua vé</h3>
-                    <p>
-                        A successful marketing plan relies heavily on
-                        the pulling-power of advertising copy. Writing
-                        result-oriented ad copy is difficult, as it must
-                        appeal to, entice, and convince consumers to
-                        take action. There is no magic formula to write
-                        perfect ad copy; it is based on a number of
-                        factors, including ad placement, demographic,
-                        even the consumer’s mood when they see your ad.
-                    </p>
-                    <p>
-                        So how is any writer supposed to pen a stunning
-                        piece of advertising copy — copy that sizzles
-                        and sells? The following tips will jumpstart
-                        your creative thinking and help you write a
-                        better ad.
-                    </p>
-                    <p>
-                        Consumers are inundated with ads, so it’s vital
-                        that your ad catches the eye and immediately
-                        grabs interest. You could do this with a
-                        headline or slogan (such as VW’s “Drivers
-                        Wanted” campaign), color or layout (Target’s new
-                        colorful, simple ads are a testimony to this) or
-                        illustration (such as the Red Bull characters or
-                        Zoloft’s depressed ball and his ladybug friend).
-                    </p>
+                    <div class="blog-comment">
+                        <h5 class="title">lịch sử mua vé</h5>
+                        {{#if bookings}}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>mã</th>
+                                        <th>ngày mua</th>
+                                        <th>tên phim</th>
+                                        <th>số lượng</th>
+                                        <th>tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each bookings}}
+                                        <tr>
+                                            <th scope="row">{{this.id}}</th>
+                                            <td>{{formatDate this.bookingTime 'vi' 'lll'}}</td>
+                                            <td>{{this.ShowTime.Movie.name}}</td>
+                                            <td>{{arrayCount this.Tickets}}</td>
+                                            <td>{{formatCurrency this.pay 'vi' 'VND'}}</td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        {{else}}
+                            <p class="text-center padding-top">chưa có lịch sử mua vé</p>
+                        {{/if}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ==========Speaker-Single========== -->

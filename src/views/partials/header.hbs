@@ -26,7 +26,13 @@
                 <li class="header-button pr-0">
                     {{#if user}}
                         {{#ifEqual user.userType 0}}
-                            <a class="truncated">{{../user.name}}</a>
+                            <a class="truncated">
+                                {{#if ../user.name}}
+                                    {{../user.name}}
+                                {{else}}
+                                    {{../user.email}}
+                                {{/if}}
+                            </a>
                     {{else}}
                         <a class="truncated">
                             <img src="{{../user.avatar}}" alt="avatar">

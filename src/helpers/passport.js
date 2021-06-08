@@ -22,7 +22,7 @@ exports.call = () => {
                         fullName: profile._json.name,
                         email: profile._json.email,
                         avatar: profile._json.picture.data.url,
-                        verified: true,
+                        mailVerified: true,
                         userType: 1,
                     },
                 });
@@ -41,7 +41,7 @@ exports.call = () => {
                         fullName: profile._json.name,
                         email: profile._json.email,
                         avatar: profile._json.picture,
-                        verified: true,
+                        mailVerified: true,
                         userType: 2,
                     },
                 });

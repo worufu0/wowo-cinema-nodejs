@@ -118,7 +118,8 @@
                                                                 </div>
                                                                 <div class="movie-schedule">
                                                                     {{#each this.ShowTimes}}
-                                                                        <a href="/seat?w=1&showtime={{this.id}}">
+                                                                        <a
+                                                                            href="/booking?showtime={{this.id}}&back={{../../back}}">
                                                                             <div class="item">
                                                                                 {{formatDateTime this.time 'vi' 'LT Do [/] MM'}}
                                                                             </div>

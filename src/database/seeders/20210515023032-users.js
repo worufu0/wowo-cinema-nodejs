@@ -1,5 +1,6 @@
 'use strict';
 
+const TokenGenerator = require('uuid-token-generator');
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -12,7 +13,11 @@ module.exports = {
                 fullName: 'Wowo Admin',
                 userType: 0,
                 admin: true,
-                verified: true,
+                mailVerified: true,
+                token: new TokenGenerator(
+                    256,
+                    TokenGenerator.BASE62
+                ).generate(),
                 avatar: 'admin.png',
                 createdAt: new Date(),
                 updatedAt: new Date(),

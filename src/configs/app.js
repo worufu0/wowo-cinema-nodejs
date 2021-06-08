@@ -1,7 +1,9 @@
 module.exports = {
     appName: 'Wowo Cinema',
     pageTitle: {
-        seat: 'Đặt Vé',
+        changePassword: 'Thay Đổi Mật Khẩu',
+        checkout: 'Thanh Toán',
+        booking: 'Đặt Vé',
         personal: 'Thông Tin Tài Khoản',
         movie: 'Phim',
         register: 'Đăng Ký',

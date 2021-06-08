@@ -17,8 +17,7 @@
         <div class="container">
             <div class="page-title-area">
                 <div class="item md-order-1">
-                    <a href="/{{redirectBack.route}}/{{redirectBack.slug}}?{{redirectBack.queryKey}}={{redirectBack.queryValue}}"
-                        class="custom-button back-button">
+                    <a href="{{back}}" class="custom-button back-button">
                         <i class="flaticon-double-right-arrows-angles"></i>quay lại
                     </a>
                 </div>
@@ -40,7 +39,7 @@
             <div class="screen-area">
                 <h4 class="screen">màn hình</h4>
                 <div class="screen-thumb">
-                    <img src="/images/seat/screen-thumb.png" alt="movie" />
+                    <img src="/images/booking/screen-thumb.png" alt="movie" />
                 </div>
                 <div class="screen-wrapper">
                     <ul class="seat-area">
@@ -53,12 +52,12 @@
                                             {{#each this}}
                                                 {{#if this.booked}}
                                                     <li class="single-seat">
-                                                        <img src="/images/seat/seat01.png" alt="{{this.seatName}}" />
+                                                        <img src="/images/booking/seat01.png" alt="{{this.seatName}}" />
                                                     </li>
                                                 {{else}}
                                                     <li class="single-seat seat-free" book="0"
                                                         data-name="{{this.seatName}}">
-                                                        <img src=" /images/seat/seat01-free.png"
+                                                        <img src=" /images/booking/seat01-free.png"
                                                             alt="{{this.seatName}}" />
                                                         <span class="sit-num">{{this.seatName}}</span>
                                                     </li>
@@ -73,7 +72,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="proceed-book bg_img" data-background="/images/seat/movie-bg-proceed.jpg">
+            <div class="proceed-book bg_img" data-background="/images/booking/movie-bg-proceed.jpg">
                 <div class="proceed-to-book">
                     <div class="book-item">
                         <span>các ghế đã chọn</span>
@@ -81,7 +80,7 @@
                     </div>
                     <div class="book-item">
                         <span>tổng cộng</span>
-                        <h3 id="total" class="title">0</h3>
+                        <h3 id="total" class="title">0 ₫</h3>
                     </div>
                     <div class="book-item">
                         <a id="checkout" class="custom-button">thanh toán</a>
