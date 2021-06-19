@@ -73,8 +73,9 @@
                                         <th>mã</th>
                                         <th>ngày mua</th>
                                         <th>tên phim</th>
-                                        <th>số lượng</th>
-                                        <th>tổng tiền</th>
+                                        <th>suất chiếu</th>
+                                        <th>số lượng vé</th>
+                                        <th>tổng thanh toán</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,6 +84,7 @@
                                             <th scope="row">{{this.id}}</th>
                                             <td>{{formatDate this.bookingTime 'vi' 'lll'}}</td>
                                             <td>{{this.ShowTime.Movie.name}}</td>
+                                            <td>{{formatDate this.time 'vi' 'lll'}}</td>
                                             <td>{{arrayCount this.Tickets}}</td>
                                             <td>{{formatCurrency this.pay 'vi' 'VND'}}</td>
                                         </tr>

@@ -1,7 +1,3 @@
 module.exports = (req, res, next) => {
-    if (req.user) {
-        res.redirect('/');
-    } else {
-        next();
-    }
+    req.user ? res.redirect('/') : next();
 };

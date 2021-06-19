@@ -14,6 +14,7 @@ const errorHandler = require('./middlewares/error-handler');
 const clientErrorHandler = require('./middlewares/client-error-handler');
 const logError = require('./middlewares/log-error');
 const authentication = require('./middlewares/authentication');
+const authorization = require('./middlewares/authorization');
 const hbsHelper = require('./helpers/handlebars');
 
 // HTTP Logger
@@ -42,7 +43,7 @@ app.set('trust proxy', 1);
 app.use(
     cookieSession({
         name: 'session',
-        keys: [process.env.COOKIE_KEY],
+        keys: [process.env.COOKIE_KEY || 'demon'],
         maxAge: 24 * 60 * 60 * 1000,
     })
 );
@@ -61,8 +62,9 @@ db.connect();
 // Passport
 app.use(passport.initialize());
 
-// Authentication
+// Authentication and authorization
 app.use(authentication);
+app.use(authorization);
 
 // Router
 router(app);

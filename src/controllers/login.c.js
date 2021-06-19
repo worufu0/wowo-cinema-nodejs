@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr(process.env.CRYPT_KEY);
+const cryptr = new Cryptr(process.env.CRYPT_KEY || 'wolf');
 const { User } = require('../models');
 const appConfig = require('../configs/app');
 const passport = require('../helpers/passport').call();

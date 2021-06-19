@@ -6704,11 +6704,10 @@ input[type='submit'] {
 }
 
 .ticket--item {
-    margin-bottom: 30px;
     padding: 30px;
     text-align: center;
     position: relative;
-    background: url(../images/css/ticket-bg04.png) #ffffff no-repeat center top;
+    background: url(/images/ticket/ticket-bg04.png) #ffffff no-repeat center top;
     background-size: cover;
     border-radius: 20px;
 }

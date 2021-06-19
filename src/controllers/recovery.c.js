@@ -44,7 +44,11 @@ class RecoveryController {
                 text: `Đặt lại  mật khẩu`,
                 html: `
                 <p>Vui lòng click vào link bên dưới để đặt lại mật khẩu.</p>
-                <a href="${process.env.URL_ROOT}/recovery/${token}" style="margin-bottom: 16px">${process.env.URL_ROOT}/recovery/${token}</a>
+                <a href="${
+                    process.env.URL_ROOT || 'http://localhost:3000'
+                }/recovery/${token}" style="margin-bottom: 16px">${
+                    process.env.URL_ROOT || 'http://localhost:3000'
+                }/recovery/${token}</a>
                 </br>
                 <h4>Wowo Admin</h4>
                 `,

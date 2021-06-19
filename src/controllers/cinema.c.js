@@ -1,5 +1,5 @@
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr(process.env.CRYPT_KEY);
+const cryptr = new Cryptr(process.env.CRYPT_KEY || 'wolf');
 const {
     Cinema,
     CinemaImage,
@@ -54,7 +54,9 @@ class CinemaController {
                 title: `${cinema.name} | ${appConfig.appName}`,
                 cinema: cinema,
                 movies: movies,
-                apiKey: process.env.GG_API_KEY,
+                apiKey:
+                    process.env.GG_API_KEY ||
+                    'AIzaSyA7R4K3OrUipqS3BGuL6VVmluiQ8XFpBgU',
                 validQuery: validQuery,
                 back: back,
             });

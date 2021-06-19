@@ -59,10 +59,16 @@ class RegisterController {
                 html: `
                 <h1>Chào mừng bạn đến với ${appConfig.appName}</h1>
                 </br>
-                <h3>Vui lòng xác minh địa chỉ email bạn dùng để đăng ký tài khoản ${appConfig.appName}.</h3>
+                <h3>Vui lòng xác minh địa chỉ email bạn dùng để đăng ký tài khoản ${
+                    appConfig.appName
+                }.</h3>
                 </br>
                 <p>Vui lòng click vào link bên dưới để xác nhận email của bạn.</p>
-                <a href="${process.env.URL_ROOT}/register/verify/${token}" style="margin-bottom: 16px">${process.env.URL_ROOT}/register/verify/${token}</a>
+                <a href="${
+                    process.env.URL_ROOT || 'http://localhost:3000'
+                }/register/verify/${token}" style="margin-bottom: 16px">${
+                    process.env.URL_ROOT || 'http://localhost:3000'
+                }/register/verify/${token}</a>
                 </br>
                 <h4>Wowo Admin</h4>
                 `,

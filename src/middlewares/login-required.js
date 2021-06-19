@@ -1,10 +1,8 @@
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr(process.env.CRYPT_KEY);
+const cryptr = new Cryptr(process.env.CRYPT_KEY || 'wolf');
 
 module.exports = (req, res, next) => {
-    if (!req.user) {
-        res.redirect(`/login?back=${cryptr.encrypt(req.originalUrl)}`);
-    } else {
-        next();
-    }
+    !req.user
+        ? res.redirect(`/login?back=${cryptr.encrypt(req.originalUrl)}`)
+        : next();
 };

@@ -25,7 +25,7 @@ module.exports = {
                 type: Sequelize.DATE,
             },
             pay: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.FLOAT,
             },
             createdAt: {
                 allowNull: false,

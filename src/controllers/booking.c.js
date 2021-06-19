@@ -1,5 +1,5 @@
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr(process.env.CRYPT_KEY);
+const cryptr = new Cryptr(process.env.CRYPT_KEY || 'wolf');
 const {
     ShowTime,
     Movie,

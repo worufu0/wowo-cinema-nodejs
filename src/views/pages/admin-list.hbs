@@ -1,0 +1,551 @@
+<div class="breadcrumbbar">
+    <div class="row align-items-center">
+        <div class="col-md-8 col-lg-8">
+            <h4 class="page-title">{{pathTitle.[1]}}</h4>
+            <div class="breadcrumb-list">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">{{pathTitle.[0]}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{pathTitle.[1]}}
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+            <div class="widgetbar">
+                <button id="add-button" class="btn btn-primary-rgba" data-toggle="modal" data-target="#modalAdd">
+                    <i class="feather icon-plus mr-2"></i>Thêm
+                    mới
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contentbar">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card m-b-30">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <h5 class="card-title mb-0">
+                                Tất cả {{pathTitle.[1]}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                {{#ifEqual item.type 0}}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>mã</th>
+                                        <th>poster</th>
+                                        <th>tên phim</th>
+                                        <th>thể loại</th>
+                                        <th>quốc gia</th>
+                                        <th>đạo diễn</th>
+                                        <th>thời lượng</th>
+                                        <th>ngày công chiếu</th>
+                                        <th>vé đã bán</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each ../item.list}}
+                                        <tr>
+                                            <td scope="row">{{this.id}}</td>
+                                            <td>
+                                                <img src="/images/movie/poster/poster-{{this.image}}.jpg"
+                                                    class="img-fluid" width="35" alt="poster" />
+                                            </td>
+                                            <td>{{this.name}}</td>
+                                            <td>{{this.category}}</td>
+                                            <td>{{this.country}}</td>
+                                            <td>{{this.director}}</td>
+                                            <td>{{this.time}} phút</td>
+                                            <td>{{this.openingDay}}</td>
+                                            <td>{{this.sold}}</td>
+                                            <td>
+                                                <div class="button-list">
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-success-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-edit-2
+                                                                    "></i></a>
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-danger-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-trash
+                                                                    "></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog"
+                            aria-labelledby="modalAddTitle" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog  slideInUp  animated" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalAddTitle">Thêm mới {{../pathTitle.[1]}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form autocomplete="off">
+                                            <div class="form-group mb-30">
+                                                <label for="">Tên phim</label>
+                                                <input type="text" class="form-control" name="inputName" id="inputName"
+                                                    placeholder="Nhập tên phim">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-9">
+                                                    <div class="form-group mb-30">
+                                                        <label for="">Poster phim</label>
+                                                        <input type="file" class="form-control-file"
+                                                            id="inputPosterButton" accept="image/png, image/jpeg">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group mb-30">
+                                                        <img src="/images/movie/poster/poster-4QhpLPhTZ1iANpK7cMDJvw.jpg"
+                                                            alt="test" style="width: 50%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-7">
+                                                    <div class="form-group mb-30">
+                                                        <label for="">Thể loại</label>
+                                                        <input type="text" class="form-control" name="inputCategory"
+                                                            id="inputCategory" placeholder="Nhập thể loại phim">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <div class="form-group mb-30">
+                                                        <label for="">Thời lượng (phút)</label>
+                                                        <input type="number" class="form-control" name="inputTime"
+                                                            id="inputTime" placeholder="Nhập thời lượng">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group mb-30">
+                                                        <label for="">Quốc gia</label>
+                                                        <input type="text" class="form-control" name="inputCountry"
+                                                            id="inputCountry" placeholder="Nhập tên quốc gia">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group mb-30">
+                                                        <label for="">Đạo diễn</label>
+                                                        <input type="text" class="form-control" name="inputDirection"
+                                                            id="inputDirection" placeholder="Nhập tên đạo diễn">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-30">
+                                                <label for="">Ngày công chiếu</label>
+                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
+                                            </div>
+                                            <div class="form-group mb-30">
+                                                <label for="">Hình ảnh phim</label>
+                                                <input type="file" class="form-control-file" id="inputImageButton"
+                                                    accept="image/png, image/jpeg" multiple>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="form-group mb-10">
+                                                        <img src="/images/movie/image/movie-B9aTeNjKWz3QfcuwzmvvVh.jpg"
+                                                            alt="test" style="width:100%">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group mb-10">
+                                                        <img src="/images/movie/image/movie-Vbkyw3RWHeD7b1rGbmDWTR.jpg"
+                                                            alt="test" style="width:100%">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group mb-10">
+                                                        <img src="/images/movie/image/movie-8UgHLhX5EqRNZYFhJsYrUj.jpg"
+                                                            alt="test" style="width:100%">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group mb-10">
+                                                        <img src="/images/movie/image/movie-X3sMPEovkNQ9Eh2Bm5tWjn.jpg"
+                                                            alt="test" style="width:100%">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group mb-10">
+                                                        <img src="/images/movie/image/movie-AcoAuH4Liw8x5B3TsCc2dQ.jpg"
+                                                            alt="test" style="width:100%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                            bỏ</button>
+                                        <button type="button" class="btn btn-primary">Thêm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/ifEqual}}
+                {{#ifEqual item.type 1}}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>mã</th>
+                                        <th>tên cụm rạp</th>
+                                        <th>địa chỉ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each ../item.list}}
+                                        <tr>
+                                            <td scope="row">{{this.id}}</td>
+                                            <td>{{this.name}}</td>
+                                            <td>{{this.address }}</td>
+                                            <td>
+                                                <div class="button-list">
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-success-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-edit-2
+                                                                    "></i></a>
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-danger-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-trash
+                                                                    "></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddTitle"
+                        style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog  slideInUp  animated" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalAddTitle">Thêm mới {{../pathTitle.[1]}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form autocomplete="off">
+                                        <div class="form-group mb-30">
+                                            <label for="">Tên cụm rạp</label>
+                                            <input type="text" class="form-control" name="inputName" id="inputName"
+                                                placeholder="Nhập tên cụm rạp">
+                                        </div>
+                                        <div class="form-group mb-30">
+                                            <label for="">Địa chỉ</label>
+                                            <input type="text" class="form-control" name="inputAddress"
+                                                id="inputAddress" placeholder="Nhập địa chỉ cụm rạp">
+                                        </div>
+                                        <div class="form-group mb-30">
+                                            <label for="">Hình ảnh cụm rạp</label>
+                                            <input type="file" class="form-control-file" id="inputImageButton"
+                                                accept="image/png, image/jpeg" multiple>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group mb-10">
+                                                    <img src="/images/movie/image/movie-B9aTeNjKWz3QfcuwzmvvVh.jpg"
+                                                        alt="test" style="width:100%">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group mb-10">
+                                                    <img src="/images/movie/image/movie-Vbkyw3RWHeD7b1rGbmDWTR.jpg"
+                                                        alt="test" style="width:100%">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group mb-10">
+                                                    <img src="/images/movie/image/movie-8UgHLhX5EqRNZYFhJsYrUj.jpg"
+                                                        alt="test" style="width:100%">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group mb-10">
+                                                    <img src="/images/movie/image/movie-X3sMPEovkNQ9Eh2Bm5tWjn.jpg"
+                                                        alt="test" style="width:100%">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group mb-10">
+                                                    <img src="/images/movie/image/movie-AcoAuH4Liw8x5B3TsCc2dQ.jpg"
+                                                        alt="test" style="width:100%">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                        bỏ</button>
+                                    <button type="button" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/ifEqual}}
+                {{#ifEqual item.type 2}}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>mã</th>
+                                        <th>tên rạp</th>
+                                        <th>cụm rạp</th>
+                                        <th>loại rạp</th>
+                                        <th>kích thước ngang</th>
+                                        <th>kích thước dọc</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each ../item.list}}
+                                        <tr>
+                                            <td scope="row">{{this.id}}</td>
+                                            <td>{{this.name}}</td>
+                                            <td>{{this.Cinema.name}}</td>
+                                            <td>{{this.RoomType.name}}</td>
+                                            <td>{{this.row}}</td>
+                                            <td>{{this.col}}</td>
+                                            <td>
+                                                <div class="button-list">
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-success-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-edit-2
+                                                                    "></i></a>
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-danger-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-trash
+                                                                    "></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddTitle"
+                        style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog  slideInUp  animated" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalAddTitle">Thêm mới {{../pathTitle.[1]}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form autocomplete="off">
+                                        <div class="form-group mb-30">
+                                            <label for="">Tên rạp</label>
+                                            <input type="text" class="form-control" name="inputName" id="inputName"
+                                                placeholder="Nhập tên rạp">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Cụm rạp</label>
+                                                    <select class="custom-select" id="inputCinema">
+                                                        <option selected="">Chọn cụm rạp</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Phim</label>
+                                                    <select class="custom-select" id="inputMovie">
+                                                        <option selected="">Chọn phim</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Kích thước ngang</label>
+                                                    <input type="number" class="form-control" name="inputRow"
+                                                        id="inputRow" placeholder="Nhập số hàng ghế">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Kích thước dọc</label>
+                                                    <input type="number" class="form-control" name="inputCol"
+                                                        id="inputDọc" placeholder="Nhập số cột ghế">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                        bỏ</button>
+                                    <button type="button" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/ifEqual}}
+                {{#ifEqual item.type 3}}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>mã</th>
+                                        <th>tên phim</th>
+                                        <th>tên rạp</th>
+                                        <th>thời gian</th>
+                                        <th>giá vé</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each ../item.list}}
+                                        <tr>
+                                            <td scope="row">{{this.id}}</td>
+                                            <td>{{this.Movie.name}}</td>
+                                            <td>{{this.Room.name}}</td>
+                                            <td>{{formatDateTime this.time 'vi' 'lll'}}</td>
+                                            <td>{{formatCurrency this.price 'vi' 'VND'}}</td>
+                                            <td>
+                                                <div class="button-list">
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-success-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-edit-2
+                                                                    "></i></a>
+                                                    <a href="#" class="
+                                                                    btn
+                                                                    btn-danger-rgba
+                                                                "><i class="
+                                                                        feather
+                                                                        icon-trash
+                                                                    "></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddTitle"
+                        style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog  slideInUp  animated" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalAddTitle">Thêm mới {{../pathTitle.[1]}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form autocomplete="off">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Phim</label>
+                                                    <select class="custom-select" id="inputMovie">
+                                                        <option selected="">Chọn phim</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Rạp</label>
+                                                    <select class="custom-select" id="inputCinema">
+                                                        <option selected="">Chọn Rạp</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Thời gian</label>
+                                                    <input type="time" class="form-control" name="inputTime"
+                                                        id="inputTime">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-30">
+                                                    <label for="">Ngày chiếu</label>
+                                                    <input type="date" class="form-control" name="inputDate"
+                                                        id="inputDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-30">
+                                            <label for="">Giá vé</label>
+                                            <input type="number" class="form-control" name="inputPrice" id="inputPrice"
+                                                placeholder="Nhập giá vé (1 = 1,000 VND)">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                        bỏ</button>
+                                    <button type="button" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/ifEqual}}
+            </div>
+        </div>
+    </div>
+</div>

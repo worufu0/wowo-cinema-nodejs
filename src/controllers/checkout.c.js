@@ -6,7 +6,7 @@ const tokgen = new TokenGenerator();
 const { totp } = require('otplib');
 const Cryptr = require('cryptr');
 totp.options = { step: 1800 };
-const cryptr = new Cryptr(process.env.CRYPT_KEY);
+const cryptr = new Cryptr(process.env.CRYPT_KEY || 'wolf');
 const {
     ShowTime,
     Movie,
@@ -88,6 +88,7 @@ class CheckoutController {
             },
             showTime: showTime,
             calInfo: calInfo,
+            back: back,
         });
     }
 
@@ -95,8 +96,12 @@ class CheckoutController {
     async checkout(req, res) {
         paypal.configure({
             mode: process.env.PAYPAL_MODE || 'sandbox',
-            client_id: process.env.PAYPAL_CLIENT_ID,
-            client_secret: process.env.PAYPAL_CLIENT_SECRET,
+            client_id:
+                process.env.PAYPAL_CLIENT_ID ||
+                'AZFSw1f52bVTFLvjn_0suweAgP3dWYc_hGhJEQG5kb49n-BahPcKSWiydex1TVeKByZdOj6V6PwtJCgg',
+            client_secret:
+                process.env.PAYPAL_CLIENT_SECRET ||
+                'EP98gHyxKPlSno-Q3XIcfh4hG1w_Derd6RSY_1EAZcK0mes1YflOYQMxZxThJMyNnnq4AWrdz7o71b78',
         });
 
         const url =
@@ -118,8 +123,12 @@ class CheckoutController {
                 payment_method: 'paypal',
             },
             redirect_urls: {
-                return_url: `${process.env.URL_ROOT}/checkout/success`,
-                cancel_url: `${process.env.URL_ROOT}/checkout/cancel`,
+                return_url: `${
+                    process.env.URL_ROOT || 'http://localhost:3000'
+                }/checkout/success`,
+                cancel_url: `${
+                    process.env.URL_ROOT || 'http://localhost:3000'
+                }/checkout/cancel`,
             },
             transactions: [
                 {
@@ -184,6 +193,13 @@ class CheckoutController {
             }
         );
 
+        const movie = await Movie.findOne({
+            where: { id: req.session.bookingInfo.showTime.Movie.id },
+        });
+        await movie.increment('sold', {
+            by: req.session.bookingInfo.bookingSeats.length,
+        });
+
         await Booking.create({
             id: req.session.payment.id,
             userId: req.user.id,
@@ -192,14 +208,15 @@ class CheckoutController {
             pay: req.session.bookingInfo.calInfo.pay,
         });
 
-        console.log(req.session.bookingInfo.bookingSeats);
         req.session.bookingInfo.bookingSeats.forEach(async (seatName) => {
+            const [y, ...x] = seatName;
+
             await Ticket.create({
                 id: shortid.generate(),
                 bookingId: req.session.payment.id,
                 seatName: seatName,
-                x: seatName[1],
-                y: seatName[0],
+                x: x.join(''),
+                y: y,
                 price: req.session.bookingInfo.showTime.price,
             });
         });
@@ -224,45 +241,57 @@ class CheckoutController {
     send(req, res) {
         if (req.body.send === 'true') {
             const otp = totp.generate(req.user.token);
-            const accountSid = process.env.TWILIO_ACCOUNT_SID;
-            const authToken = process.env.TWILIO_AUTH_TOKEN;
+            const accountSid =
+                process.env.TWILIO_ACCOUNT_SID ||
+                'AC6920bef8341db8902f13c6a585df0676';
+            const authToken =
+                process.env.TWILIO_AUTH_TOKEN ||
+                'acdeff76be424084d74efdc175b55b44';
             const client = require('twilio')(accountSid, authToken);
             const phone = req.body.phone.replace(0, '+84');
             const bookingInfo = req.session.bookingInfo;
 
-            client.messages.create({
-                from: '+14753291996',
-                to: phone,
-                body: `Xác nhận thông tin đặt vé xem phim tại Wowo Cinema.\nTên phim: ${
-                    bookingInfo.showTime.Movie.name
-                }\nThời gian: ${require('moment')(bookingInfo.showTime.time)
-                    .locale('vi')
-                    .format('llll')}\nRạp: ${
-                    bookingInfo.showTime.Room.name
-                } - ${bookingInfo.showTime.Room.Cinema.name}\nLoại rạp: ${
-                    bookingInfo.showTime.Room.RoomType.name
-                }\nGiá vé: ${(bookingInfo.showTime.price * 1000).toLocaleString(
-                    'vi',
-                    {
+            client.messages
+                .create({
+                    from: process.env.TWILIO_PHONE_NUMBER || '+15005550006',
+                    to: phone,
+                    body: `Xác nhận thông tin đặt vé xem phim tại Wowo Cinema.\nTên phim: ${
+                        bookingInfo.showTime.Movie.name
+                    }\nThời gian: ${require('moment')(bookingInfo.showTime.time)
+                        .locale('vi')
+                        .format('llll')}\nRạp: ${
+                        bookingInfo.showTime.Room.name
+                    } - ${bookingInfo.showTime.Room.Cinema.name}\nLoại rạp: ${
+                        bookingInfo.showTime.Room.RoomType.name
+                    }\nGiá vé: ${(
+                        bookingInfo.showTime.price * 1000
+                    ).toLocaleString('vi', {
                         style: 'currency',
                         currency: 'VND',
-                    }
-                )}\nSố lượng vé: ${bookingInfo.calInfo.count}\nTổng giá vé: ${(
-                    bookingInfo.calInfo.total * 1000
-                ).toLocaleString('vi', {
-                    style: 'currency',
-                    currency: 'VND',
-                })}\nMã vé: ${req.session.bookingInfo.bookingSeats
-                    .join(', ')
-                    .toUpperCase()}\nGiảm giá: ${
-                    bookingInfo.calInfo.discount
-                }%\nThuế VAT: 10%\nTổng thanh toán: ${(
-                    bookingInfo.calInfo.pay * 1000
-                ).toLocaleString('vi', {
-                    style: 'currency',
-                    currency: 'VND',
-                })}\nMã xác nhận đặt vé của bạn là ${otp}`,
-            });
+                    })}\nSố lượng vé: ${
+                        bookingInfo.calInfo.count
+                    }\nTổng giá vé: ${(
+                        bookingInfo.calInfo.total * 1000
+                    ).toLocaleString('vi', {
+                        style: 'currency',
+                        currency: 'VND',
+                    })}\nMã vé: ${req.session.bookingInfo.bookingSeats
+                        .join(', ')
+                        .toUpperCase()}\nGiảm giá: ${
+                        bookingInfo.calInfo.discount
+                    }%\nThuế VAT: 10%\nTổng thanh toán: ${(
+                        bookingInfo.calInfo.pay * 1000
+                    ).toLocaleString('vi', {
+                        style: 'currency',
+                        currency: 'VND',
+                    })}\nMã xác nhận đặt vé của bạn là ${otp}`,
+                })
+                .then((message) => {
+                    console.log(message);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
 
         res.json(true);
