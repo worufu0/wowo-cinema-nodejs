@@ -1082,7 +1082,7 @@
         });
         $('#submit-send').click(function (e) {
             e.preventDefault();
-            if ($('#phone').val().length === 10) {
+            if ($('#phone').val().length === 12) {
                 $('#phone').prop('readonly', true);
                 submitVerification(e);
             } else {
@@ -1163,6 +1163,11 @@
                     }
                 },
             });
+        });
+        //Input mask
+        $('#phone').inputmask({
+            mask: '999 999 9999',
+            clearIncomplete: true,
         });
     });
 })(jQuery);

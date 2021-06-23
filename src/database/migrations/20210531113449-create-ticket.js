@@ -13,6 +13,8 @@ module.exports = {
                     model: 'Bookings',
                     key: 'id',
                 },
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
             },
             seatName: {
                 type: Sequelize.STRING,

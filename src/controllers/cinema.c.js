@@ -37,7 +37,9 @@ class CinemaController {
                                 model: ShowTime,
                                 where: {
                                     roomId:
-                                        req.query.room || cinema.Rooms[0].id,
+                                        req.query.room ||
+                                        cinema.Rooms[0]?.id ||
+                                        null,
                                 },
                             },
                         ],

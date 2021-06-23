@@ -36,104 +36,134 @@
                 </div>
                 {{#ifEqual item.type 0}}
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>mã</th>
-                                        <th>poster</th>
-                                        <th>tên phim</th>
-                                        <th>thể loại</th>
-                                        <th>quốc gia</th>
-                                        <th>đạo diễn</th>
-                                        <th>thời lượng</th>
-                                        <th>ngày công chiếu</th>
-                                        <th>vé đã bán</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each ../item.list}}
+                        {{#if ../item.list}}
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <thead>
                                         <tr>
-                                            <td scope="row">{{this.id}}</td>
-                                            <td>
-                                                <img src="/images/movie/poster/poster-{{this.image}}.jpg"
-                                                    class="img-fluid" width="35" alt="poster" />
-                                            </td>
-                                            <td>{{this.name}}</td>
-                                            <td>{{this.category}}</td>
-                                            <td>{{this.country}}</td>
-                                            <td>{{this.director}}</td>
-                                            <td>{{this.time}} phút</td>
-                                            <td>{{this.openingDay}}</td>
-                                            <td>{{this.sold}}</td>
-                                            <td>
-                                                <div class="button-list">
-                                                    <a href="#" class="
+                                            <th>mã</th>
+                                            <th>poster</th>
+                                            <th>tên phim</th>
+                                            <th>thể loại</th>
+                                            <th>quốc gia</th>
+                                            <th>đạo diễn</th>
+                                            <th>thời lượng</th>
+                                            <th>ngày công chiếu</th>
+                                            <th>vé đã bán</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each ../item.list}}
+                                            <tr>
+                                                <td scope="row">{{this.id}}</td>
+                                                <td>
+                                                    <img src="/images/movie/poster/poster-{{this.image}}.jpg"
+                                                        class="img-fluid" width="35" alt="poster" />
+                                                </td>
+                                                <td>{{this.name}}</td>
+                                                <td>{{this.category}}</td>
+                                                <td>{{this.country}}</td>
+                                                <td>{{this.director}}</td>
+                                                <td>{{this.time}} phút</td>
+                                                <td>{{this.openingDay}}</td>
+                                                <td>{{this.sold}}</td>
+                                                <td>
+                                                    <div class="button-list">
+                                                        <a href="#" class="
                                                                     btn
                                                                     btn-success-rgba
                                                                 "><i class="
                                                                         feather
                                                                         icon-edit-2
                                                                     "></i></a>
-                                                    <a href="#" class="
+                                                        <form method="POST" action="?_method=delete" class="deleteForm">
+                                                            <input type="hidden" name="id" value="{{this.id}}">
+                                                            <button type="submit" class="
                                                                     btn
-                                                                    btn-danger-rgba
+                                                                    btn-danger-rgba deleteBtn
                                                                 "><i class="
                                                                         feather
                                                                         icon-trash
-                                                                    "></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                        </div>
+                                                                    "></i></button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {{else}}
+                            <span>Chưa có dữ liệu</span>
+                        {{/if}}
                         <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog"
                             aria-labelledby="modalAddTitle" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog  slideInUp  animated" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalAddTitle">Thêm mới {{../pathTitle.[1]}}</h5>
+                                        <h5 class="modal-title" id="modalAddTitle">Thêm mới {{../pathTitle.[1]}}
+                                        </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form autocomplete="off">
+                                    <form autocomplete="off" method="POST" class="form-validate addForm"
+                                        enctype="multipart/form-data">
+                                        <div class="modal-body">
                                             <div class="form-group mb-30">
                                                 <label for="">Tên phim</label>
                                                 <input type="text" class="form-control" name="inputName" id="inputName"
-                                                    placeholder="Nhập tên phim">
+                                                    maxlength="128" placeholder="Nhập tên phim">
+                                            </div>
+                                            <div class="form-group mb-30">
+                                                <label for="">Đường dẫn (không dấu)</label>
+                                                <input type="text" class="form-control" name="inputUnsignedName"
+                                                    id="inputUnsignedName" maxlength="256"
+                                                    placeholder="Nhập đường dẫn của phim">
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-9">
                                                     <div class="form-group mb-30">
                                                         <label for="">Poster phim</label>
-                                                        <input type="file" class="form-control-file"
-                                                            id="inputPosterButton" accept="image/png, image/jpeg">
+                                                        <input type="file" class="form-control-file" id="inputPoster"
+                                                            name="inputPoster" accept="image/jpeg">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group mb-30">
-                                                        <img src="/images/movie/poster/poster-4QhpLPhTZ1iANpK7cMDJvw.jpg"
-                                                            alt="test" style="width: 50%">
+                                                        <img id="previewPoster" style="width: 75%">
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-lg-9">
+                                                    <div class="form-group mb-30">
+                                                        <label for="">Banner phim</label>
+                                                        <input type="file" class="form-control-file" id="inputBanner"
+                                                            name="inputBanner" accept="image/jpeg">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group mb-30">
+                                                        <img id="previewBanner" style="width: 75%">
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="row">
                                                 <div class="col-lg-7">
                                                     <div class="form-group mb-30">
                                                         <label for="">Thể loại</label>
                                                         <input type="text" class="form-control" name="inputCategory"
-                                                            id="inputCategory" placeholder="Nhập thể loại phim">
+                                                            maxlength="64" id="inputCategory"
+                                                            placeholder="Nhập thể loại phim">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-5">
                                                     <div class="form-group mb-30">
                                                         <label for="">Thời lượng (phút)</label>
-                                                        <input type="number" class="form-control" name="inputTime"
-                                                            id="inputTime" placeholder="Nhập thời lượng">
+                                                        <input type="number" class="form-control" name="inputTimeLong"
+                                                            id="inputTimeLong" placeholder="Nhập thời lượng">
                                                     </div>
                                                 </div>
                                             </div>
@@ -142,65 +172,49 @@
                                                     <div class="form-group mb-30">
                                                         <label for="">Quốc gia</label>
                                                         <input type="text" class="form-control" name="inputCountry"
-                                                            id="inputCountry" placeholder="Nhập tên quốc gia">
+                                                            maxlength="64" id="inputCountry"
+                                                            placeholder="Nhập tên quốc gia">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group mb-30">
                                                         <label for="">Đạo diễn</label>
-                                                        <input type="text" class="form-control" name="inputDirection"
-                                                            id="inputDirection" placeholder="Nhập tên đạo diễn">
+                                                        <input type="text" class="form-control" name="inputDirector"
+                                                            maxlength="64" id="inputDirector"
+                                                            placeholder="Nhập tên đạo diễn">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-30">
                                                 <label for="">Ngày công chiếu</label>
-                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
+                                                <input type="date" class="form-control" name="inputOpeningDay"
+                                                    id="inputOpeningDay">
+                                            </div>
+                                            <div class="form-group mb-30">
+                                                <label for="">Trailer phim (Youtube)</label>
+                                                <input type="text" class="form-control" name="inputVideo"
+                                                    id="inputVideo" placeholder="Nhập tên liên kết trailer">
+                                            </div>
+                                            <div class="form-group mb-30">
+                                                <label for="">Nội dung phim</label>
+                                                <textarea class="form-control" name="inputDescription"
+                                                    id="inputDescription" rows="5"
+                                                    placeholder="Nhập tóm tắt nội dung phim"></textarea>
                                             </div>
                                             <div class="form-group mb-30">
                                                 <label for="">Hình ảnh phim</label>
-                                                <input type="file" class="form-control-file" id="inputImageButton"
-                                                    accept="image/png, image/jpeg" multiple>
+                                                <input type="file" class="form-control-file" id="inputImages"
+                                                    name="inputImages" accept="image/jpeg" multiple>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <div class="form-group mb-10">
-                                                        <img src="/images/movie/image/movie-B9aTeNjKWz3QfcuwzmvvVh.jpg"
-                                                            alt="test" style="width:100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group mb-10">
-                                                        <img src="/images/movie/image/movie-Vbkyw3RWHeD7b1rGbmDWTR.jpg"
-                                                            alt="test" style="width:100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group mb-10">
-                                                        <img src="/images/movie/image/movie-8UgHLhX5EqRNZYFhJsYrUj.jpg"
-                                                            alt="test" style="width:100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group mb-10">
-                                                        <img src="/images/movie/image/movie-X3sMPEovkNQ9Eh2Bm5tWjn.jpg"
-                                                            alt="test" style="width:100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group mb-10">
-                                                        <img src="/images/movie/image/movie-AcoAuH4Liw8x5B3TsCc2dQ.jpg"
-                                                            alt="test" style="width:100%">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
-                                            bỏ</button>
-                                        <button type="button" class="btn btn-primary">Thêm</button>
-                                    </div>
+                                            <div id="previewImages" class="row"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                                bỏ</button>
+                                            <button type="submit" class="btn btn-primary addBtn">Thêm</button>
+                                        </div>
+
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -208,44 +222,51 @@
                 {{/ifEqual}}
                 {{#ifEqual item.type 1}}
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>mã</th>
-                                        <th>tên cụm rạp</th>
-                                        <th>địa chỉ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each ../item.list}}
+                        {{#if ../item.list}}
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <thead>
                                         <tr>
-                                            <td scope="row">{{this.id}}</td>
-                                            <td>{{this.name}}</td>
-                                            <td>{{this.address }}</td>
-                                            <td>
-                                                <div class="button-list">
-                                                    <a href="#" class="
+                                            <th>mã</th>
+                                            <th>tên cụm rạp</th>
+                                            <th>địa chỉ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each ../item.list}}
+                                            <tr>
+                                                <td scope="row">{{this.id}}</td>
+                                                <td>{{this.name}}</td>
+                                                <td>{{this.address }}</td>
+                                                <td>
+                                                    <div class="button-list">
+                                                        <a href="#" class="
                                                                     btn
                                                                     btn-success-rgba
                                                                 "><i class="
                                                                         feather
                                                                         icon-edit-2
                                                                     "></i></a>
-                                                    <a href="#" class="
+                                                        <form method="POST" action="?_method=delete" class="deleteForm">
+                                                            <input type="hidden" name="id" value="{{this.id}}">
+                                                            <button type="submit" class="
                                                                     btn
-                                                                    btn-danger-rgba
+                                                                    btn-danger-rgba deleteBtn
                                                                 "><i class="
                                                                         feather
                                                                         icon-trash
-                                                                    "></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                        </div>
+                                                                    "></i></button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {{else}}
+                            <span>Chưa có dữ liệu</span>
+                        {{/if}}
                     </div>
                     <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddTitle"
                         style="display: none;" aria-hidden="true">
@@ -257,12 +278,19 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <form autocomplete="off">
+                                <form autocomplete="off" method="POST" class="form-validate addForm"
+                                    enctype="multipart/form-data">
+                                    <div class="modal-body">
                                         <div class="form-group mb-30">
                                             <label for="">Tên cụm rạp</label>
-                                            <input type="text" class="form-control" name="inputName" id="inputName"
-                                                placeholder="Nhập tên cụm rạp">
+                                            <input type="text" class="form-control cinemaInput" name="inputName"
+                                                id="inputName" placeholder="Nhập tên cụm rạp">
+                                        </div>
+                                        <div class="form-group mb-30">
+                                            <label for="">Đường dẫn (không dấu)</label>
+                                            <input type="text" class="form-control" name="inputUnsignedName2"
+                                                id="inputUnsignedName2" maxlength="256"
+                                                placeholder="Nhập đường dẫn của cụm rạp">
                                         </div>
                                         <div class="form-group mb-30">
                                             <label for="">Địa chỉ</label>
@@ -271,98 +299,74 @@
                                         </div>
                                         <div class="form-group mb-30">
                                             <label for="">Hình ảnh cụm rạp</label>
-                                            <input type="file" class="form-control-file" id="inputImageButton"
-                                                accept="image/png, image/jpeg" multiple>
+                                            <input type="file" class="form-control-file" id="inputImages"
+                                                name="inputImages" accept="image/jpeg" multiple>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-3">
-                                                <div class="form-group mb-10">
-                                                    <img src="/images/movie/image/movie-B9aTeNjKWz3QfcuwzmvvVh.jpg"
-                                                        alt="test" style="width:100%">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group mb-10">
-                                                    <img src="/images/movie/image/movie-Vbkyw3RWHeD7b1rGbmDWTR.jpg"
-                                                        alt="test" style="width:100%">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group mb-10">
-                                                    <img src="/images/movie/image/movie-8UgHLhX5EqRNZYFhJsYrUj.jpg"
-                                                        alt="test" style="width:100%">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group mb-10">
-                                                    <img src="/images/movie/image/movie-X3sMPEovkNQ9Eh2Bm5tWjn.jpg"
-                                                        alt="test" style="width:100%">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group mb-10">
-                                                    <img src="/images/movie/image/movie-AcoAuH4Liw8x5B3TsCc2dQ.jpg"
-                                                        alt="test" style="width:100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
-                                        bỏ</button>
-                                    <button type="button" class="btn btn-primary">Thêm</button>
-                                </div>
+                                        <div id="previewImages" class="row"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                            bỏ</button>
+                                        <button type="submit" class="btn btn-primary addBtn">Thêm</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 {{/ifEqual}}
                 {{#ifEqual item.type 2}}
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>mã</th>
-                                        <th>tên rạp</th>
-                                        <th>cụm rạp</th>
-                                        <th>loại rạp</th>
-                                        <th>kích thước ngang</th>
-                                        <th>kích thước dọc</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each ../item.list}}
+                        {{#if ../item.list}}
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <thead>
                                         <tr>
-                                            <td scope="row">{{this.id}}</td>
-                                            <td>{{this.name}}</td>
-                                            <td>{{this.Cinema.name}}</td>
-                                            <td>{{this.RoomType.name}}</td>
-                                            <td>{{this.row}}</td>
-                                            <td>{{this.col}}</td>
-                                            <td>
-                                                <div class="button-list">
-                                                    <a href="#" class="
+                                            <th>mã</th>
+                                            <th>tên rạp</th>
+                                            <th>cụm rạp</th>
+                                            <th>loại rạp</th>
+                                            <th>kích thước ngang</th>
+                                            <th>kích thước dọc</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each ../item.list}}
+                                            <tr>
+                                                <td scope="row">{{this.id}}</td>
+                                                <td>{{this.name}}</td>
+                                                <td>{{this.Cinema.name}}</td>
+                                                <td>{{this.RoomType.name}}</td>
+                                                <td>{{this.row}}</td>
+                                                <td>{{this.col}}</td>
+                                                <td>
+                                                    <div class="button-list">
+                                                        <a href="#" class="
                                                                     btn
                                                                     btn-success-rgba
                                                                 "><i class="
                                                                         feather
                                                                         icon-edit-2
                                                                     "></i></a>
-                                                    <a href="#" class="
+                                                        <form method="POST" action="?_method=delete" class="deleteForm">
+                                                            <input type="hidden" name="id" value="{{this.id}}">
+                                                            <button type="submit" class="
                                                                     btn
-                                                                    btn-danger-rgba
+                                                                    btn-danger-rgba deleteBtn
                                                                 "><i class="
                                                                         feather
                                                                         icon-trash
-                                                                    "></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                        </div>
+                                                                    "></i></button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {{else}}
+                            <span>Chưa có dữ liệu</span>
+                        {{/if}}
                     </div>
                     <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddTitle"
                         style="display: none;" aria-hidden="true">
@@ -374,33 +378,29 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <form autocomplete="off">
-                                        <div class="form-group mb-30">
-                                            <label for="">Tên rạp</label>
-                                            <input type="text" class="form-control" name="inputName" id="inputName"
-                                                placeholder="Nhập tên rạp">
-                                        </div>
+                                <form autocomplete="off" method="POST" class="form-validate addForm">
+                                    <div class="modal-body">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-30">
                                                     <label for="">Cụm rạp</label>
-                                                    <select class="custom-select" id="inputCinema">
-                                                        <option selected="">Chọn cụm rạp</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <select class="custom-select" id="inputCinema" name="inputCinema">
+                                                        <option value="" selected>Chọn cụm rạp</option>
+                                                        {{#each ../selectLists.cinemas}}
+                                                            <option value="{{this.id}}">{{this.name}}</option>
+                                                        {{/each}}
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-30">
-                                                    <label for="">Phim</label>
-                                                    <select class="custom-select" id="inputMovie">
-                                                        <option selected="">Chọn phim</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <label for="">Loại rạp</label>
+                                                    <select class="custom-select" id="inputRoomType"
+                                                        name="inputRoomType">
+                                                        <option value="" selected>Chọn loại rạp</option>
+                                                        {{#each ../selectLists.roomTypes}}
+                                                            <option value="{{this.id}}">{{this.name}}</option>
+                                                        {{/each}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -417,65 +417,72 @@
                                                 <div class="form-group mb-30">
                                                     <label for="">Kích thước dọc</label>
                                                     <input type="number" class="form-control" name="inputCol"
-                                                        id="inputDọc" placeholder="Nhập số cột ghế">
+                                                        id="inputCol" placeholder="Nhập số cột ghế">
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
-                                        bỏ</button>
-                                    <button type="button" class="btn btn-primary">Thêm</button>
-                                </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                            bỏ</button>
+                                        <button type="submit" class="btn btn-primary addBtn">Thêm</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 {{/ifEqual}}
                 {{#ifEqual item.type 3}}
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>mã</th>
-                                        <th>tên phim</th>
-                                        <th>tên rạp</th>
-                                        <th>thời gian</th>
-                                        <th>giá vé</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each ../item.list}}
+                        {{#if ../item.list}}
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <thead>
                                         <tr>
-                                            <td scope="row">{{this.id}}</td>
-                                            <td>{{this.Movie.name}}</td>
-                                            <td>{{this.Room.name}}</td>
-                                            <td>{{formatDateTime this.time 'vi' 'lll'}}</td>
-                                            <td>{{formatCurrency this.price 'vi' 'VND'}}</td>
-                                            <td>
-                                                <div class="button-list">
-                                                    <a href="#" class="
+                                            <th>mã</th>
+                                            <th>tên phim</th>
+                                            <th>tên rạp</th>
+                                            <th>thời gian</th>
+                                            <th>giá vé</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each ../item.list}}
+                                            <tr>
+                                                <td scope="row">{{this.id}}</td>
+                                                <td>{{this.Movie.name}}</td>
+                                                <td>{{this.Room.name}}</td>
+                                                <td>{{formatDateTime this.time 'vi' 'lll'}}</td>
+                                                <td>{{formatCurrency this.price 'vi' 'VND'}}</td>
+                                                <td>
+                                                    <div class="button-list">
+                                                        <a href="#" class="
                                                                     btn
                                                                     btn-success-rgba
                                                                 "><i class="
                                                                         feather
                                                                         icon-edit-2
                                                                     "></i></a>
-                                                    <a href="#" class="
+                                                        <form method="POST" action="?_method=delete" class="deleteForm">
+                                                            <input type="hidden" name="id" value="{{this.id}}">
+                                                            <button type="submit" class="
                                                                     btn
-                                                                    btn-danger-rgba
+                                                                    btn-danger-rgba deleteBtn
                                                                 "><i class="
                                                                         feather
                                                                         icon-trash
-                                                                    "></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                        </div>
+                                                                    "></i></button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {{else}}
+                            <span>Chưa có dữ liệu</span>
+                        {{/if}}
                     </div>
                     <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddTitle"
                         style="display: none;" aria-hidden="true">
@@ -487,28 +494,28 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <form autocomplete="off">
+                                <form autocomplete="off" method="POST" class="form-validate addForm">
+                                    <div class="modal-body">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-30">
                                                     <label for="">Phim</label>
-                                                    <select class="custom-select" id="inputMovie">
-                                                        <option selected="">Chọn phim</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <select class="custom-select" id="inputMovie" name="inputMovie">
+                                                        <option value="" selected>Chọn phim</option>
+                                                        {{#each ../selectLists.movies}}
+                                                            <option value="{{this.id}}">{{this.name}}</option>
+                                                        {{/each}}
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group mb-30">
                                                     <label for="">Rạp</label>
-                                                    <select class="custom-select" id="inputCinema">
-                                                        <option selected="">Chọn Rạp</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <select class="custom-select" id="inputRoom" name="inputRoom">
+                                                        <option value="" selected>Chọn Rạp</option>
+                                                        {{#each ../selectLists.rooms}}
+                                                            <option value="{{this.id}}">{{this.name}}</option>
+                                                        {{/each}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -534,13 +541,13 @@
                                             <input type="number" class="form-control" name="inputPrice" id="inputPrice"
                                                 placeholder="Nhập giá vé (1 = 1,000 VND)">
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
-                                        bỏ</button>
-                                    <button type="button" class="btn btn-primary">Thêm</button>
-                                </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                            bỏ</button>
+                                        <button type="submit" class="btn btn-primary addBtn">Thêm</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -549,3 +556,4 @@
         </div>
     </div>
 </div>
+<div id="action-res" style="display: none;" data-value="{{actionRes}}"></div>

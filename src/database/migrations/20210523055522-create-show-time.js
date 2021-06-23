@@ -14,6 +14,8 @@ module.exports = {
                     model: 'Movies',
                     key: 'id',
                 },
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
             },
             roomId: {
                 type: Sequelize.INTEGER,
@@ -21,6 +23,8 @@ module.exports = {
                     model: 'Rooms',
                     key: 'id',
                 },
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
             },
             time: {
                 type: Sequelize.DATE,

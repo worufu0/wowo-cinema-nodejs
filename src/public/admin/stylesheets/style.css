@@ -35398,3 +35398,18 @@ table.focus-on tfoot tr.focused td {
 }
 
 /*# sourceMappingURL=style.css.map */
+label.error {
+    margin-top: 4px;
+    color: red;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+.modal-body label:not(.error) {
+    color: #000;
+}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
+}

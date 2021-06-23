@@ -13,6 +13,8 @@ module.exports = {
                     model: 'Users',
                     key: 'id',
                 },
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
             },
             showTimeId: {
                 type: Sequelize.INTEGER,
@@ -20,6 +22,8 @@ module.exports = {
                     model: 'ShowTimes',
                     key: 'id',
                 },
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
             },
             bookingTime: {
                 type: Sequelize.DATE,

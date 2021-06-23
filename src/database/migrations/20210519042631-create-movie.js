@@ -11,12 +11,10 @@ module.exports = {
             name: {
                 allowNull: false,
                 type: Sequelize.TEXT,
-                unique: true,
             },
             unsignedName: {
                 allowNull: false,
                 type: Sequelize.STRING,
-                unique: true,
             },
             category: {
                 type: Sequelize.TEXT,

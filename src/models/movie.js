@@ -11,14 +11,20 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            this.hasMany(models.MovieImage, { foreignKey: 'movieId' });
-            this.hasMany(models.ShowTime, { foreignKey: 'movieId' });
+            this.hasMany(models.MovieImage, {
+                foreignKey: 'movieId',
+                onDelete: 'cascade',
+            });
+            this.hasMany(models.ShowTime, {
+                foreignKey: 'movieId',
+                onDelete: 'cascade',
+            });
         }
     }
     Movie.init(
         {
-            name: { type: DataTypes.TEXT, unique: true },
-            unsignedName: { type: DataTypes.STRING, unique: true },
+            name: DataTypes.TEXT,
+            unsignedName: DataTypes.STRING,
             category: DataTypes.TEXT,
             time: DataTypes.INTEGER,
             country: DataTypes.TEXT,

@@ -111,12 +111,12 @@ class MovieController {
         });
     }
 
-    // [GET] /movie/all
+    // [GET] /movie
     async all(req, res) {
         if (req.query.page === '0') {
-            res.redirect('/movie/all');
+            res.redirect('/movie');
         } else if (req.query.page < 0) {
-            res.redirect(`/movie/all?page=${-req.query.page}`);
+            res.redirect(`/movie?page=${-req.query.page}`);
         } else {
             // Query and paging
             const pageSize = 12;

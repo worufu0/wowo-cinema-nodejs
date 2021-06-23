@@ -17,6 +17,8 @@ module.exports = {
                     model: 'Cinemas',
                     key: 'id',
                 },
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
             },
             roomTypeId: {
                 type: Sequelize.INTEGER,
@@ -24,6 +26,8 @@ module.exports = {
                     model: 'RoomTypes',
                     key: 'id',
                 },
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
             },
             row: {
                 type: Sequelize.INTEGER,
