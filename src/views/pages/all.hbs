@@ -43,15 +43,15 @@
                                     {{/each}}
                                 </div>
                                 <div class="pagination-area text-center">
-                                    {{#unless min}}
-                                        <a href="/movie?page={{minus currentPage 1}}"><i
+                                    {{#unless pagingInfo.min}}
+                                        <a href="/movie?page={{minus pagingInfo.currentPage 1}}"><i
                                                 class="fas fa-angle-double-left"></i><span>trước</span></a>
                                     {{/unless}}
-                                    {{#each pageNumberArray}}
+                                    {{#each pagingInfo.pageNumberArray}}
                                         <a href="/movie?page={{this.value}}" class="{{this.active}}">{{this.value}}</a>
                                     {{/each}}
-                                    {{#unless max}}
-                                        <a href="/movie?page={{add currentPage 1}}"><span>sau</span><i
+                                    {{#unless pagingInfo.max}}
+                                        <a href="/movie?page={{add pagingInfo.currentPage 1}}"><span>sau</span><i
                                                 class="fas fa-angle-double-right"></i></a>
                                     {{/unless}}
                                 </div>

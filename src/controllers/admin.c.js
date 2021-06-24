@@ -23,7 +23,41 @@ class AdminController {
     }
 
     async movieList(req, res) {
-        const movies = JSON.parse(JSON.stringify(await Movie.findAll()));
+        const pageSize = 10;
+        const currentPage = parseInt(req.query.page) || 1;
+        const movies = JSON.parse(
+            JSON.stringify(
+                await Movie.findAndCountAll({
+                    offset: (currentPage - 1) * pageSize,
+                    limit: pageSize,
+                })
+            )
+        );
+
+        const totalPage = Math.ceil(movies.count / pageSize);
+        const pageNumberArray = [];
+        let max, min;
+        if (currentPage === 1) {
+            pageNumberArray.push(
+                { value: null },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+            min = true;
+        } else if (currentPage === totalPage) {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: null }
+            );
+            max = true;
+        } else {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+        }
 
         res.render('pages/admin-list', {
             layout: 'admin',
@@ -34,14 +68,55 @@ class AdminController {
             },
             pathTitle: ['Quản lý', 'Phim'],
             actionRes: req.session.actionRes,
+            pagingInfo: {
+                pageNumberArray: pageNumberArray,
+                currentPage: currentPage,
+                min: min,
+                max: max,
+            },
         });
 
         delete req.session.actionRes;
     }
 
     async cinemaList(req, res) {
-        const cinemas = JSON.parse(JSON.stringify(await Cinema.findAll()));
+        const pageSize = 5;
+        const currentPage = parseInt(req.query.page) || 1;
+        const cinemas = JSON.parse(
+            JSON.stringify(
+                await Cinema.findAndCountAll({
+                    offset: (currentPage - 1) * pageSize,
+                    limit: pageSize,
+                })
+            )
+        );
 
+        const totalPage = Math.ceil(cinemas.count / pageSize);
+        const pageNumberArray = [];
+        let max, min;
+        if (currentPage === 1) {
+            pageNumberArray.push(
+                { value: null },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+            min = true;
+        } else if (currentPage === totalPage) {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: null }
+            );
+            max = true;
+        } else {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+        }
+
+        console.log(pageNumberArray, currentPage, min, max);
         res.render('pages/admin-list', {
             layout: 'admin',
             title: `${appConfig.pageTitle.admin} | ${appConfig.appName}`,
@@ -51,19 +126,58 @@ class AdminController {
             },
             pathTitle: ['Quản lý', 'Cụm rạp'],
             actionRes: req.session.actionRes,
+            pagingInfo: {
+                pageNumberArray: pageNumberArray,
+                currentPage: currentPage,
+                min: min,
+                max: max,
+            },
         });
 
         delete req.session.actionRes;
     }
 
     async roomList(req, res) {
+        const pageSize = 20;
+        const currentPage = parseInt(req.query.page) || 1;
         const rooms = JSON.parse(
-            JSON.stringify(await Room.findAll({ include: [Cinema, RoomType] }))
+            JSON.stringify(
+                await Room.findAndCountAll({
+                    include: [Cinema, RoomType],
+                    offset: (currentPage - 1) * pageSize,
+                    limit: pageSize,
+                })
+            )
         );
         const cinemas = JSON.parse(JSON.stringify(await Cinema.findAll({})));
         const roomTypes = JSON.parse(
             JSON.stringify(await RoomType.findAll({}))
         );
+
+        const totalPage = Math.ceil(rooms.count / pageSize);
+        const pageNumberArray = [];
+        let max, min;
+        if (currentPage === 1) {
+            pageNumberArray.push(
+                { value: null },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+            min = true;
+        } else if (currentPage === totalPage) {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: null }
+            );
+            max = true;
+        } else {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+        }
 
         res.render('pages/admin-list', {
             layout: 'admin',
@@ -78,17 +192,57 @@ class AdminController {
                 roomTypes: roomTypes,
             },
             actionRes: req.session.actionRes,
+            pagingInfo: {
+                pageNumberArray: pageNumberArray,
+                currentPage: currentPage,
+                min: min,
+                max: max,
+            },
         });
 
         delete req.session.actionRes;
     }
 
     async showTimeList(req, res) {
+        const pageSize = 20;
+        const currentPage = parseInt(req.query.page) || 1;
         const showTimes = JSON.parse(
-            JSON.stringify(await ShowTime.findAll({ include: [Movie, Room] }))
+            JSON.stringify(
+                await ShowTime.findAndCountAll({
+                    include: [Movie, Room],
+                    offset: (currentPage - 1) * pageSize,
+                    limit: pageSize,
+                    order: [['id', 'ASC']],
+                })
+            )
         );
         const movies = JSON.parse(JSON.stringify(await Movie.findAll({})));
         const rooms = JSON.parse(JSON.stringify(await Room.findAll({})));
+
+        const totalPage = Math.ceil(rooms.count / pageSize);
+        const pageNumberArray = [];
+        let max, min;
+        if (currentPage === 1) {
+            pageNumberArray.push(
+                { value: null },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+            min = true;
+        } else if (currentPage === totalPage) {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: null }
+            );
+            max = true;
+        } else {
+            pageNumberArray.push(
+                { value: currentPage - 1 },
+                { value: currentPage, active: 'active' },
+                { value: currentPage + 1 }
+            );
+        }
 
         res.render('pages/admin-list', {
             layout: 'admin',
@@ -103,6 +257,12 @@ class AdminController {
                 rooms: rooms,
             },
             actionRes: req.session.actionRes,
+            pagingInfo: {
+                pageNumberArray: pageNumberArray,
+                currentPage: currentPage,
+                min: min,
+                max: max,
+            },
         });
 
         delete req.session.actionRes;

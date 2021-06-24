@@ -53,7 +53,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#each ../item.list}}
+                                        {{#each ../item.list.rows}}
                                             <tr>
                                                 <td scope="row">{{this.id}}</td>
                                                 <td>
@@ -93,6 +93,30 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    {{#unless ../pagingInfo.min}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/movie?page={{minus ../pagingInfo.currentPage 1}}">Trước</a>
+                                        </li>
+                                    {{/unless}}
+                                    {{#each ../pagingInfo.pageNumberArray}}
+                                        <li class="page-item {{this.active}}">
+                                            <a class="page-link" href="/admin/movie?page={{this.value}}">
+                                                {{this.value}}
+                                                <span class="sr-only">(current)</span>
+                                            </a>
+                                        </li>
+                                    {{/each}}
+                                    {{#unless ../pagingInfo.max}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/movie?page={{add ../pagingInfo.currentPage 1}}">Sau</a>
+                                        </li>
+                                    {{/unless}}
+                                </ul>
+                            </nav>
                         {{else}}
                             <span>Chưa có dữ liệu</span>
                         {{/if}}
@@ -233,7 +257,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#each ../item.list}}
+                                        {{#each ../item.list.rows}}
                                             <tr>
                                                 <td scope="row">{{this.id}}</td>
                                                 <td>{{this.name}}</td>
@@ -264,6 +288,30 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    {{#unless ../pagingInfo.min}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/cinema?page={{minus ../pagingInfo.currentPage 1}}">Trước</a>
+                                        </li>
+                                    {{/unless}}
+                                    {{#each ../pagingInfo.pageNumberArray}}
+                                        <li class="page-item {{this.active}}">
+                                            <a class="page-link" href="/admin/cinema?page={{this.value}}">
+                                                {{this.value}}
+                                                <span class="sr-only">(current)</span>
+                                            </a>
+                                        </li>
+                                    {{/each}}
+                                    {{#unless ../pagingInfo.max}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/cinema?page={{add ../pagingInfo.currentPage 1}}">Sau</a>
+                                        </li>
+                                    {{/unless}}
+                                </ul>
+                            </nav>
                         {{else}}
                             <span>Chưa có dữ liệu</span>
                         {{/if}}
@@ -330,7 +378,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#each ../item.list}}
+                                        {{#each ../item.list.rows}}
                                             <tr>
                                                 <td scope="row">{{this.id}}</td>
                                                 <td>{{this.name}}</td>
@@ -364,6 +412,30 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    {{#unless ../pagingInfo.min}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/room?page={{minus ../pagingInfo.currentPage 1}}">Trước</a>
+                                        </li>
+                                    {{/unless}}
+                                    {{#each ../pagingInfo.pageNumberArray}}
+                                        <li class="page-item {{this.active}}">
+                                            <a class="page-link" href="/admin/room?page={{this.value}}">
+                                                {{this.value}}
+                                                <span class="sr-only">(current)</span>
+                                            </a>
+                                        </li>
+                                    {{/each}}
+                                    {{#unless ../pagingInfo.max}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/room?page={{add ../pagingInfo.currentPage 1}}">Sau</a>
+                                        </li>
+                                    {{/unless}}
+                                </ul>
+                            </nav>
                         {{else}}
                             <span>Chưa có dữ liệu</span>
                         {{/if}}
@@ -447,7 +519,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#each ../item.list}}
+                                        {{#each ../item.list.rows}}
                                             <tr>
                                                 <td scope="row">{{this.id}}</td>
                                                 <td>{{this.Movie.name}}</td>
@@ -480,6 +552,30 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    {{#unless ../pagingInfo.min}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/showtime?page={{minus ../pagingInfo.currentPage 1}}">Trước</a>
+                                        </li>
+                                    {{/unless}}
+                                    {{#each ../pagingInfo.pageNumberArray}}
+                                        <li class="page-item {{this.active}}">
+                                            <a class="page-link" href="/admin/showtime?page={{this.value}}">
+                                                {{this.value}}
+                                                <span class="sr-only">(current)</span>
+                                            </a>
+                                        </li>
+                                    {{/each}}
+                                    {{#unless ../pagingInfo.max}}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/admin/showtime?page={{add ../pagingInfo.currentPage 1}}">Sau</a>
+                                        </li>
+                                    {{/unless}}
+                                </ul>
+                            </nav>
                         {{else}}
                             <span>Chưa có dữ liệu</span>
                         {{/if}}

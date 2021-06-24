@@ -129,6 +129,7 @@ class MovieController {
                     })
                 )
             );
+
             const totalPage = Math.ceil(movies.count / pageSize);
             const pageNumberArray = [];
             let max, min;
@@ -157,10 +158,12 @@ class MovieController {
             res.render('pages/all', {
                 title: `${appConfig.pageTitle.movie} | ${appConfig.appName}`,
                 movies: movies,
-                pageNumberArray: pageNumberArray,
-                currentPage: currentPage,
-                min: min,
-                max: max,
+                pagingInfo: {
+                    pageNumberArray: pageNumberArray,
+                    currentPage: currentPage,
+                    min: min,
+                    max: max,
+                },
             });
         }
     }

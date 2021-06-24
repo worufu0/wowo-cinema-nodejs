@@ -1,16 +1,44 @@
 <div class="breadcrumbbar">
     <div class="row align-items-center">
-        <div class="col-md-12 col-lg-12">
-            <h4 class="page-title">Thống kê</h4>
+        <div class="col-md-4 col-lg-4">
+            <h4 class="page-title">Tổng quan</h4>
+        </div>
+        <div class="col-md-8 col-lg-8">
+            <div class="widgetbar mb-30" style="display: flex; justify-content: flex-end; text-align: left">
+                <div class="mr-4">
+                    <label for="">Thông kê theo:</label>
+                    <select class="custom-select" id="inputMovie" name="inputMovie">
+                        <option value="" selected>Chọn loại</option>
+                        {{#each ../selectLists.movies}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="mr-2">
+                    <label for="">Từ ngày:</label>
+                    <input type="date" class="form-control" name="inputOpeningDay" id="inputOpeningDay">
+                </div>
+                <div>
+                    <label for="">Đến ngày:</label>
+                    <input type="date" class="form-control" name="inputOpeningDay" id="inputOpeningDay">
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="contentbar">
     <div class="row">
         <div class="col-lg-12">
+            <p class="m-10"><b>Cụm rạp CGV Hùng Vương</b> bán được <b>2400 vé</b> với doanh thu
+                <b>500.000.000 VND</b> từ ngày <b>01/03/2019</b> đến <b>30/04/2019</b>.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-                    <h5 class="card-title">Spline Chart</h5>
+                    <h5 class="card-title">Biểu đồ doanh thu</h5>
                 </div>
                 <div class="card-body">
                     <div id="apex-chart"></div>

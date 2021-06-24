@@ -13,7 +13,7 @@ $(document).ready(function () {
             var a = window.location,
                 abc = $('.vertical-menu a')
                     .filter(function () {
-                        return this.href == a;
+                        return a.href.includes(this.href);
                     })
                     .addClass('active')
                     .parent()
