@@ -12,6 +12,8 @@ const upload = multer({
 router.use(loginRequired);
 router.use(loadFixedData);
 
+router.get('/stastical/refresh', adminC.refreshChart);
+router.get('/stastical/change-type', adminC.changeStasticalType);
 router.delete('/showtime', adminC.showTimeDelete);
 router.delete('/room', adminC.roomDelete);
 router.delete('/cinema', adminC.cinemaDelete);

@@ -1,3 +1,4 @@
+const twilio = require('twilio');
 const fetch = require('node-fetch');
 const paypal = require('paypal-rest-sdk');
 const TokenGenerator = require('uuid-token-generator');
@@ -7,6 +8,11 @@ const { totp } = require('otplib');
 const Cryptr = require('cryptr');
 totp.options = { step: 1800 };
 const cryptr = new Cryptr(process.env.CRYPT_KEY || 'wolf');
+const accountSid =
+    process.env.TWILIO_ACCOUNT_SID || 'AC6920bef8341db8902f13c6a585df0676';
+const authToken =
+    process.env.TWILIO_AUTH_TOKEN || 'acdeff76be424084d74efdc175b55b44';
+const client = twilio(accountSid, authToken);
 const {
     ShowTime,
     Movie,
@@ -200,7 +206,7 @@ class CheckoutController {
             by: req.session.bookingInfo.bookingSeats.length,
         });
 
-        await Booking.create({
+        const booking = await Booking.create({
             id: req.session.payment.id,
             userId: req.user.id,
             showTimeId: req.session.bookingInfo.showTime.id,
@@ -221,7 +227,27 @@ class CheckoutController {
             });
         });
 
+        client.messages
+            .create({
+                from: process.env.TWILIO_PHONE_NUMBER || '+15005550006',
+                to: req.session.phone,
+                body: `Cảm ơn bạn đã đặt vé tại ${
+                    appConfig.appName
+                } !\nMã QR đặt vé của bạn: ${
+                    process.env.URL_ROOT || 'http://localhost:3000'
+                }/qrcode/generate/${
+                    booking.id
+                }\nKhi đến rạp vui lòng cung cấp mã QR của vé để nhân viên kiểm soát.`,
+            })
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
         delete req.session.payment;
+        delete req.session.phone;
 
         res.render('pages/notification', {
             layout: 'other',
@@ -241,20 +267,13 @@ class CheckoutController {
     send(req, res) {
         if (req.body.send === 'true') {
             const otp = totp.generate(req.user.token);
-            const accountSid =
-                process.env.TWILIO_ACCOUNT_SID ||
-                'AC6920bef8341db8902f13c6a585df0676';
-            const authToken =
-                process.env.TWILIO_AUTH_TOKEN ||
-                'acdeff76be424084d74efdc175b55b44';
-            const client = require('twilio')(accountSid, authToken);
-            const phone = req.body.phone.replace(0, '+84');
+            req.session.phone = req.body.phone.replace(0, '+84');
             const bookingInfo = req.session.bookingInfo;
 
             client.messages
                 .create({
                     from: process.env.TWILIO_PHONE_NUMBER || '+15005550006',
-                    to: phone,
+                    to: req.session.phone,
                     body: `Xác nhận thông tin đặt vé xem phim tại Wowo Cinema.\nTên phim: ${
                         bookingInfo.showTime.Movie.name
                     }\nThời gian: ${require('moment')(bookingInfo.showTime.time)

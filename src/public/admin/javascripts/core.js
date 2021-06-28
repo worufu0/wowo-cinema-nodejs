@@ -25,6 +25,137 @@ $(document).ready(function () {
             abc = abc.parent().addClass('in').parent().addClass('active');
         }
     });
+    // Stastical
+    $('#inputStasType').on('change', function () {
+        $.ajax({
+            url: `/admin/stastical/change-type`,
+            method: 'GET',
+            data: { type: $(this).val() },
+            success: function (res) {
+                let result = res.reduce(
+                    (total, curr) =>
+                        (total += `<option value="${curr.id}">${curr.name}</option>`),
+                    ''
+                );
+
+                $('#inputStasObj').html(result);
+            },
+        });
+    });
+    // Stastical
+    var today = new Date();
+    today.setDate(today.getDate() + 1);
+    var oneMonthAgo = new Date(today);
+    oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+    $('#inputDateFrom').val(
+        oneMonthAgo.getFullYear() +
+            '-' +
+            ('0' + (oneMonthAgo.getMonth() + 1)).slice(-2) +
+            '-' +
+            ('0' + oneMonthAgo.getDate()).slice(-2)
+    );
+    $('#inputDateTo').val(
+        today.getFullYear() +
+            '-' +
+            ('0' + (today.getMonth() + 1)).slice(-2) +
+            '-' +
+            ('0' + today.getDate()).slice(-2)
+    );
+    function refreshChart() {
+        $.ajax({
+            url: 'http://localhost:3000/admin/stastical/refresh',
+            data: {
+                type: $('#inputStasType').val(),
+                obj: $('#inputStasObj').val(),
+                from: $('#inputDateFrom').val(),
+                to: $('#inputDateTo').val(),
+            },
+            success: function (res) {
+                $('#text').html(
+                    `<p class="m-10"><b>${res.objName}</b> bán được <b>${
+                        res.dataTotal.amount
+                    } vé</b> với doanh thu
+                        <b>${(res.dataTotal.revenue * 1000).toLocaleString(
+                            'vi',
+                            {
+                                style: 'currency',
+                                currency: 'VND',
+                            }
+                        )}</b> từ ngày <b>${res.date.from}</b> đến <b>${
+                        res.date.to
+                    }</b>.
+                    </p>`
+                );
+
+                var options = {
+                    series: [
+                        {
+                            name: 'Doanh thu',
+                            data: res.data.revenueSet,
+                        },
+                        {
+                            name: 'Vé bán ra',
+                            data: res.data.amountSet,
+                        },
+                    ],
+                    chart: {
+                        height: 350,
+                        type: 'area',
+                    },
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                    },
+                    xaxis: {
+                        type: 'datetime',
+                        categories: res.range,
+                    },
+                    yaxis: [
+                        {
+                            title: {
+                                text: 'Doanh thu',
+                            },
+                            labels: {
+                                formatter: function (value) {
+                                    return (value * 1000).toLocaleString('vi', {
+                                        style: 'currency',
+                                        currency: 'VND',
+                                    });
+                                },
+                            },
+                        },
+                        {
+                            opposite: true,
+                            title: {
+                                text: 'Vé bán ra',
+                            },
+                        },
+                    ],
+                    tooltip: {
+                        x: {
+                            format: 'dd/MM/yy',
+                        },
+                    },
+                };
+                var apexChart = $('#apex-chart');
+                var chart = new ApexCharts(
+                    document.querySelector('#apex-chart'),
+                    options
+                );
+                apexChart.html('');
+                chart.render();
+            },
+        });
+    }
+    if (window.location.pathname === '/admin/') {
+        refreshChart();
+    }
+    $('#stasticalForm').on('submit', function (e) {
+        e.preventDefault();
+        refreshChart();
+    });
     //Input mask
     $('#inputName.cinemaInput').inputmask({
         mask: 'Wowo *{*}',
@@ -59,7 +190,6 @@ $(document).ready(function () {
             },
         },
     });
-
     /* -- Preview image -- */
     function previewSingle(input, previewId) {
         if (input.files && input.files[0]) {
@@ -157,48 +287,6 @@ $(document).ready(function () {
     $('#inputImages').on('change', function (e) {
         previewMulti(this, '#previewImages');
     });
-    // Chart
-    var options = {
-        series: [
-            {
-                name: 'series1',
-                data: [31, 40, 28, 51, 42, 109, 100],
-            },
-            {
-                name: 'series2',
-                data: [11, 32, 45, 32, 34, 52, 41],
-            },
-        ],
-        chart: {
-            height: 350,
-            type: 'area',
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        stroke: {
-            curve: 'smooth',
-        },
-        xaxis: {
-            type: 'datetime',
-            categories: [
-                '2018-09-19T00:00:00.000Z',
-                '2018-09-19T01:30:00.000Z',
-                '2018-09-19T02:30:00.000Z',
-                '2018-09-19T03:30:00.000Z',
-                '2018-09-19T04:30:00.000Z',
-                '2018-09-19T05:30:00.000Z',
-                '2018-09-19T06:30:00.000Z',
-            ],
-        },
-        tooltip: {
-            x: {
-                format: 'dd/MM/yy HH:mm',
-            },
-        },
-    };
-    var chart = new ApexCharts(document.querySelector('#apex-chart'), options);
-    chart.render();
     /* -- Infobar Setting Sidebar -- */
     $('#infobar-settings-open').on('click', function (e) {
         e.preventDefault();

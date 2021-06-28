@@ -5,6 +5,36 @@
 */
 'use strict';
 $(document).ready(function () {
+    jQuery('#stasticalForm').validate({
+        rules: {
+            inputStasType: {
+                required: true,
+            },
+            inputStasObj: {
+                required: true,
+            },
+            inputDateFrom: {
+                required: true,
+            },
+            inputDateTo: {
+                required: true,
+            },
+        },
+        messages: {
+            inputStasType: {
+                required: 'Trường này không được trống',
+            },
+            inputStasObj: {
+                required: 'Trường này không được trống',
+            },
+            inputDateFrom: {
+                required: 'Trường này không được trống',
+            },
+            inputDateTo: {
+                required: 'Trường này không được trống',
+            },
+        },
+    });
     jQuery('.form-validate').validate({
         rules: {
             inputName: {

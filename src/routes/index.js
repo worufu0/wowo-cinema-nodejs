@@ -1,5 +1,6 @@
 module.exports = (app) => {
     app.use('/admin', require('./admin.r'));
+    app.use('/qrcode', require('./qrcode.r'));
     app.use('/checkout', require('./checkout.r'));
     app.use('/booking', require('./booking.r'));
     app.use('/personal', require('./personal.r'));

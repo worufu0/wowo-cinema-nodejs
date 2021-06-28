@@ -10,15 +10,23 @@ const {
     RoomType,
     MovieImage,
     CinemaImage,
+    Booking,
+    Ticket,
 } = require('../models');
 const nonAccent = require('../helpers/non-accent');
+const listDate = require('../helpers/list-date');
 const appConfig = require('../configs/app');
 
 class AdminController {
-    index(req, res) {
+    async index(req, res) {
+        const movies = JSON.parse(JSON.stringify(await Movie.findAll()));
+
         res.render('pages/admin-dashboard', {
             layout: 'admin',
             title: `${appConfig.pageTitle.admin} | ${appConfig.appName}`,
+            selectLists: {
+                movies: movies,
+            },
         });
     }
 
@@ -496,6 +504,122 @@ class AdminController {
 
         req.session.actionRes = 'delete';
         res.redirect('back');
+    }
+
+    async changeStasticalType(req, res) {
+        const type = req.query.type;
+
+        let data;
+        if (type === '1') {
+            data = JSON.parse(JSON.stringify(await Movie.findAll()));
+        } else if (type === '2') {
+            data = JSON.parse(JSON.stringify(await Cinema.findAll()));
+        }
+
+        res.json(data);
+    }
+
+    async refreshChart(req, res) {
+        const { type, obj, from, to } = req.query;
+
+        let data = { revenueSet: [], amountSet: [] },
+            dataTotal,
+            foundObj;
+
+        const dateFrom = new Date(from);
+        const dateTo = new Date(to);
+        const range = listDate(dateFrom, dateTo);
+        range.forEach((date) => {
+            date.toString();
+            data.revenueSet.push(0);
+            data.amountSet.push(0);
+        });
+        if (type === '1') {
+            foundObj = JSON.parse(
+                JSON.stringify(
+                    await Movie.findOne({
+                        where: {
+                            id: obj,
+                        },
+                        include: {
+                            model: ShowTime,
+                            include: {
+                                model: Booking,
+                                include: Ticket,
+                            },
+                        },
+                    })
+                )
+            );
+
+            foundObj.ShowTimes.forEach((showtime) => {
+                showtime.Bookings.forEach((booking) => {
+                    const createdDate = new Date(
+                        booking.createdAt.split('T')[0]
+                    ).toISOString();
+
+                    if (range.indexOf(createdDate)) {
+                        const index = range.indexOf(createdDate);
+
+                        data.revenueSet[index] += booking.pay;
+                        data.amountSet[index] += booking.Tickets.length;
+                    }
+                });
+            });
+        } else if (type === '2') {
+            foundObj = JSON.parse(
+                JSON.stringify(
+                    await Cinema.findOne({
+                        where: {
+                            id: obj,
+                        },
+                        include: {
+                            model: Room,
+                            include: {
+                                model: ShowTime,
+                                include: {
+                                    model: Booking,
+                                    include: Ticket,
+                                },
+                            },
+                        },
+                    })
+                )
+            );
+
+            foundObj.Rooms.forEach((room) => {
+                room.ShowTimes.forEach((showtime) => {
+                    showtime.Bookings.forEach((booking) => {
+                        const createdDate = new Date(
+                            booking.createdAt.split('T')[0]
+                        ).toISOString();
+
+                        if (range.indexOf(createdDate)) {
+                            const index = range.indexOf(createdDate);
+
+                            data.revenueSet[index] += booking.pay;
+                            data.amountSet[index] += booking.Tickets.length;
+                        }
+                    });
+                });
+            });
+        }
+
+        dataTotal = {
+            revenue: data.revenueSet.reduce((acc, cur) => acc + cur, 0),
+            amount: data.amountSet.reduce((acc, cur) => acc + cur, 0),
+        };
+
+        res.json({
+            range,
+            date: {
+                from,
+                to,
+            },
+            data,
+            dataTotal,
+            objName: foundObj.name,
+        });
     }
 }
 
