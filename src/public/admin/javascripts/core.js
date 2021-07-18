@@ -63,7 +63,7 @@ $(document).ready(function () {
     );
     function refreshChart() {
         $.ajax({
-            url: 'http://localhost:3000/admin/stastical/refresh',
+            url: 'https://wowo-cinema.herokuapp.com/admin/stastical/refresh',
             data: {
                 type: $('#inputStasType').val(),
                 obj: $('#inputStasObj').val(),
