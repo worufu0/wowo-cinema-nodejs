@@ -3,7 +3,7 @@ module.exports = {
     port: 587,
     secure: false,
     auth: {
-        user: 'wowocinema0@gmail.com',
-        pass: '!Abc123456',
+        user: process.env.EMAIL_USER || 'wowocinema0@gmail.com',
+        pass: process.env.EMAIL_PASSWORD || '!Abc123456',
     },
 };

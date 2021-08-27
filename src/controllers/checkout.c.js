@@ -9,9 +9,9 @@ const Cryptr = require('cryptr');
 totp.options = { step: 1800 };
 const cryptr = new Cryptr(process.env.CRYPT_KEY || 'wolf');
 const accountSid =
-    process.env.TWILIO_ACCOUNT_SID || 'AC6920bef8341db8902f13c6a585df0676';
+    process.env.TWILIO_ACCOUNT_SID || 'AC6259905ad2c94aa9409e70e067d4c2b4';
 const authToken =
-    process.env.TWILIO_AUTH_TOKEN || 'acdeff76be424084d74efdc175b55b44';
+    process.env.TWILIO_AUTH_TOKEN || '4eac8e3e7504c82659e98132a44ce65d';
 const client = twilio(accountSid, authToken);
 const {
     ShowTime,
@@ -229,7 +229,7 @@ class CheckoutController {
 
         client.messages
             .create({
-                from: process.env.TWILIO_PHONE_NUMBER || '+15005550006',
+                from: process.env.TWILIO_PHONE_NUMBER || '+14242342742',
                 to: req.session.phone,
                 body: `Cảm ơn bạn đã đặt vé tại ${
                     appConfig.appName
@@ -272,7 +272,7 @@ class CheckoutController {
 
             client.messages
                 .create({
-                    from: process.env.TWILIO_PHONE_NUMBER || '+15005550006',
+                    from: process.env.TWILIO_PHONE_NUMBER || '+14242342742',
                     to: req.session.phone,
                     body: `Xác nhận thông tin đặt vé xem phim tại Wowo Cinema.\nTên phim: ${
                         bookingInfo.showTime.Movie.name
